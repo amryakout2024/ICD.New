@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ICD.ViewModels"
+             xmlns:m="clr-namespace:ICD.Models"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="ICD.Views.HomePage"
+             x:DataType="vm:HomeVM"
+             x:Name="this"
+             Title="HomePage"          
+             FlowDirection="LeftToRight">
+        <ContentPage.Resources>
+            <ControlTemplate x:Key="RadioButtonTemplate">
+                <Border Stroke="MediumSeaGreen"
+                        StrokeThickness="2"
+                        x:Name="b"
+                        StrokeShape="RoundRectangle 10"
+                        BackgroundColor="MediumSeaGreen"
+                        HeightRequest="40"
+                        WidthRequest="150"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0"
+                               Text="{TemplateBinding Content}" 
+                               FontSize="15"
+                               TextColor="White"
+                               x:Name="lb"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="CenterAndExpand"/>
+                        <BoxView Grid.Row="1"
+                                 x:Name="line"
+                                 Color="White"
+                                 WidthRequest="130"
+                                 HeightRequest="1"/>
+                    </Grid>
+                    <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroupList>
+                                <VisualStateGroup x:Name="CheckedStates">
+                                    <VisualState x:Name="Checked">
+                                        <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                                Value="MediumSeaGreen" />
+                                    <Setter TargetName="lb"
+                                                Property="Label.TextColor"
+                                                Value="White" />
+                                    <Setter TargetName="line"
+                                                Property="BoxView.Color"
+                                                Value="White" />
+                                </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked">
+                                        <VisualState.Setters>
+                                        <Setter Property="BackgroundColor"
+                                                Value="White" />
+                                        <Setter TargetName="lb"
+                                                Property="Label.TextColor"
+                                                Value="MediumSeaGreen" />
+                                        <Setter TargetName="line"
+                                                Property="BoxView.Color"
+                                                Value="MediumSeaGreen" />
+                                    </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateGroupList>
+                        </VisualStateManager.VisualStateGroups>
+                        <!--<Grid Margin="4"
+                          WidthRequest="90">
+                            <Grid Margin="0,0,4,0"
+                              WidthRequest="18"
+                              HeightRequest="18"
+                              HorizontalOptions="End"
+                              VerticalOptions="Start">
+                                <Ellipse Stroke="Blue"
+                                     Fill="White"
+                                     WidthRequest="16"
+                                     HeightRequest="16"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center" />
+                                <Ellipse x:Name="check"
+                                     Fill="Blue"
+                                     WidthRequest="8"
+                                     HeightRequest="8"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center" />
+                            </Grid>
+                            <ContentPresenter />
+                        </Grid>-->
+                    </Border>
+            </ControlTemplate>
+
+            <Style TargetType="RadioButton">
+                <Setter Property="ControlTemplate"
+                    Value="{StaticResource RadioButtonTemplate}" />
+            </Style>
+        </ContentPage.Resources>
+    <Grid>
+        <!--drug details grid-->
+        <!--<Grid ZIndex="1"
+              BackgroundColor="Transparent">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="IsVisible" Value="Collapse"/>
+                    <Style.Triggers>
+                        <DataTrigger TargetType="Grid" Binding="{Binding IsDrugSelected}" Value="true">
+                            <Setter Property="IsVisible" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Border Background="White" 
+                    Margin="40"
+                    Stroke="DarkGray"
+                    StrokeThickness="2">
+                <VerticalStackLayout Spacing="2">
+                    <ImageButton
+                        Margin="0"
+                        HorizontalOptions="Start"
+                        Source="cancel4"
+                        Command="{Binding GotoHomePageCommand}"/>
+                    <ScrollView>
+                        <VerticalStackLayout Margin="5" Spacing="2">
+                            <Label
+                        HorizontalOptions="CenterAndExpand"
+                        TextColor="ForestGreen"
+                        Text="Drug Details" 
+                        FontSize="30"/>
+                            <Label 
+                        Text="Drug Name :" 
+                        FontSize="25"
+                        TextColor="ForestGreen"/>
+                            <Label 
+                        Text="{Binding DrugName}" 
+                        FontSize="20"/>
+                            <Label 
+                        Text="Diagnosis Code :" 
+                        FontSize="25"
+                        TextColor="ForestGreen"/>
+                            <Label 
+                        Text="{Binding DiagnosisCode}" 
+                        FontSize="20"/>
+                            <Label 
+                        Text="Diagnosis Name :" 
+                        FontSize="25"
+                        TextColor="ForestGreen"/>
+                            <Label 
+                        Text="{Binding DiagnosisName}" 
+                        FontSize="20"/>
+
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </VerticalStackLayout>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="30"/>
+                </Border.StrokeShape>
+            </Border>
+        </Grid>-->
+        
+        <!--main ingredient grid-->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="0"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Opacity" Value="1"/>
+                    <Setter Property="IsEnabled" Value="True"/>
+                    <Style.Triggers>
+                        <DataTrigger TargetType="Grid" Binding="{Binding IsDrugSelected}" Value="true">
+                            <Setter Property="Opacity" Value="0.4"/>
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <VerticalStackLayout Grid.Row="0">
+                <Label 
+                    HorizontalOptions="CenterAndExpand"
+                    TextColor="ForestGreen"
+                    Text="Welcome To ICD Library" 
+                    FontSize="25"/>
+                <Label 
+                    Margin="5,5,0,0"
+                    TextColor="Green"
+                    Text="{Binding CountDrugs,StringFormat='Results Count : {0}'}" 
+                    FontSize="15"/>
+                <VerticalStackLayout>
+                    <Border Margin="5" HeightRequest="50">
+                        <Entry
+                            Text="{Binding SearchName}"
+                            Placeholder="{Binding PlaceHolderText}" 
+                            PlaceholderColor="Gray">
+                            <Entry.Behaviors>
+                                <toolkit:EventToCommandBehavior                            
+                                     EventName="TextChanged"
+                                     Command="{Binding Source={x:Reference this}, Path=BindingContext.SearchCommand}">
+                                </toolkit:EventToCommandBehavior>
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10"/>
+                        </Border.StrokeShape>
+                    </Border>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+            
+            <!--<Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <RadioButton Grid.Column="0" 
+                             Content="By Active Ingredient" 
+                             GroupName="rd"
+                             IsChecked="True">
+                    <RadioButton.Style>
+                        <Style TargetType="RadioButton">
+                            <Setter Property="ControlTemplate" Value="{StaticResource RadioButtonTemplate}"/>
+                        </Style>
+                    </RadioButton.Style>
+                </RadioButton>
+                <RadioButton Grid.Column="1"
+                             Content="By Trade Name"
+                             GroupName="rd"
+                             IsChecked="{Binding IsTradeRadioButtonChecked}">
+                    <RadioButton.Style>
+                        <Style TargetType="RadioButton">
+                            <Setter Property="ControlTemplate" Value="{StaticResource RadioButtonTemplate}"/>
+                        </Style>
+                    </RadioButton.Style>
+                </RadioButton>
+            </Grid>-->
+            
+            <!--active ingredient collection-->
+            <CollectionView Grid.Row="2"
+                SelectionMode="Single"
+                ItemsSource="{Binding Drugs}"
+                EmptyView="No Items To Display Or The Word Is Not Correct">
+                <CollectionView.Style>
+                    <Style TargetType="CollectionView">
+                        <Setter Property="IsVisible" Value="Visible"/>
+                        <Style.Triggers>
+                            <DataTrigger TargetType="CollectionView" Binding="{Binding IsTradeRadioButtonChecked}" Value="true">
+                                <Setter Property="IsVisible" Value="Collapse"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </CollectionView.Style>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="m:Drug">
+                        <Border 
+                            StrokeThickness="1"
+                            Padding="5"
+                            Margin="5,5,5,0">
+                            <VerticalStackLayout>
+                                <Label TextColor="DarkGreen" 
+                                       Text="{Binding DrugName}" 
+                                       FontSize="25"/>
+                                <Label TextColor="DarkGreen" 
+                                       Text="{Binding DiagnosisCode}" 
+                                       FontSize="20"/>
+                                <Label TextColor="DarkGreen" 
+                                       Text="{Binding DiagnosisName1}"
+                                       FontSize="15"/>
+                                <Label TextColor="DarkGreen" 
+                                       Text="{Binding DiagnosisName2}"
+                                       FontSize="15"/>
+                                <Label TextColor="DarkGreen" 
+                                       Text="{Binding DiagnosisName3}"
+                                       FontSize="15"/>
+
+                            </VerticalStackLayout>
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="5,0,0,5"/>
+                            </Border.StrokeShape>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:HomeVM}},Path=ShowDrugDetailsFormCommand}" CommandParameter="{Binding .}"/>
+                            </Border.GestureRecognizers>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
+            <!--trade name collection-->
+            <CollectionView 
+                Grid.Row="2"
+                SelectionMode="Single"
+                IsVisible="Collapse"
+                ItemsSource="{Binding TradeDrugs}"
+                EmptyView="No Items To Display Or The Word Is Not Correct">
+                <CollectionView.Style>
+                    <Style TargetType="CollectionView">
+                        <Setter Property="IsVisible" Value="Collapse"/>
+                        <Style.Triggers>
+                            <DataTrigger TargetType="CollectionView" Binding="{Binding IsTradeRadioButtonChecked}" Value="true">
+                                <Setter Property="IsVisible" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </CollectionView.Style>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="m:TradeDrug">
+                        <Border 
+                            StrokeThickness="1"
+                            Margin="5,5,5,0">
+                            <VerticalStackLayout>
+                                <Label TextColor="DarkGreen" 
+                                       Text="{Binding TradeDrugName}" 
+                                       FontSize="25"/>
+                                <Label TextColor="DarkGreen" 
+                                       Text="{Binding DrugName}" 
+                                       FontSize="15"/>
+                                <Label TextColor="DarkGreen" 
+                                       Text="{Binding DiagnosisId}" 
+                                       FontSize="15"/>
+                                <Label TextColor="DarkGreen" 
+                                       Text="{Binding DiagnosisName}"
+                                       FontSize="15"/>
+                            </VerticalStackLayout>
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="5,0,0,5"/>
+                            </Border.StrokeShape>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:HomeVM}},Path=ShowDrugDetailsFormCommand}" CommandParameter="{Binding .}"/>
+                            </Border.GestureRecognizers>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Frame Grid.Row="3"
+                   Margin="5"
+                   BackgroundColor="ForestGreen"
+                   Padding="0">
+                <Label
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand"
+                FontSize="20"
+                TextColor="White"
+                Text="Powered By : Amr Yakout"/>
+            </Frame>
+            <!--<ActivityIndicator IsRunning="{Binding IsBusy}"/>-->
+        </Grid>
+    </Grid>
+</ContentPage>
+<!--<toolkit:EventToCommandBehavior
+                                EventName="TextChanged"
+                                Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:HomeVM}},Path=SearchCommand}"/>-->

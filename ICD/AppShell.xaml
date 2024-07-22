@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="ICD.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ICD"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:v="clr-namespace:ICD.Views"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.TabBarIsVisible="False"
+    Shell.NavBarIsVisible="False"
+    FlowDirection="RightToLeft"
+    Title="IdealDiagnosis">
+
+
+    <Shell.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="ForestGreen"/>
+    </Shell.Behaviors>
+
+    <ShellContent
+                Title="loading"
+                ContentTemplate="{DataTemplate v:LoadingPage}"
+                Route="LoadingPage" />
+
+    <ShellContent
+                Title="Home"
+                ContentTemplate="{DataTemplate v:HomePage}"
+                Route="HomePage" />
+    <ShellContent
+                Title="Home2"
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage" />
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding CloseAppCommand}"/>
+    </Shell.BackButtonBehavior>
+</Shell>

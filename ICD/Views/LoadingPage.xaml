@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ICD.Views.LoadingPage"
+             Title="LoadingPage"
+             BackgroundColor="ForestGreen">
+    <ContentPage.Resources>
+        <ControlTemplate x:Key="rb">
+            <Button 
+                x:Name="b"
+                Text="Load Data"
+                BackgroundColor="MediumSeaGreen"
+                HeightRequest="40"
+                Command="{Binding LoadDataCommand}"
+                WidthRequest="200"
+                HorizontalOptions="{TemplateBinding Path=HorizontalOptions}"
+                VerticalOptions="CenterAndExpand">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CheckedStates">
+                            <VisualState x:Name="Unchecked">
+                                <VisualState.Setters>
+                                    <Setter TargetName="b" Property="BackgroundColor" Value="MediumSeaGreen"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Checked">
+                                <VisualState.Setters>
+                                    <Setter TargetName="b" Property="BackgroundColor" Value="Gray" />
+                                    <Setter TargetName="b" Property="Text" Value="Loading....."/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+            </Button>
+        </ControlTemplate>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+        </Style>
+    </ContentPage.Resources>
+    <Grid>
+        <VerticalStackLayout>
+            <Label 
+                Text="Welcome to ICD App"
+                FontSize="30"/>
+            <BoxView 
+                BackgroundColor="White" 
+                Margin="30,0,30,0"
+                HeightRequest="2"/>
+            <Image
+                Source="icd"
+                Margin="5,20,5,50"/>
+            
+            <Label 
+                Text="Click load data to start the app"
+                FontSize="20">
+                <!--<Label.Style>
+                    <Style TargetType="Label">
+                        <Setter Property="IsVisible" Value="Visible"/>
+                        <Style.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference LoadButton},Path=IsChecked}" Value="true">
+                                <Setter Property="IsVisible" Value="Collapse"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>-->
+
+            </Label>
+            <Label 
+                Text="Please don't close the app untill finishing loading all data"
+                FontSize="15"
+                IsVisible="Visible">
+                <!--<Label.Style>
+                    <Style TargetType="Label">
+                        <Setter Property="IsVisible" Value="Collapse"/>
+                        <Style.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference LoadButton},Path=IsChecked}" Value="true">
+                                <Setter Property="IsVisible" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>-->
+            </Label>
+            <Label 
+                Text="It will take few minutes"
+                FontSize="15"
+                IsVisible="Collapse">
+                <!--<Label.Style>
+                    <Style TargetType="Label">
+                        <Setter Property="IsVisible" Value="Collapse"/>
+                        <Style.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference LoadButton},Path=IsChecked}" Value="true">
+                                <Setter Property="IsVisible" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>-->
+            </Label>
+
+            <Button
+                Text="Load Data"
+                Margin="0,30,0,0"
+                BackgroundColor="DarkSlateBlue"
+                WidthRequest="200"
+                HeightRequest="40"
+                Command="{Binding LoadDataCommand}">
+               
+            </Button>
+            <!--<RadioButton
+                x:Name="LoadButton"
+                IsChecked="{Binding Loading}">
+                <RadioButton.Style>
+                    <Style TargetType="RadioButton">
+                        <Setter Property="ControlTemplate" Value="{StaticResource rb}"/>
+                    </Style>
+                </RadioButton.Style>
+            </RadioButton>-->
+
+        </VerticalStackLayout>
+        <Frame VerticalOptions="End"
+                   Margin="5"
+                   BackgroundColor="ForestGreen"
+                   Padding="0">
+            <Label
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand"
+                FontSize="20"
+                TextColor="White"
+                Text="Powered By : Amr Yakout"/>
+        </Frame>
+
+    </Grid>
+</ContentPage>
