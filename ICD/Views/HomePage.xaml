@@ -183,9 +183,10 @@
             <VerticalStackLayout Grid.Row="0">
                 <Label 
                     HorizontalOptions="CenterAndExpand"
-                    TextColor="ForestGreen"
-                    Text="Welcome To ICD Library" 
-                    FontSize="25"/>
+                    TextColor="Green"
+                    TextDecorations="Underline"
+                    Text="Welcome To ICD-10 Library" 
+                    FontSize="26"/>
                 <Label 
                     Margin="5,5,0,0"
                     TextColor="Green"
@@ -195,6 +196,8 @@
                     <Border Margin="5" HeightRequest="50">
                         <Entry
                             Text="{Binding SearchName}"
+                            TextColor="Green"
+                            FontSize="18"
                             Placeholder="{Binding PlaceHolderText}" 
                             PlaceholderColor="Gray">
                             <Entry.Behaviors>
@@ -261,20 +264,22 @@
                             Margin="5,5,5,0">
                             <VerticalStackLayout>
                                 <Label TextColor="DarkGreen" 
-                                       Text="{Binding DrugName}" 
-                                       FontSize="25"/>
-                                <Label TextColor="DarkGreen" 
-                                       Text="{Binding DiagnosisCode}" 
+                                       Text="{Binding DrugName}"
+                                       FontAttributes="Italic"
                                        FontSize="20"/>
+                                <Label TextColor="DarkSlateBlue"
+                                       Text="{Binding DiagnosisCode}" 
+                                       FontSize="18"
+                                       FontAttributes="Bold"/>
                                 <Label TextColor="DarkGreen" 
                                        Text="{Binding DiagnosisName1}"
-                                       FontSize="15"/>
+                                       FontSize="16"/>
                                 <Label TextColor="DarkGreen" 
                                        Text="{Binding DiagnosisName2}"
-                                       FontSize="15"/>
+                                       FontSize="16"/>
                                 <Label TextColor="DarkGreen" 
                                        Text="{Binding DiagnosisName3}"
-                                       FontSize="15"/>
+                                       FontSize="16"/>
 
                             </VerticalStackLayout>
                             <Border.StrokeShape>

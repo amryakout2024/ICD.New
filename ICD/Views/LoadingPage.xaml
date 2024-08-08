@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
              x:Class="ICD.Views.LoadingPage"
              Title="LoadingPage"
-             BackgroundColor="ForestGreen">
+             BackgroundColor="White">
     <ContentPage.Resources>
-        <ControlTemplate x:Key="rb">
+        <!--<ControlTemplate x:Key="rb">
             <Button 
                 x:Name="b"
                 Text="Load Data"
@@ -20,94 +21,119 @@
                         <VisualStateGroup x:Name="CheckedStates">
                             <VisualState x:Name="Unchecked">
                                 <VisualState.Setters>
-                                    <Setter TargetName="b" Property="BackgroundColor" Value="MediumSeaGreen"/>
+                                    -->
+        <!--<Setter TargetName="b" Property="BackgroundColor" Value="MediumSeaGreen"/>--><!--
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Checked">
                                 <VisualState.Setters>
-                                    <Setter TargetName="b" Property="BackgroundColor" Value="Gray" />
-                                    <Setter TargetName="b" Property="Text" Value="Loading....."/>
+                                    --><!--<Setter TargetName="b" Property="BackgroundColor" Value="Gray" />
+                                    <Setter TargetName="b" Property="Text" Value="Loading....."/>--><!--
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
                     </VisualStateGroupList>
                 </VisualStateManager.VisualStateGroups>
             </Button>
-        </ControlTemplate>
+        </ControlTemplate>-->
         <Style TargetType="Label">
-            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="TextColor" Value="Green"/>
             <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
             <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
         </Style>
     </ContentPage.Resources>
-    <Grid>
-        <VerticalStackLayout>
+
+    <Grid RowDefinitions="auto,*">
+        <VerticalStackLayout Padding="5">
             <Label 
-                Text="Welcome to ICD App"
-                FontSize="30"/>
-            <BoxView 
-                BackgroundColor="White" 
-                Margin="30,0,30,0"
-                HeightRequest="2"/>
+            Grid.Row="0"
+            Text="Welcome to ICD-10 App"
+            TextDecorations="Underline"
+            FontSize="30"/>
+
             <Image
                 Source="icd"
-                Margin="5,20,5,50"/>
+                Margin="5,10,5,30"
+                Aspect="AspectFill"/>
             
-            <Label 
-                Text="Click load data to start the app"
-                FontSize="20">
-                <!--<Label.Style>
-                    <Style TargetType="Label">
-                        <Setter Property="IsVisible" Value="Visible"/>
-                        <Style.Triggers>
-                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference LoadButton},Path=IsChecked}" Value="true">
-                                <Setter Property="IsVisible" Value="Collapse"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Label.Style>-->
+            <!--<BoxView 
+            Grid.Row="1"
+            BackgroundColor="White" 
+            Margin="30,0,30,0"
+            HeightRequest="2"/>-->
 
-            </Label>
             <Label 
-                Text="Please don't close the app untill finishing loading all data"
-                FontSize="15"
-                IsVisible="Visible">
+            Grid.Row="2"
+            Text="Click load data to start the app"
+            x:Name="lblToStartLoad"
+            FontSize="20">
                 <!--<Label.Style>
-                    <Style TargetType="Label">
-                        <Setter Property="IsVisible" Value="Collapse"/>
-                        <Style.Triggers>
-                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference LoadButton},Path=IsChecked}" Value="true">
-                                <Setter Property="IsVisible" Value="Visible"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Label.Style>-->
-            </Label>
-            <Label 
-                Text="It will take few minutes"
-                FontSize="15"
-                IsVisible="Collapse">
-                <!--<Label.Style>
-                    <Style TargetType="Label">
-                        <Setter Property="IsVisible" Value="Collapse"/>
-                        <Style.Triggers>
-                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference LoadButton},Path=IsChecked}" Value="true">
-                                <Setter Property="IsVisible" Value="Visible"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Label.Style>-->
+                <Style TargetType="Label">
+                    <Setter Property="IsVisible" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference LoadButton},Path=IsChecked}" Value="true">
+                            <Setter Property="IsVisible" Value="Collapse"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>-->
             </Label>
 
+            <Label 
+            Grid.Row="3"
+            Text="Please don't close the app untill finishing loading all data"
+            FontSize="15"
+            x:Name="lblDonotClose"
+            IsVisible="Collapse">
+                <!--<Label.Style>
+                <Style TargetType="Label">
+                    <Setter Property="IsVisible" Value="Collapse"/>
+                    <Style.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference LoadButton},Path=IsChecked}" Value="true">
+                            <Setter Property="IsVisible" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>-->
+            </Label>
+
+            <Label 
+            Grid.Row="4"
+            Text="It will take few minutes"
+            FontSize="15"
+            x:Name="lblFewMinutes"
+            IsVisible="Collapse">
+                <!--<Label.Style>
+                <Style TargetType="Label">
+                    <Setter Property="IsVisible" Value="Collapse"/>
+                    <Style.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference LoadButton},Path=IsChecked}" Value="true">
+                            <Setter Property="IsVisible" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>-->
+            </Label>
+            
             <Button
+                Grid.Row="5"
                 Text="Load Data"
                 Margin="0,30,0,0"
+                Padding="0"
+                FontSize="18"
                 BackgroundColor="DarkSlateBlue"
-                WidthRequest="200"
+                WidthRequest="250"
                 HeightRequest="40"
+                x:Name="LoadDataBtn"
+                Pressed="LoadDataBtn_Pressed"
                 Command="{Binding LoadDataCommand}">
-               
             </Button>
+
+            <skia:SKLottieView
+                Source="loading.json"
+                RepeatCount="-1"
+                RepeatMode="Restart"
+                x:Name="sk"/>
             <!--<RadioButton
                 x:Name="LoadButton"
                 IsChecked="{Binding Loading}">
@@ -119,10 +145,13 @@
             </RadioButton>-->
 
         </VerticalStackLayout>
-        <Frame VerticalOptions="End"
-                   Margin="5"
-                   BackgroundColor="ForestGreen"
-                   Padding="0">
+
+        <Frame 
+            Grid.Row="1"
+            VerticalOptions="End"
+            Margin="5"
+            BackgroundColor="Green"
+            Padding="0">
             <Label
                 HorizontalOptions="CenterAndExpand"
                 VerticalOptions="CenterAndExpand"
@@ -130,6 +159,7 @@
                 TextColor="White"
                 Text="Powered By : Amr Yakout"/>
         </Frame>
-
     </Grid>
 </ContentPage>
+
+

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICD", "ICD\ICD.csproj", "{640A9108-C7C8-44E4-9A43-561E0A0E7BD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICD", "ICD\ICD.csproj", "{640A9108-C7C8-44E4-9A43-561E0A0E7BD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

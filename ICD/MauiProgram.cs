@@ -3,6 +3,7 @@ using ICD.Models;
 using ICD.ViewModels;
 using ICD.Views;
 using Microsoft.Extensions.Logging;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace ICD
 {
@@ -13,6 +14,7 @@ namespace ICD
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseSkiaSharp()
                 .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {

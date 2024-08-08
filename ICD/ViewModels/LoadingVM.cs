@@ -24,6 +24,7 @@ namespace ICD.ViewModels
         [RelayCommand]
         private async Task LoadData()
         {
+
             if (Loading2)
             {
                 Loading2 = false;

@@ -10,7 +10,7 @@ namespace ICD
     {
         private readonly AppShellVM _appShellVM;
 
-        private const string DbName = "ICD1";
+        private const string DbName = "ICD2";
 
         public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory, DbName);
 
@@ -30,8 +30,8 @@ namespace ICD
         private async Task CheckDatabase()
         {
             //File.Delete(DbPath);
-            ///
-            //Shell.Current.GoToAsync($"//{nameof(HomePage)}", animate: true);
+
+            //Shell.Current.GoToAsync($"//{nameof(MainPage)}", animate: true);
 
             try
             {
@@ -65,3 +65,4 @@ namespace ICD
         }
     }
 }
+//C: \Users\Hp\AppData\Roaming\Microsoft\UserSecrets\40840c8b-ed9e-4de6-b6f6-f0b2617cb810\secrets.json

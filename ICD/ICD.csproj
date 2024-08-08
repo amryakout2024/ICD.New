@@ -84,11 +84,21 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\AppIcon\stas.svg" />
+	  <None Remove="Resources\Images\icd.png" />
+	  <None Remove="Resources\Raw\loading.json" />
 	  <None Remove="Resources\Splash\pill.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiAsset Include="Resources\Raw\loading.json" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiIcon Include="Resources\AppIcon\stas.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Include="Resources\Images\icd.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -101,6 +111,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="SkiaSharp.Extended.UI.Maui" Version="3.0.0-preview.7" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
 	</ItemGroup>
 
