@@ -185,7 +185,7 @@
                     HorizontalOptions="CenterAndExpand"
                     TextColor="Green"
                     TextDecorations="Underline"
-                    Text="Welcome To ICD-10 Library" 
+                    Text="Welcome To ICD-10 App" 
                     FontSize="26"/>
                 <Label 
                     Margin="5,5,0,0"
@@ -262,26 +262,44 @@
                             StrokeThickness="1"
                             Padding="5"
                             Margin="5,5,5,0">
-                            <VerticalStackLayout>
-                                <Label TextColor="DarkGreen" 
+                            <Grid ColumnDefinitions="*,auto">
+                                <VerticalStackLayout Grid.Column="0">
+                                    <Label TextColor="DarkGreen" 
                                        Text="{Binding DrugName}"
                                        FontAttributes="Italic"
                                        FontSize="20"/>
-                                <Label TextColor="DarkSlateBlue"
+                                    <Label TextColor="DarkSlateBlue"
                                        Text="{Binding DiagnosisCode}" 
                                        FontSize="18"
                                        FontAttributes="Bold"/>
-                                <Label TextColor="DarkGreen" 
+                                    <Label TextColor="DarkGreen" 
+                                           TextTransform="Lowercase"
                                        Text="{Binding DiagnosisName1}"
                                        FontSize="16"/>
-                                <Label TextColor="DarkGreen" 
+                                    <Label TextColor="DarkGreen" 
+                                           TextTransform="Lowercase"
                                        Text="{Binding DiagnosisName2}"
                                        FontSize="16"/>
-                                <Label TextColor="DarkGreen" 
+                                    <Label TextColor="DarkGreen" 
+                                           TextTransform="Lowercase"
                                        Text="{Binding DiagnosisName3}"
                                        FontSize="16"/>
 
-                            </VerticalStackLayout>
+                                </VerticalStackLayout>
+                                <Grid RowDefinitions="auto,*"
+                                      Grid.Column="1">
+                                    <!--<CheckBox/>-->
+                                    <Button
+                                    Grid.Row="1"
+                                    HeightRequest="50"
+                                    WidthRequest="60"
+                                    BackgroundColor="Transparent"
+                                    ImageSource="share"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeVM}},Path=ShareDrugCommand}"
+                                    CommandParameter="{Binding .}">
+                                    </Button>
+                                </Grid>
+                            </Grid>
                             <Border.StrokeShape>
                                 <RoundRectangle CornerRadius="5,0,0,5"/>
                             </Border.StrokeShape>

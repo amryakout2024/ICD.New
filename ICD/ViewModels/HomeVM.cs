@@ -56,6 +56,7 @@ namespace ICD.ViewModels
 
         partial void OnIsTradeRadioButtonCheckedChanged(bool value)
         {
+			//Configuration 
 			Search();
         }
 
@@ -146,7 +147,17 @@ namespace ICD.ViewModels
             }
         }
 
-		[RelayCommand]
+        [RelayCommand]
+        private async Task ShareDrug(Drug drug)
+        {
+			Share.Default.RequestAsync(
+				new ShareTextRequest(
+					@$"{drug.DrugName} : {drug.DiagnosisCode} 
+			sent from ICD-10 App"
+					));
+        }
+
+        [RelayCommand]
 		private async Task GotoHomePage()
 		{
 			IsDrugSelected = false;
