@@ -2,6 +2,8 @@
 using ICD.Models;
 using ICD.ViewModels;
 using ICD.Views;
+using UraniumUI;
+using UraniumUI.Material;
 using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 
@@ -16,6 +18,8 @@ namespace ICD
                 .UseMauiApp<App>()
                 .UseSkiaSharp()
                 .UseMauiCommunityToolkit()
+                .UseUraniumUI()
+                .UseUraniumUIMaterial()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

@@ -22,5 +22,7 @@ namespace ICD.Models
 		public string? DiagnosisName2 { get; set; }
 
 		public string? DiagnosisName3 { get; set; }
+
+		public bool IsChecked { get; set; }=false;
 	}
 }

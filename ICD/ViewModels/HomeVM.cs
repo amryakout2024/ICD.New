@@ -30,7 +30,12 @@ namespace ICD.ViewModels
         private string _searchName;
 
         [ObservableProperty]
+        private string _countCheckedDrugs;
+
+        [ObservableProperty]
         private string _placeHolderText;
+
+        public ObservableCollection<Drug> CheckedDrugs;
 
         [ObservableProperty]
 		private string _drugName;
@@ -49,8 +54,13 @@ namespace ICD.ViewModels
 
         [ObservableProperty]
         private bool _isDrugSelected;
+        [ObservableProperty]
+        private bool _isLabelVisible;
 
-		[ObservableProperty]
+        [ObservableProperty]
+        private bool _isButtonVisible;
+
+        [ObservableProperty]
 		[NotifyCanExecuteChangedFor(nameof(SearchCommand))]
 		private bool _isTradeRadioButtonChecked;
 
@@ -69,35 +79,20 @@ namespace ICD.ViewModels
 		public async Task InitializeDrugsAsync() 
 		{
 			DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
-			//DrugsWithoutFilter = new List<Drug>()
-			//{
-			//	new Drug(){DrugId=1,DrugName="nf",DiagnosisId="hhf",DiagnosisName="gtj"},
-			//	new Drug(){DrugId=2,DrugName="nf",DiagnosisId="hhf",DiagnosisName="gtj"},
-			//	new Drug(){DrugId=3,DrugName="nf",DiagnosisId="hhf",DiagnosisName="gtj"},
-			//	new Drug(){DrugId=4,DrugName="nf",DiagnosisId="hhf",DiagnosisName="gtj"},
-			//	new Drug(){DrugId=5,DrugName="nf",DiagnosisId="hhf",DiagnosisName="gtj"},
-			//	new Drug(){DrugId=6,DrugName="nf",DiagnosisId="hhf",DiagnosisName="gtj"},
-			//};
 			Drugs = DrugsWithoutFilter;
 			CountDrugs =Drugs.Count();
 
 			TradeDrugsWithoutFilter = await _dataContext.LoadAllTradeDrugsAsync();
-			//TradeDrugsWithoutFilter = new List<TradeDrug>()
-			//{
-			//	new TradeDrug(){TradeDrugId=1,TradeDrugName="srt",DrugName="e4",DiagnosisId="fre",DiagnosisName="sw"},
-			//	new TradeDrug(){TradeDrugId=2,TradeDrugName="srt",DrugName="e4",DiagnosisId="fre",DiagnosisName="sw"},
-			//	new TradeDrug(){TradeDrugId=3,TradeDrugName="srt",DrugName="e4",DiagnosisId="fre",DiagnosisName="sw"},
-			//	new TradeDrug(){TradeDrugId=4,TradeDrugName="srt",DrugName="e4",DiagnosisId="fre",DiagnosisName="sw"},
-			//	new TradeDrug(){TradeDrugId=5,TradeDrugName="srt",DrugName="e4",DiagnosisId="fre",DiagnosisName="sw"},
-			//	new TradeDrug(){TradeDrugId=6,TradeDrugName="srt",DrugName="e4",DiagnosisId="fre",DiagnosisName="sw"},
-			//	new TradeDrug(){TradeDrugId=7,TradeDrugName="srt",DrugName="e4",DiagnosisId="fre",DiagnosisName="sw"},
-			//};
-
 			TradeDrugs = TradeDrugsWithoutFilter;
 
             IsDrugSelected = false;
 			IsTradeRadioButtonChecked = false;
 
+            CheckedDrugs = new ObservableCollection<Drug>();
+			IsDrugSelected=false;
+			IsLabelVisible=false;
+			IsButtonVisible=false;
+			CountCheckedDrugs = "0";
         }
 
         [RelayCommand]
@@ -150,11 +145,59 @@ namespace ICD.ViewModels
         [RelayCommand]
         private async Task ShareDrug(Drug drug)
         {
-			Share.Default.RequestAsync(
+			await Share.Default.RequestAsync(
 				new ShareTextRequest(
-					@$"{drug.DrugName} : {drug.DiagnosisCode} 
-			sent from ICD-10 App"
-					));
+					@$"{drug.DrugName.TrimStart()} : {drug.DiagnosisCode} 
+		sent from ICD-10 Application".TrimStart()
+                    ));
+        }
+
+		[RelayCommand]
+		private async Task ShareCheckedDrugs()
+		{
+			if (CheckedDrugs.Count>10)
+			{
+				await Shell.Current.DisplayAlert("Error","Can not share more than 10 records","Ok",FlowDirection.LeftToRight);
+				return;
+			}
+			string txt = "";
+			foreach (var d in CheckedDrugs)
+			{
+				txt = @$"{txt.TrimStart()}
+        {d.DrugName.TrimStart()} : {d.DiagnosisCode}".TrimStart();
+			}
+
+			await Share.Default.RequestAsync(
+				new ShareTextRequest(@$"{txt.TrimStart()} 
+		    sent from ICD-10 Application".TrimStart()
+        ));
+
+        }
+
+        [RelayCommand]
+        private async Task UpdateCheckedDrug(Drug drug)
+        {
+			if (drug.IsChecked == true)
+			{
+				CheckedDrugs.Add(drug);
+                if (CheckedDrugs.Count>0)
+                {
+					IsLabelVisible = true;
+                    IsButtonVisible = true;
+                }
+                CountCheckedDrugs=CheckedDrugs.Count.ToString();
+            }
+			else 
+			{
+				CheckedDrugs.Remove(drug);
+                if (CheckedDrugs.Count < 1)
+                {
+                    IsLabelVisible = false;
+                    IsButtonVisible = false;
+                }
+
+                CountCheckedDrugs = CheckedDrugs.Count.ToString();
+            }
         }
 
         [RelayCommand]

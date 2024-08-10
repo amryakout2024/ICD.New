@@ -115,6 +115,8 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="SkiaSharp.Extended.UI.Maui" Version="3.0.0-preview.7" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+		<PackageReference Include="UraniumUI" Version="2.9.1" />
+		<PackageReference Include="UraniumUI.Material" Version="2.9.1" />
 	</ItemGroup>
 
 	<ItemGroup>

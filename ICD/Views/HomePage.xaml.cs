@@ -1,6 +1,7 @@
 using ICD.ViewModels;
+using System.Collections.ObjectModel;
 using System.Globalization;
-
+using UraniumUI.Material;
 namespace ICD.Views;
 
 public partial class HomePage : ContentPage
@@ -14,6 +15,7 @@ public partial class HomePage : ContentPage
 		_homeVM = homeVM;
 
 		BindingContext = _homeVM;
+
 	}
 
 	protected async override void OnAppearing()
@@ -50,4 +52,25 @@ public partial class HomePage : ContentPage
 
 		return true;
 	}
+
+    private void cb_CheckChanged(object sender, EventArgs e)
+    {
+		//var b = (UraniumUI.Material.Controls.CheckBox)sender;
+		//if (b.IsChecked==true)
+		//{
+		//	if (_homeVM.CheckedDrugs.Count>0)
+		//	{
+		//		lr.IsVisible = false;
+		//		br.IsVisible = false;
+		//	}
+		//}
+		//else
+		//{
+  //          if (_homeVM.CheckedDrugs.Count <1)
+  //          {
+  //              lr.IsVisible = true;
+  //              br.IsVisible = true;
+  //          }
+  //      }
+    }
 }

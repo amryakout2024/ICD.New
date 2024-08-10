@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:ICD.ViewModels"
              xmlns:m="clr-namespace:ICD.Models"
+             xmlns:ur="clr-namespace:UraniumUI;assembly=UraniumUI"
+             xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="ICD.Views.HomePage"
              x:DataType="vm:HomeVM"
@@ -163,7 +165,7 @@
         <!--main ingredient grid-->
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="120"/>
+                <RowDefinition Height="145"/>
                 <RowDefinition Height="0"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="50"/>
@@ -187,31 +189,49 @@
                     TextDecorations="Underline"
                     Text="Welcome To ICD-10 App" 
                     FontSize="26"/>
-                <Label 
-                    Margin="5,5,0,0"
-                    TextColor="Green"
-                    Text="{Binding CountDrugs,StringFormat='Results Count : {0}'}" 
-                    FontSize="15"/>
-                <VerticalStackLayout>
-                    <Border Margin="5" HeightRequest="50">
-                        <Entry
+                <Grid ColumnDefinitions="*,auto,auto">
+                    <Label 
+                        Grid.Column="0"
+                        Margin="5,5,0,0"
+                        VerticalOptions="CenterAndExpand"
+                        TextColor="Green"
+                        Text="{Binding CountDrugs,StringFormat='Results count : {0}'}" 
+                        FontSize="15"/>
+                    <Label 
+                        Grid.Column="1"
+                        Margin="5,5,0,0"
+                        TextColor="Green"
+                        IsVisible="{Binding IsLabelVisible}"
+                        VerticalOptions="Center"
+                        Text="{Binding CountCheckedDrugs,StringFormat='Share {0} records'}" 
+                        FontSize="15"/>
+                    <Button
+                        Grid.Column="2"
+                        IsVisible="{Binding IsButtonVisible}"
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="45"
+                        WidthRequest="50"
+                        BackgroundColor="Transparent"
+                        ImageSource="share"
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeVM}},Path=ShareCheckedDrugsCommand}">
+                    </Button>
+                </Grid>
+                <mat:TextField
                             Text="{Binding SearchName}"
                             TextColor="Green"
                             FontSize="18"
-                            Placeholder="{Binding PlaceHolderText}" 
-                            PlaceholderColor="Gray">
-                            <Entry.Behaviors>
-                                <toolkit:EventToCommandBehavior                            
+                            AccentColor="Green"
+                            Margin="5"
+                            AllowClear="True"
+                            Title="Enter Active Ingredients"
+                            TitleColor="Gray">
+                    <mat:TextField.Behaviors>
+                        <toolkit:EventToCommandBehavior                            
                                      EventName="TextChanged"
                                      Command="{Binding Source={x:Reference this}, Path=BindingContext.SearchCommand}">
-                                </toolkit:EventToCommandBehavior>
-                            </Entry.Behaviors>
-                        </Entry>
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="10"/>
-                        </Border.StrokeShape>
-                    </Border>
-                </VerticalStackLayout>
+                        </toolkit:EventToCommandBehavior>
+                    </mat:TextField.Behaviors>
+                </mat:TextField>
             </VerticalStackLayout>
             
             <!--<Grid Grid.Row="1">
@@ -288,11 +308,24 @@
                                 </VerticalStackLayout>
                                 <Grid RowDefinitions="auto,*"
                                       Grid.Column="1">
-                                    <!--<CheckBox/>-->
+                                    <mat:CheckBox
+                                        x:Name="cb"
+                                        CheckChanged="cb_CheckChanged"
+                                        IconColor="DarkSlateBlue"
+                                        IsChecked="{Binding IsChecked}"
+                                        BorderColor="DarkSlateBlue"
+                                        HorizontalOptions="CenterAndExpand"
+                                        VerticalOptions="CenterAndExpand"
+                                        Margin="5"
+                                        BoxSizeRequest="23"
+                                        CheckChangedCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeVM}} ,Path=UpdateCheckedDrugCommand}"
+                                        CommandParameter="{Binding .}"
+                                        CornerRadius="25">
+                                    </mat:CheckBox>
                                     <Button
                                     Grid.Row="1"
-                                    HeightRequest="50"
-                                    WidthRequest="60"
+                                    HeightRequest="45"
+                                    WidthRequest="50"
                                     BackgroundColor="Transparent"
                                     ImageSource="share"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeVM}},Path=ShareDrugCommand}"
@@ -312,7 +345,7 @@
             </CollectionView>
             
             <!--trade name collection-->
-            <CollectionView 
+            <!--<CollectionView 
                 Grid.Row="2"
                 SelectionMode="Single"
                 IsVisible="Collapse"
@@ -356,7 +389,7 @@
                         </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-            </CollectionView>
+            </CollectionView>-->
 
             <Frame Grid.Row="3"
                    Margin="5"
@@ -369,6 +402,7 @@
                 TextColor="White"
                 Text="Powered By : Amr Yakout"/>
             </Frame>
+            
             <!--<ActivityIndicator IsRunning="{Binding IsBusy}"/>-->
         </Grid>
     </Grid>
