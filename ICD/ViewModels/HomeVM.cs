@@ -177,7 +177,8 @@ namespace ICD.ViewModels
         [RelayCommand]
         private async Task UpdateCheckedDrug(Drug drug)
         {
-			if (drug.IsChecked == true)
+
+			if (drug.IsCheckboxChecked == true)
 			{
 				CheckedDrugs.Add(drug);
                 if (CheckedDrugs.Count>0)
@@ -198,6 +199,15 @@ namespace ICD.ViewModels
 
                 CountCheckedDrugs = CheckedDrugs.Count.ToString();
             }
+
+   //         var d = Drugs.Where(x => x.DrugId == drug.DrugId).FirstOrDefault();
+   //         d.IsCheckboxChecked = true;
+   //         d.IsButtonVisible = false;
+   //         Drugs.Remove(drug);
+			////Drugs.Add(d);
+			//var c= Drugs.Count();
+            //var d2 = Drugs.Where(x => x.DrugId == d.DrugId).FirstOrDefault();
+			
         }
 
         [RelayCommand]

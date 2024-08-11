@@ -23,6 +23,8 @@ namespace ICD.Models
 
 		public string? DiagnosisName3 { get; set; }
 
-		public bool IsChecked { get; set; }=false;
+		public bool IsCheckboxChecked { get; set; }=false;
+
+		public bool IsButtonVisible { get; set; }=true;
 	}
 }

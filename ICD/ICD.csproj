@@ -86,6 +86,7 @@
 	  <None Remove="Resources\AppIcon\stas.svg" />
 	  <None Remove="Resources\Images\icd.png" />
 	  <None Remove="Resources\Images\share.png" />
+	  <None Remove="Resources\Images\sharesquare.png" />
 	  <None Remove="Resources\Raw\loading.json" />
 	  <None Remove="Resources\Splash\pill.svg" />
 	</ItemGroup>
@@ -101,6 +102,7 @@
 	<ItemGroup>
 	  <MauiImage Include="Resources\Images\icd.png" />
 	  <MauiImage Include="Resources\Images\share.png" />
+	  <MauiImage Include="Resources\Images\sharesquare.png" />
 	</ItemGroup>
 
 	<ItemGroup>

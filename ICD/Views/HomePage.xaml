@@ -165,10 +165,10 @@
         <!--main ingredient grid-->
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="145"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="0"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Grid.Style>
                 <Style TargetType="Grid">
@@ -200,7 +200,7 @@
                     <Label 
                         Grid.Column="1"
                         Margin="5,5,0,0"
-                        TextColor="Green"
+                        TextColor="DarkRed"
                         IsVisible="{Binding IsLabelVisible}"
                         VerticalOptions="Center"
                         Text="{Binding CountCheckedDrugs,StringFormat='Share {0} records'}" 
@@ -209,10 +209,10 @@
                         Grid.Column="2"
                         IsVisible="{Binding IsButtonVisible}"
                         VerticalOptions="CenterAndExpand"
-                        HeightRequest="45"
-                        WidthRequest="50"
+                        HeightRequest="50"
+                        WidthRequest="60"
                         BackgroundColor="Transparent"
-                        ImageSource="share"
+                        ImageSource="sharesquare"
                         Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeVM}},Path=ShareCheckedDrugsCommand}">
                     </Button>
                 </Grid>
@@ -224,7 +224,7 @@
                             Margin="5"
                             AllowClear="True"
                             Title="Enter Active Ingredients"
-                            TitleColor="Gray">
+                            TitleColor="LightGray">
                     <mat:TextField.Behaviors>
                         <toolkit:EventToCommandBehavior                            
                                      EventName="TextChanged"
@@ -264,6 +264,7 @@
             <!--active ingredient collection-->
             <CollectionView Grid.Row="2"
                 SelectionMode="Single"
+                            x:Name="cv"
                 ItemsSource="{Binding Drugs}"
                 EmptyView="No Items To Display Or The Word Is Not Correct">
                 <CollectionView.Style>
@@ -312,7 +313,7 @@
                                         x:Name="cb"
                                         CheckChanged="cb_CheckChanged"
                                         IconColor="DarkSlateBlue"
-                                        IsChecked="{Binding IsChecked}"
+                                        IsChecked="{Binding IsCheckboxChecked}"
                                         BorderColor="DarkSlateBlue"
                                         HorizontalOptions="CenterAndExpand"
                                         VerticalOptions="CenterAndExpand"
@@ -324,12 +325,13 @@
                                     </mat:CheckBox>
                                     <Button
                                     Grid.Row="1"
-                                    HeightRequest="45"
-                                    WidthRequest="50"
-                                    BackgroundColor="Transparent"
-                                    ImageSource="share"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeVM}},Path=ShareDrugCommand}"
-                                    CommandParameter="{Binding .}">
+                                        HeightRequest="45"
+                                        IsVisible="{Binding IsButtonVisible}"
+                                        WidthRequest="50"
+                                        BackgroundColor="Transparent"
+                                        ImageSource="share"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeVM}},Path=ShareDrugCommand}"
+                                        CommandParameter="{Binding .}">
                                     </Button>
                                 </Grid>
                             </Grid>
@@ -398,7 +400,7 @@
                 <Label
                 HorizontalOptions="CenterAndExpand"
                 VerticalOptions="CenterAndExpand"
-                FontSize="20"
+                FontSize="25"
                 TextColor="White"
                 Text="Powered By : Amr Yakout"/>
             </Frame>

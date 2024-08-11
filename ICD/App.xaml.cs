@@ -10,7 +10,7 @@ namespace ICD
     {
         private readonly AppShellVM _appShellVM;
 
-        private const string DbName = "ICD2";
+        private const string DbName = "ICD3";
 
         public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory, DbName);
 

@@ -53,24 +53,23 @@ public partial class HomePage : ContentPage
 		return true;
 	}
 
-    private void cb_CheckChanged(object sender, EventArgs e)
+    private async void cb_CheckChanged(object sender, EventArgs e)
     {
+		//cv.ItemsSource = _homeVM.Drugs;
 		//var b = (UraniumUI.Material.Controls.CheckBox)sender;
-		//if (b.IsChecked==true)
+		//if (b.IsChecked == true)
 		//{
-		//	if (_homeVM.CheckedDrugs.Count>0)
+		//	if (_homeVM.CheckedDrugs.Count > 0)
 		//	{
-		//		lr.IsVisible = false;
-		//		br.IsVisible = false;
+
 		//	}
 		//}
 		//else
 		//{
-  //          if (_homeVM.CheckedDrugs.Count <1)
-  //          {
-  //              lr.IsVisible = true;
-  //              br.IsVisible = true;
-  //          }
-  //      }
-    }
+		//	if (_homeVM.CheckedDrugs.Count < 1)
+		//	{
+
+		//	}
+		//}
+	}
 }
