@@ -1,4 +1,5 @@
 ﻿using ICD.ViewModels;
+using ICD.Views;
 
 namespace ICD
 {
@@ -13,6 +14,11 @@ namespace ICD
             _appShellVM = appShellVM;
 
             BindingContext = _appShellVM = new AppShellVM();
+
+            //Routing.RegisterRoute("HomePage", typeof(HomePage));
+
+            //Routing.RegisterRoute("LoadingPage", typeof(LoadingPage));
+
         }
     }
 }

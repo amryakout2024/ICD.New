@@ -9,7 +9,10 @@
              x:Class="ICD.Views.HomePage"
              x:DataType="vm:HomeVM"
              x:Name="this"
-             Title="HomePage"          
+             Shell.FlyoutBehavior="Flyout"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.TabBarIsVisible="False"
+             Title="Welcome To ICD-10 App"          
              FlowDirection="LeftToRight">
         <ContentPage.Resources>
             <ControlTemplate x:Key="RadioButtonTemplate">
@@ -161,7 +164,8 @@
                 </Border.StrokeShape>
             </Border>
         </Grid>-->
-        
+
+
         <!--main ingredient grid-->
         <Grid>
             <Grid.RowDefinitions>
@@ -183,12 +187,12 @@
                 </Style>
             </Grid.Style>
             <VerticalStackLayout Grid.Row="0">
-                <Label 
+                <!--<Label 
                     HorizontalOptions="CenterAndExpand"
                     TextColor="Green"
                     TextDecorations="Underline"
                     Text="Welcome To ICD-10 App" 
-                    FontSize="26"/>
+                    FontSize="26"/>-->
                 <Grid ColumnDefinitions="*,auto,auto">
                     <Label 
                         Grid.Column="0"
@@ -392,8 +396,13 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>-->
+            <mat:BottomSheetView  Grid.Row="3" HeightRequest="100">
+                <mat:BottomSheetView.Body>
+                    <Label Text="ggg"/>
+                </mat:BottomSheetView.Body>
+            </mat:BottomSheetView>
 
-            <Frame Grid.Row="3"
+            <!--<Frame Grid.Row="3"
                    Margin="5"
                    BackgroundColor="ForestGreen"
                    Padding="0">
@@ -403,7 +412,7 @@
                 FontSize="25"
                 TextColor="White"
                 Text="Powered By : Amr Yakout"/>
-            </Frame>
+            </Frame>-->
             
             <!--<ActivityIndicator IsRunning="{Binding IsBusy}"/>-->
         </Grid>

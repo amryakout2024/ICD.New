@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
              x:Class="ICD.Views.LoadingPage"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False"
              Title="LoadingPage"
              BackgroundColor="White">
     <ContentPage.Resources>
