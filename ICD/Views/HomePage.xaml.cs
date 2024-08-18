@@ -2,9 +2,10 @@ using ICD.ViewModels;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using UraniumUI.Material;
+using UraniumUI.Pages;
 namespace ICD.Views;
 
-public partial class HomePage : ContentPage
+public partial class HomePage : UraniumContentPage
 {
 	private readonly HomeVM _homeVM;
 
@@ -16,6 +17,7 @@ public partial class HomePage : ContentPage
 
 		BindingContext = _homeVM;
 
+		
 	}
 
 	protected async override void OnAppearing()
@@ -72,4 +74,5 @@ public partial class HomePage : ContentPage
 		//	}
 		//}
 	}
+
 }

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace ICD.ViewModels
 {
@@ -19,7 +20,10 @@ namespace ICD.ViewModels
 		[ObservableProperty]
 		private List<Drug> _drugs;
 
-		[ObservableProperty]
+        [ObservableProperty]
+        private List<Drug> _drugsFalse;
+
+        [ObservableProperty]
 		private List<TradeDrug> _tradeDrugs;
 
 		private List<Drug> DrugsWithoutFilter;
@@ -54,8 +58,12 @@ namespace ICD.ViewModels
 
         [ObservableProperty]
         private bool _isDrugSelected;
+
         [ObservableProperty]
         private bool _isLabelVisible;
+
+        [ObservableProperty]
+        private bool _isRefreshing = false;
 
         [ObservableProperty]
         private bool _isButtonVisible;
@@ -80,6 +88,7 @@ namespace ICD.ViewModels
 		{
 			DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
 			Drugs = DrugsWithoutFilter;
+			DrugsFalse = Drugs;
 			CountDrugs =Drugs.Count();
 
 			TradeDrugsWithoutFilter = await _dataContext.LoadAllTradeDrugsAsync();
@@ -93,6 +102,17 @@ namespace ICD.ViewModels
 			IsLabelVisible=false;
 			IsButtonVisible=false;
 			CountCheckedDrugs = "0";
+
+			//Shell.SetBackButtonBehavior(this, new BackButtonBehavior()
+			//{
+			//	Command = searchComman()
+			//});
+				 
+        }
+
+        private ICommand searchComman()
+        {
+            throw new NotImplementedException();
         }
 
         [RelayCommand]
@@ -172,6 +192,37 @@ namespace ICD.ViewModels
 		    sent from ICD-10 Application".TrimStart()
         ));
 
+        }
+
+		[RelayCommand]
+		private async Task ShareTheApplication()
+        {
+
+			await Share.Default.RequestAsync(new ShareTextRequest
+			{
+				Uri = "https://play.google.com/store/apps/details?id=com.amr.icd&pli=1"
+			});
+
+        }
+
+        [RelayCommand]
+        private async Task CloseApp()
+        {
+#if ANDROID
+            App.Current.CloseWindow(App.Current.MainPage.Window);
+            App.Current.Quit();
+#endif
+        }
+
+        [RelayCommand]
+        private async Task ClearSelections()
+        {
+			Drugs = DrugsWithoutFilter;
+			//var d= Drugs.Where(x=>x.DrugId==1).SingleOrDefault();
+   //         Drugs.Remove(Drugs.Where(x => x.DrugId == 1).SingleOrDefault());
+   //         d.IsCheckboxChecked = false;
+			//Drugs.Add(d);
+   //         IsRefreshing = true;
         }
 
         [RelayCommand]

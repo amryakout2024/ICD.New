@@ -9,6 +9,7 @@
     FlowDirection="LeftToRight"
     Shell.NavBarIsVisible="True"
     Title="IdealDiagnosis">
+    
 
 
     <Shell.Behaviors>
