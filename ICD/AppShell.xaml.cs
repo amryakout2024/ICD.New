@@ -17,8 +17,6 @@ namespace ICD
 
             //Routing.RegisterRoute("HomePage", typeof(HomePage));
 
-            //Routing.RegisterRoute("LoadingPage", typeof(LoadingPage));
-
         }
     }
 }

@@ -10,7 +10,7 @@ namespace ICD
     {
         private readonly AppShellVM _appShellVM;
 
-        private const string DbName = "ICD3";
+        private const string DbName = "ICD4";
 
         public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory, DbName);
 
@@ -65,4 +65,3 @@ namespace ICD
         }
     }
 }
-//C: \Users\Hp\AppData\Roaming\Microsoft\UserSecrets\40840c8b-ed9e-4de6-b6f6-f0b2617cb810\secrets.json

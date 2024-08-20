@@ -16,12 +16,6 @@
         <toolkit:StatusBarBehavior StatusBarColor="Green"/>
     </Shell.Behaviors>
 
-    <!--<Shell.MenuItemTemplate>
-        <DataTemplate>
-            <Label Text="{Binding Title}"/>
-        </DataTemplate>
-    </Shell.MenuItemTemplate>-->
-
     <ShellContent
                 Title="loading"
                 ContentTemplate="{DataTemplate v:LoadingPage}"
@@ -30,10 +24,6 @@
                 Title="Home"
                 ContentTemplate="{DataTemplate v:HomePage}"
                 Route="HomePage" />
-    <!--<ShellContent
-                Title="MainPage"
-                ContentTemplate="{DataTemplate local:MainPage}"
-                Route="MainPage" />-->
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior Command="{Binding CloseAppCommand}"/>

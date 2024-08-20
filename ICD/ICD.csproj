@@ -121,6 +121,7 @@
 	  <MauiImage Include="Resources\Images\sharesquare.png" />
 	</ItemGroup>
 
+	
 	<ItemGroup>
 	  <MauiSplashScreen Include="Resources\Splash\pill.svg" ForegroundScale="0.65" Color="white" />
 	</ItemGroup>
@@ -142,6 +143,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="AppShell.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Archives\Dictionary1.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\Colors.xaml">
