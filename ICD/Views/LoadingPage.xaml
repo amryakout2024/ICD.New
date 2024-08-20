@@ -66,13 +66,6 @@
                 Command="{Binding LoadDataCommand}">
             </Button>
 
-            <!--<skia:SKLottieView BackgroundColor="Aquamarine"
-                    WidthRequest="200"
-                    HeightRequest="200"
-                    Source="loading.json"
-                    RepeatCount="-1"
-                    RepeatMode="Restart"
-                    x:Name="sk"/>-->
         </VerticalStackLayout>
         
         <skia:SKLottieView

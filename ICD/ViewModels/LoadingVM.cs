@@ -15,22 +15,17 @@ namespace ICD.ViewModels
     {
         private readonly DataContext _dataContext = dataContext;
 
-        [ObservableProperty]
-        private bool _loading=false;
+        private bool Loading=true;
 
         [RelayCommand]
         private async Task LoadData()
         {
-
             if (Loading)
             {
-
                 Loading = false;
-                await Shell.Current.DisplayAlert("dd", "dds", "ok");
-
-                //await _dataContext.LoadAllDrugsAsync();
-                //await _dataContext.LoadAllTradeDrugsAsync();
-                //await Shell.Current.GoToAsync($"//{nameof(HomePage)}", animate: true);
+                await _dataContext.LoadAllDrugsAsync();
+                await _dataContext.LoadAllTradeDrugsAsync();
+                await Shell.Current.GoToAsync($"//{nameof(HomePage)}", animate: true);
             };
         }
     }
