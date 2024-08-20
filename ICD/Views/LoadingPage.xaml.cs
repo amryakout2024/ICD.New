@@ -13,6 +13,7 @@ public partial class LoadingPage : ContentPage
         _loadingVM = loadingVM;
 
         BindingContext =_loadingVM;
+
     }
 
     private async void LoadDataBtn_Pressed(object sender, EventArgs e)
@@ -21,7 +22,6 @@ public partial class LoadingPage : ContentPage
         lblDonotClose.IsVisible = true;
         lblFewMinutes.IsVisible = true;
         LoadDataBtn.Text = "Loading....";
-        sk.IsVisible = true;
         sk.IsAnimationEnabled = true;
 
     }

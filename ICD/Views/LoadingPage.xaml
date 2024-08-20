@@ -16,8 +16,8 @@
         </Style>
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="auto,*">
-        <VerticalStackLayout Padding="5">
+    <Grid RowDefinitions="auto,*,auto">
+        <VerticalStackLayout Grid.Row="0" Padding="5">
             <Label 
                 Grid.Row="0"
                 Text="Welcome to ICD-10 App"
@@ -74,17 +74,20 @@
                     RepeatMode="Restart"
                     x:Name="sk"/>-->
         </VerticalStackLayout>
+        
         <skia:SKLottieView
-                           Grid.Row="1"
-                    WidthRequest="200"
-                    HeightRequest="200"
-                    Source="ani.json"
-                    RepeatCount="-1"
-                    RepeatMode="Restart"
-                    x:Name="sk"/>
+            Grid.Row="1"
+            WidthRequest="200"
+            HeightRequest="200"
+            Source="Resources\Raw\loading.json"
+            RepeatCount="-1"
+            IsVisible="True"
+            IsAnimationEnabled="False"
+            RepeatMode="Restart"
+            x:Name="sk"/>
 
         <Frame 
-            Grid.Row="1"
+            Grid.Row="2"
             VerticalOptions="End"
             Margin="5"
             BackgroundColor="Green"
