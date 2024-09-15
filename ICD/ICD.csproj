@@ -131,9 +131,10 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.2" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.0-rc.1.24453.9" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.0-rc.1.24453.9" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="Plugin.MauiMTAdmob" Version="1.6.3" />
 		<PackageReference Include="SkiaSharp.Extended.UI.Maui" Version="3.0.0-preview.7" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
 		<PackageReference Include="UraniumUI" Version="2.9.1" />
@@ -162,10 +163,6 @@
 	  <MauiXaml Update="Views\LoadingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Dependencies\" />
 	</ItemGroup>
 
 </Project>

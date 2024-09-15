@@ -1,6 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-	<application android:allowBackup="true" android:icon="@mipmap/stas" android:supportsRtl="true"></application>
+	<application 
+		android:allowBackup="true" 
+		android:icon="@mipmap/stas" 
+		android:supportsRtl="true">
+		<meta-data 
+			android:name="com.google.android.gms.ads.ca-app-pub-3829937021524038~4291208264" 
+			android:value="ca-app-pub-3829937021524038~4291208264" />
+	</application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
 </manifest>
