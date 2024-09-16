@@ -24,6 +24,8 @@ namespace ICD
 
             MainPage = new AppShell(_appShellVM);
 
+            Routing.RegisterRoute("LoadingPage", typeof(LoadingPage));
+
             CheckDatabase();
         }
 
@@ -41,7 +43,7 @@ namespace ICD
 
                 if (drug != null && tradeDrug != null)
                 {
-                    Shell.Current.GoToAsync($"//{nameof(HomePage)}", animate: true);
+                    await Shell.Current.GoToAsync($"//{nameof(HomePage)}", animate: true);
                 }
                 else
                 {
@@ -51,7 +53,7 @@ namespace ICD
 
                     Database.Table<TradeDrug>().Delete();
 
-                    Shell.Current.GoToAsync($"//{nameof(LoadingPage)}", animate: true);
+                     await Shell.Current.GoToAsync($"//{nameof(LoadingPage)}", animate: true);
                 }
 
 
@@ -60,7 +62,7 @@ namespace ICD
             {
                 //File.Delete(DbPath);
 
-                Shell.Current.GoToAsync($"//{nameof(LoadingPage)}", animate: true);
+                await Shell.Current.GoToAsync($"//{nameof(LoadingPage)}", animate: true);
             }
         }
     }

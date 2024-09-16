@@ -124,17 +124,18 @@ namespace ICD.ViewModels
 
                 if (!string.IsNullOrEmpty(SearchName))
 				{
-					IsBusy = true;
+					//IsBusy = true;
 					Drugs = DrugsWithoutFilter.Where(x => x.DrugName.ToLower().Contains(SearchName.ToLower())).ToList();
 
 					CountDrugs = Drugs.Count();
-					IsBusy = false;
+
+					//IsBusy = false;
 				}
 				else
 				{
 					Drugs = DrugsWithoutFilter;
 
-					CountDrugs = Drugs.Count();
+					CountDrugs = 0;
 
 				}
  

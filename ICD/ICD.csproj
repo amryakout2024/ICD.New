@@ -41,7 +41,7 @@
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
 	  <AndroidUseAapt2>True</AndroidUseAapt2>
 	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
-	  <AndroidPackageFormat>aab</AndroidPackageFormat>
+	  <AndroidPackageFormat>apk</AndroidPackageFormat>
 	  <ApplicationId>com.amr.icd</ApplicationId>
 	  <ApplicationTitle>ICD-10</ApplicationTitle>
 	  <ApplicationDisplayVersion>3.0</ApplicationDisplayVersion>
@@ -72,7 +72,7 @@
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
 	  <ApplicationId>com.amr.icd</ApplicationId>
 	  <ApplicationTitle>ICD-10</ApplicationTitle>
-	  <AndroidPackageFormat>aab</AndroidPackageFormat>
+	  <AndroidPackageFormat>apk</AndroidPackageFormat>
 	  <ApplicationDisplayVersion>3.0</ApplicationDisplayVersion>
 	  <ApplicationVersion>3</ApplicationVersion>
 	  <AndroidUseAapt2>True</AndroidUseAapt2>
@@ -131,8 +131,8 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.2" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.0-rc.1.24453.9" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.0-rc.1.24453.9" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.90" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.90" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="Plugin.MauiMTAdmob" Version="1.6.3" />
 		<PackageReference Include="SkiaSharp.Extended.UI.Maui" Version="3.0.0-preview.7" />

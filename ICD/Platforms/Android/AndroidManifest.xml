@@ -5,7 +5,7 @@
 		android:icon="@mipmap/stas" 
 		android:supportsRtl="true">
 		<meta-data 
-			android:name="com.google.android.gms.ads.ca-app-pub-3829937021524038~4291208264" 
+			android:name="com.google.android.gms.ads.APPLICATION_ID"  
 			android:value="ca-app-pub-3829937021524038~4291208264" />
 	</application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

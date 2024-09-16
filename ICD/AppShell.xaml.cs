@@ -15,7 +15,7 @@ namespace ICD
 
             BindingContext = _appShellVM = new AppShellVM();
 
-            //Routing.RegisterRoute("HomePage", typeof(HomePage));
+            Routing.RegisterRoute("LoadingPage", typeof(LoadingPage));
 
         }
     }

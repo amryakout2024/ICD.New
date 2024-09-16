@@ -55,24 +55,4 @@ public partial class HomePage : UraniumContentPage
 		return true;
 	}
 
-    private async void cb_CheckChanged(object sender, EventArgs e)
-    {
-		//cv.ItemsSource = _homeVM.Drugs;
-		//var b = (UraniumUI.Material.Controls.CheckBox)sender;
-		//if (b.IsChecked == true)
-		//{
-		//	if (_homeVM.CheckedDrugs.Count > 0)
-		//	{
-
-		//	}
-		//}
-		//else
-		//{
-		//	if (_homeVM.CheckedDrugs.Count < 1)
-		//	{
-
-		//	}
-		//}
-	}
-
 }
