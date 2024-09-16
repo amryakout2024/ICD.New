@@ -17,10 +17,17 @@ public partial class HomePage : UraniumContentPage
 
 		BindingContext = _homeVM;
 
-		
+		SetBannerId();
 	}
 
-	protected async override void OnAppearing()
+    private void SetBannerId()
+    {
+#if ANDROID
+		myAds.AdsId="ca-app-pub-3829937021524038/7874998548";
+#endif
+    }
+
+    protected async override void OnAppearing()
 	{
 		base.OnAppearing();
 

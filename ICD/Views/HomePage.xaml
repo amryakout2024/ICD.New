@@ -226,12 +226,23 @@
             </CollectionView>
 
             <VerticalStackLayout Grid.Row="2">
-                <controls:MTAdView x:Name="myAds">
+                <Border StrokeShape="RoundRectangle 10"
+                        StrokeThickness="0"
+                    Margin="5,0,5,0">
+                    <controls:MTAdView x:Name="myAds">
+                        <controls:MTAdView.HeightRequest>
+                            <OnIdiom 
+                                Phone="50"
+                                Tablet="90"
+                                Desktop="90"/>
+                        </controls:MTAdView.HeightRequest>
 
-                </controls:MTAdView>
-                
+                    </controls:MTAdView>
+                </Border>
+
                 <Border
                    Margin="5"
+                   StrokeShape="RoundRectangle 10"
                    BackgroundColor="ForestGreen"
                    Padding="0">
                     <Label

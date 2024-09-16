@@ -105,11 +105,13 @@
 	  <None Remove="Resources\Images\icd.png" />
 	  <None Remove="Resources\Images\share.png" />
 	  <None Remove="Resources\Images\sharesquare.png" />
+	  <None Remove="Resources\Raw\cap.json" />
 	  <None Remove="Resources\Raw\loading.json" />
 	  <None Remove="Resources\Splash\pill.svg" />
 	</ItemGroup>
 	
 	<ItemGroup>
+	  <MauiAsset Include="Resources\Raw\cap.json" />
 	  <MauiAsset Include="Resources\Raw\loading.json" />
 	</ItemGroup>
 

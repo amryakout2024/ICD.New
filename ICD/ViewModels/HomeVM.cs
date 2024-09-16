@@ -89,7 +89,7 @@ namespace ICD.ViewModels
 			DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
 			Drugs = DrugsWithoutFilter;
 			DrugsFalse = Drugs;
-			CountDrugs =Drugs.Count();
+			CountDrugs =0;
 
 			TradeDrugsWithoutFilter = await _dataContext.LoadAllTradeDrugsAsync();
 			TradeDrugs = TradeDrugsWithoutFilter;
@@ -229,8 +229,16 @@ namespace ICD.ViewModels
         [RelayCommand]
         private async Task UpdateCheckedDrug(Drug drug)
         {
+            if (drug.IsCheckboxChecked==true)
+            {
+				drug.IsCheckboxChecked = false;
+            }
+            else
+            {
+				drug.IsCheckboxChecked = true;
+            }
 
-			if (drug.IsCheckboxChecked == true)
+            if (drug.IsCheckboxChecked == true)
 			{
 				CheckedDrugs.Add(drug);
                 if (CheckedDrugs.Count>0)
