@@ -41,41 +41,41 @@
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
 	  <AndroidUseAapt2>True</AndroidUseAapt2>
 	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
-	  <AndroidPackageFormat>apk</AndroidPackageFormat>
+	  <AndroidPackageFormat>aab</AndroidPackageFormat>
 	  <ApplicationId>com.amr.icd</ApplicationId>
 	  <ApplicationTitle>ICD-10</ApplicationTitle>
-	  <ApplicationDisplayVersion>10.0</ApplicationDisplayVersion>
-	  <ApplicationVersion>10</ApplicationVersion>
+	  <ApplicationDisplayVersion>9.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>9</ApplicationVersion>
 	  <RunAOTCompilation>False</RunAOTCompilation>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
 	  <ApplicationId>com.amr.icd</ApplicationId>
 	  <ApplicationTitle>ICD-10</ApplicationTitle>
-	  <ApplicationDisplayVersion>10.0</ApplicationDisplayVersion>
-	  <ApplicationVersion>10</ApplicationVersion>
+	  <ApplicationDisplayVersion>9.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>9</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-maccatalyst|AnyCPU'">
 	  <ApplicationId>com.amr.icd</ApplicationId>
 	  <ApplicationTitle>ICD-10</ApplicationTitle>
-	  <ApplicationDisplayVersion>10.0</ApplicationDisplayVersion>
-	  <ApplicationVersion>10</ApplicationVersion>
+	  <ApplicationDisplayVersion>9.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>9</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|AnyCPU'">
 	  <ApplicationId>com.amr.icd</ApplicationId>
 	  <ApplicationTitle>ICD-10</ApplicationTitle>
-	  <ApplicationDisplayVersion>10.0</ApplicationDisplayVersion>
-	  <ApplicationVersion>10</ApplicationVersion>
+	  <ApplicationDisplayVersion>9.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>9</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
 	  <ApplicationId>com.amr.icd</ApplicationId>
 	  <ApplicationTitle>ICD-10</ApplicationTitle>
-	  <AndroidPackageFormat>apk</AndroidPackageFormat>
-	  <ApplicationDisplayVersion>10.0</ApplicationDisplayVersion>
-	  <ApplicationVersion>10</ApplicationVersion>
+	  <AndroidPackageFormat>aab</AndroidPackageFormat>
+	  <ApplicationDisplayVersion>9.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>9</ApplicationVersion>
 	  <AndroidUseAapt2>True</AndroidUseAapt2>
 	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
 	</PropertyGroup>
@@ -83,22 +83,22 @@
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|AnyCPU'">
 	  <ApplicationId>com.amr.icd</ApplicationId>
 	  <ApplicationTitle>ICD-10</ApplicationTitle>
-	  <ApplicationDisplayVersion>10.0</ApplicationDisplayVersion>
-	  <ApplicationVersion>10</ApplicationVersion>
+	  <ApplicationDisplayVersion>9.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>9</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-maccatalyst|AnyCPU'">
 	  <ApplicationId>com.amr.icd</ApplicationId>
 	  <ApplicationTitle>ICD-10</ApplicationTitle>
-	  <ApplicationDisplayVersion>10.0</ApplicationDisplayVersion>
-	  <ApplicationVersion>10</ApplicationVersion>
+	  <ApplicationDisplayVersion>9.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>9</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows10.0.19041.0|AnyCPU'">
 	  <ApplicationId>com.amr.icd</ApplicationId>
 	  <ApplicationTitle>ICD-10</ApplicationTitle>
-	  <ApplicationDisplayVersion>10.0</ApplicationDisplayVersion>
-	  <ApplicationVersion>10</ApplicationVersion>
+	  <ApplicationDisplayVersion>9.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>9</ApplicationVersion>
 	</PropertyGroup>
 
 	<ItemGroup>

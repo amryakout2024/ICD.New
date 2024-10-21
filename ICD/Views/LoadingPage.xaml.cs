@@ -14,8 +14,16 @@ public partial class LoadingPage : ContentPage
 
         BindingContext =_loadingVM;
 
+        SetBannerId();
+
     }
 
+    private void SetBannerId()
+    {
+//#if ANDROID
+//		myAds.AdsId="ca-app-pub-3829937021524038/7874998548";
+//#endif
+    }
     private void LoadDataBtn_Pressed(object sender, EventArgs e)
     {
         lblToStartLoad.IsVisible = false;

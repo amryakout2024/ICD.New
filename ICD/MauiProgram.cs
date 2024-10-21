@@ -6,7 +6,7 @@ using UraniumUI;
 using UraniumUI.Material;
 using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
-using Plugin.MauiMTAdmob;
+//using Plugin.MauiMTAdmob;
 
 namespace ICD
 {
@@ -21,7 +21,6 @@ namespace ICD
                 .UseMauiCommunityToolkit()
                 .UseUraniumUI()
                 .UseUraniumUIMaterial()
-                .UseMauiMTAdmob()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

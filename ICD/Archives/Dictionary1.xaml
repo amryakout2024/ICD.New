@@ -2,6 +2,27 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ICD.Archives.Dictionary1">
+    
+    <!--//protected override void OnCreate(Bundle? savedInstanceState)
+        //{
+        //    base.OnCreate(savedInstanceState);
+        //    //MobileAds.Initialize(this);
+        //}-->
+    <!--.UseMauiMTAdmob()-->
+
+    <!--xmlns:controls="clr-namespace:Plugin.MauiMTAdmob.Controls;assembly=Plugin.MauiMTAdmob"-->
+
+    <!--Plugin.MauiMTAdmob-->
+    
+    
+    
+    <!--<meta-data 
+			android:name="com.google.android.gms.ads.APPLICATION_ID" 
+			android:value="ca-app-pub-3829937021524038~4291208264"/>-->
+
+    <!--tools:node="remove"-->
+
+
     <!--<Border.GestureRecognizers>
         <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:HomeVM}},Path=ShowDrugDetailsFormCommand}" CommandParameter="{Binding .}"/>
     </Border.GestureRecognizers>-->

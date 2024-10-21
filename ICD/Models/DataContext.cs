@@ -10,7 +10,7 @@ namespace ICD.Models
 {
 	public class DataContext
 	{
-		private const string DbName = "ICD103";
+		private const string DbName = "ICD10";
 
 		public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory,DbName);
 

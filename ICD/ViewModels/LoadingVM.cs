@@ -15,18 +15,12 @@ namespace ICD.ViewModels
     {
         private readonly DataContext _dataContext = dataContext;
 
-        private bool Loading=true;
-
         [RelayCommand]
         private async Task LoadData()
         {
-            if (Loading)
-            {
-                Loading = false;
-                await _dataContext.LoadAllDrugsAsync();
-                await _dataContext.LoadAllTradeDrugsAsync();
-                await Shell.Current.GoToAsync($"//{nameof(HomePage)}", animate: true);
-            };
+            await _dataContext.LoadAllDrugsAsync();
+            await _dataContext.LoadAllTradeDrugsAsync();
+            await Shell.Current.GoToAsync($"//{nameof(HomePage)}", animate: true);
         }
     }
 }
