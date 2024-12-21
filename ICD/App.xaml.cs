@@ -10,7 +10,7 @@ namespace ICD
     {
         private readonly AppShellVM _appShellVM;
 
-        private const string DbName = "ICD10";
+        private const string DbName = "ICD500";
 
         public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory, DbName);
 
@@ -37,11 +37,10 @@ namespace ICD
 
             try
             {
-                Drug drug = Database.Table<Drug>().Where(x => x.DrugId == 1800).FirstOrDefault();
+                DrugDetail drugDetail = Database.Table<DrugDetail>().ToList().Where(x => x.DrugDetailId == 6000).FirstOrDefault()??new DrugDetail();
 
-                TradeDrug tradeDrug = Database.Table<TradeDrug>().Where(x => x.TradeDrugId == 1).FirstOrDefault();
 
-                if (drug != null && tradeDrug != null)
+                if (drugDetail != null)
                 {
                     await Shell.Current.GoToAsync($"//{nameof(HomePage)}", animate: true);
                 }
@@ -49,12 +48,29 @@ namespace ICD
                 {
                     //File.Delete(DbPath);
 
-                    Database.Table<Drug>().Delete();
+                    Database.Table<DrugDetail>().Delete();
 
-                    Database.Table<TradeDrug>().Delete();
-
-                     await Shell.Current.GoToAsync($"//{nameof(LoadingPage)}", animate: true);
+                    await Shell.Current.GoToAsync($"//{nameof(LoadingPage)}", animate: true);
                 }
+
+                //Drug drug = Database.Table<Drug>().Where(x => x.DrugId == 1800).FirstOrDefault();
+
+                ////TradeDrug tradeDrug = Database.Table<TradeDrug>().Where(x => x.TradeDrugId == 1).FirstOrDefault();
+
+                //if (drug != null && tradeDrug != null)
+                //{
+                //    await Shell.Current.GoToAsync($"//{nameof(HomePage)}", animate: true);
+                //}
+                //else
+                //{
+                //    //File.Delete(DbPath);
+
+                //    Database.Table<Drug>().Delete();
+
+                //    Database.Table<TradeDrug>().Delete();
+
+                //     await Shell.Current.GoToAsync($"//{nameof(LoadingPage)}", animate: true);
+                //}
 
 
             }

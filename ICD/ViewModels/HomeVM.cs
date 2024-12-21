@@ -28,8 +28,9 @@ namespace ICD.ViewModels
 
 		private List<Drug> DrugsWithoutFilter;
 
-		private List<TradeDrug> TradeDrugsWithoutFilter;
-
+		[ObservableProperty]
+		private List<DrugDetail> _drugDetails;
+		 
         [ObservableProperty]
         private string _searchName;
 
@@ -91,8 +92,7 @@ namespace ICD.ViewModels
 			DrugsFalse = Drugs;
 			CountDrugs =0;
 
-			TradeDrugsWithoutFilter = await _dataContext.LoadAllTradeDrugsAsync();
-			TradeDrugs = TradeDrugsWithoutFilter;
+			DrugDetails = await _dataContext.LoadAllDrugDetailsAsync();
 
             IsDrugSelected = false;
 			IsTradeRadioButtonChecked = false;
@@ -110,88 +110,83 @@ namespace ICD.ViewModels
 				 
         }
 
-        private ICommand searchComman()
-        {
-            throw new NotImplementedException();
-        }
-
         [RelayCommand]
 		private async Task Search()
 		{
-            if (!IsTradeRadioButtonChecked)
-            {
-				PlaceHolderText = "Enter Active Ingredient";
+    //        if (!IsTradeRadioButtonChecked)
+    //        {
+				//PlaceHolderText = "Enter Active Ingredient";
 
-                if (!string.IsNullOrEmpty(SearchName))
-				{
-					//IsBusy = true;
-					Drugs = DrugsWithoutFilter.Where(x => x.DrugName.ToLower().Contains(SearchName.ToLower())).ToList();
+    //            if (!string.IsNullOrEmpty(SearchName))
+				//{
+				//	//IsBusy = true;
+				//	Drugs = DrugsWithoutFilter.Where(x => x.DrugName.ToLower().Contains(SearchName.ToLower())).ToList();
 
-					CountDrugs = Drugs.Count();
+				//	CountDrugs = Drugs.Count();
 
-					//IsBusy = false;
-				}
-				else
-				{
-					Drugs = DrugsWithoutFilter;
+				//	//IsBusy = false;
+				//}
+				//else
+				//{
+				//	Drugs = DrugsWithoutFilter;
 
-					CountDrugs = 0;
+				//	CountDrugs = 0;
 
-				}
+				//}
  
-            }
-            else
-            {
-                PlaceHolderText = "Enter Trade Name";
+    //        }
+    //        else
+    //        {
+    //            PlaceHolderText = "Enter Trade Name";
 
-                if (!string.IsNullOrEmpty(SearchName))
-                {
-                    IsBusy = true;
-                    TradeDrugs = TradeDrugsWithoutFilter.Where(x => x.TradeDrugName.ToLower().Contains(SearchName.ToLower())).ToList();
+    //            if (!string.IsNullOrEmpty(SearchName))
+    //            {
+    //                IsBusy = true;
+    //                //TradeDrugs = TradeDrugsWithoutFilter.Where(x => x.TradeDrugName.ToLower().Contains(SearchName.ToLower())).ToList();
 
-                    CountDrugs = TradeDrugs.Count();
-                    IsBusy = false;
-                }
-                else
-                {
-                    TradeDrugs = TradeDrugsWithoutFilter;
+    //                //CountDrugs = TradeDrugs.Count();
+    //                IsBusy = false;
+    //            }
+    //            else
+    //            {
+    //                //TradeDrugs = TradeDrugsWithoutFilter;
 
-                    CountDrugs = TradeDrugs.Count();
+    //                //CountDrugs = TradeDrugs.Count();
 
-                }
+    //            }
 
-            }
+    //        }
         }
 
         [RelayCommand]
-        private async Task ShareDrug(Drug drug)
+        private async Task ShareDrug(DrugDetail drugDetail)
         {
-			await Share.Default.RequestAsync(
-				new ShareTextRequest(
-					@$"{drug.DrugName.TrimStart()} : {drug.DiagnosisCode} 
-		sent from ICD-10 Application".TrimStart()
-                    ));
+		//	await Share.Default.RequestAsync(
+		//		new ShareTextRequest(
+		//			@$"{drug.DrugName.TrimStart()} : {drug.DiagnosisCode} 
+		//sent from ICD-10 Application".TrimStart()
+                    //));
         }
 
 		[RelayCommand]
 		private async Task ShareCheckedDrugs()
 		{
-			if (CheckedDrugs.Count>10)
-			{
-				await Shell.Current.DisplayAlert("Error","Can not share more than 10 records","Ok",FlowDirection.LeftToRight);
-				return;
-			}
-			string txt = "";
-			foreach (var d in CheckedDrugs)
-			{
-				txt = @$"{txt.TrimStart()}
-        {d.DrugName.TrimStart()} : {d.DiagnosisCode}".TrimStart();
-			}
+			//if (CheckedDrugs.Count>10)
+			//{
+			//	await Shell.Current.DisplayAlert("Error","Can not share more than 10 records","Ok",FlowDirection.LeftToRight);
+			//	return;
+			//}
+			//string txt = "";
+			//foreach (var d in CheckedDrugs)
+			//{
+			//	txt = @$"{txt.TrimStart()}
+   //     {d.DrugName.TrimStart()} : {d.DiagnosisCode}".TrimStart();
+			//}
 
-			await Share.Default.RequestAsync(
-				new ShareTextRequest(@$"{txt.TrimStart()} 
-		    sent from ICD-10 Application".TrimStart()
-        ));
+			//await Share.Default.RequestAsync(
+			//	new ShareTextRequest(@$"{txt.TrimStart()} 
+		 //   sent from ICD-10 Application".TrimStart()
+   //     ));
 
         }
 

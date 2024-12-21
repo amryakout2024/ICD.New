@@ -146,7 +146,7 @@
             <CollectionView Grid.Row="1"
                 SelectionMode="Single"
                             x:Name="cv"
-                ItemsSource="{Binding Drugs}"
+                ItemsSource="{Binding DrugDetails}"
                 EmptyView="No Items To Display Or The Word Is Not Correct">
                 <CollectionView.Style>
                     <Style TargetType="CollectionView">
@@ -167,28 +167,20 @@
                             Margin="5,5,5,0">
                             <Grid  ColumnDefinitions="*,auto">
                                 <VerticalStackLayout
-                                    x:DataType="m:Drug"
+                                    x:DataType="m:DrugDetail"
                                     Grid.Column="0">
                                     <Label TextColor="DarkGreen" 
                                        Text="{Binding DrugName}"
                                        FontAttributes="Italic"
                                        FontSize="20"/>
                                     <Label TextColor="DarkSlateBlue"
+                                       Text="{Binding Indication}" 
+                                       FontSize="18"
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="DarkSlateBlue"
                                        Text="{Binding DiagnosisCode}" 
                                        FontSize="18"
                                        FontAttributes="Bold"/>
-                                    <Label TextColor="DarkGreen" 
-                                           TextTransform="Lowercase"
-                                       Text="{Binding DiagnosisName1}"
-                                       FontSize="16"/>
-                                    <Label TextColor="DarkGreen" 
-                                           TextTransform="Lowercase"
-                                       Text="{Binding DiagnosisName2}"
-                                       FontSize="16"/>
-                                    <Label TextColor="DarkGreen" 
-                                           TextTransform="Lowercase"
-                                       Text="{Binding DiagnosisName3}"
-                                       FontSize="16"/>
 
                                 </VerticalStackLayout>
                                 <Grid RowDefinitions="auto,*"

@@ -18,6 +18,7 @@ namespace ICD.ViewModels
         [RelayCommand]
         private async Task LoadData()
         {
+            await _dataContext.LoadAllDrugDetailsAsync();
             await _dataContext.LoadAllDrugsAsync();
             await _dataContext.LoadAllTradeDrugsAsync();
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}", animate: true);
