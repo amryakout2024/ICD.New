@@ -1,22 +1,32 @@
 ﻿using ICD.ViewModels;
+using ICD.Models;
 using ICD.Views;
+using SQLite;
 
 namespace ICD
 {
     public partial class AppShell : Shell
     {
-        private readonly AppShellVM _appShellVM;
 
-        public AppShell(AppShellVM appShellVM)
+        public AppShell()
         {
             InitializeComponent();
 
-            _appShellVM = appShellVM;
-
-            BindingContext = _appShellVM = new AppShellVM();
-
-            Routing.RegisterRoute("LoadingPage", typeof(LoadingPage));
-
+            RegisterRoutes();
         }
+        private readonly static Type[] _routablePageTypes =
+        [
+            typeof(LoadingPage),
+            typeof(HomePage),
+        ];
+
+        private static void RegisterRoutes()
+        {
+            foreach (var pageType in _routablePageTypes)
+            {
+                Routing.RegisterRoute(pageType.Name, pageType);
+            }
+        }
+
     }
 }

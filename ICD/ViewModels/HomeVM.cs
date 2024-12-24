@@ -27,9 +27,6 @@ namespace ICD.ViewModels
 		private List<TradeDrug> _tradeDrugs;
 
 		private List<Drug> DrugsWithoutFilter;
-
-		[ObservableProperty]
-		private List<DrugDetail> _drugDetails;
 		 
         [ObservableProperty]
         private string _searchName;
@@ -48,15 +45,6 @@ namespace ICD.ViewModels
 		[ObservableProperty]
 		private string _diagnosisCode;
 
-		[ObservableProperty]
-		private string _diagnosisName1;
-
-        [ObservableProperty]
-        private string _diagnosisName2;
-
-        [ObservableProperty]
-        private string _diagnosisName3;
-
         [ObservableProperty]
         private bool _isDrugSelected;
 
@@ -71,43 +59,44 @@ namespace ICD.ViewModels
 
         [ObservableProperty]
 		[NotifyCanExecuteChangedFor(nameof(SearchCommand))]
-		private bool _isTradeRadioButtonChecked;
+		
+        private bool _isTradeRadioButtonChecked;
+        [ObservableProperty]
+        private Drug _selectedDrug;
+
+        [ObservableProperty]
+        private int _countDrugs;
+
+
+        public async Task Init()
+        {
+            DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
+            Drugs = DrugsWithoutFilter;
+            DrugsFalse = Drugs;
+            CountDrugs = 0;
+
+            Drugs = await _dataContext.LoadAllDrugsAsync();
+
+            IsDrugSelected = false;
+            IsTradeRadioButtonChecked = false;
+
+            CheckedDrugs = new ObservableCollection<Drug>();
+            IsDrugSelected = false;
+            IsLabelVisible = false;
+            IsButtonVisible = false;
+            CountCheckedDrugs = "0";
+
+            //Shell.SetBackButtonBehavior(this, new BackButtonBehavior()
+            //{
+            //	Command = searchComman()
+            //});
+
+        }
 
         partial void OnIsTradeRadioButtonCheckedChanged(bool value)
         {
 			//Configuration 
 			Search();
-        }
-
-        [ObservableProperty]
-		private Drug _selectedDrug;
-
-		[ObservableProperty]
-		private int _countDrugs;
-
-		public async Task InitializeDrugsAsync() 
-		{
-			DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
-			Drugs = DrugsWithoutFilter;
-			DrugsFalse = Drugs;
-			CountDrugs =0;
-
-			DrugDetails = await _dataContext.LoadAllDrugDetailsAsync();
-
-            IsDrugSelected = false;
-			IsTradeRadioButtonChecked = false;
-
-            CheckedDrugs = new ObservableCollection<Drug>();
-			IsDrugSelected=false;
-			IsLabelVisible=false;
-			IsButtonVisible=false;
-			CountCheckedDrugs = "0";
-
-			//Shell.SetBackButtonBehavior(this, new BackButtonBehavior()
-			//{
-			//	Command = searchComman()
-			//});
-				 
         }
 
         [RelayCommand]
@@ -159,7 +148,7 @@ namespace ICD.ViewModels
         }
 
         [RelayCommand]
-        private async Task ShareDrug(DrugDetail drugDetail)
+        private async Task ShareDrug(Drug Drug)
         {
 		//	await Share.Default.RequestAsync(
 		//		new ShareTextRequest(
@@ -272,7 +261,7 @@ namespace ICD.ViewModels
 		}
 
 		[RelayCommand]
-		private async Task ShowDrugDetailsForm(Drug drug)
+		private async Task ShowDrugsForm(Drug drug)
 		{
 			//DrugName = drug.DrugName;
 			//DiagnosisId = drug.DiagnosisId;
@@ -282,13 +271,13 @@ namespace ICD.ViewModels
 		}
 
 		[RelayCommand]
-		private async Task NavigateDrugDetailsPage(Drug drug)
+		private async Task NavigateDrugsPage(Drug drug)
 		{
 			//var parameter = new Dictionary<string, object>
 			//{
-			//	[nameof(DrugDetailsVM.Drug)] = drug,
+			//	[nameof(DrugsVM.Drug)] = drug,
 			//};
-			//await Shell.Current.GoToAsync($"//{nameof(DrugDetailsPage)}",animate:true,parameter);
+			//await Shell.Current.GoToAsync($"//{nameof(DrugsPage)}",animate:true,parameter);
 		}
 	}
 }

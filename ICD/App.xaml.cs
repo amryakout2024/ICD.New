@@ -8,78 +8,13 @@ namespace ICD
 {
     public partial class App : Application
     {
-        private readonly AppShellVM _appShellVM;
-
-        private const string DbName = "ICD500";
-
-        public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory, DbName);
-
-        private SQLiteConnection Database = new SQLiteConnection(DbPath, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.SharedCache);
-
-        public App(AppShellVM appShellVM)
+        public App()
         {
             InitializeComponent();
 
-            _appShellVM = appShellVM;
+            MainPage = new AppShell();
 
-            MainPage = new AppShell(_appShellVM);
-
-            Routing.RegisterRoute("LoadingPage", typeof(LoadingPage));
-
-            CheckDatabase();
         }
 
-        private async Task CheckDatabase()
-        {
-            //File.Delete(DbPath);
-
-            //Shell.Current.GoToAsync($"//{nameof(MainPage)}", animate: true);
-
-            try
-            {
-                DrugDetail drugDetail = Database.Table<DrugDetail>().ToList().Where(x => x.DrugDetailId == 6000).FirstOrDefault()??new DrugDetail();
-
-
-                if (drugDetail != null)
-                {
-                    await Shell.Current.GoToAsync($"//{nameof(HomePage)}", animate: true);
-                }
-                else
-                {
-                    //File.Delete(DbPath);
-
-                    Database.Table<DrugDetail>().Delete();
-
-                    await Shell.Current.GoToAsync($"//{nameof(LoadingPage)}", animate: true);
-                }
-
-                //Drug drug = Database.Table<Drug>().Where(x => x.DrugId == 1800).FirstOrDefault();
-
-                ////TradeDrug tradeDrug = Database.Table<TradeDrug>().Where(x => x.TradeDrugId == 1).FirstOrDefault();
-
-                //if (drug != null && tradeDrug != null)
-                //{
-                //    await Shell.Current.GoToAsync($"//{nameof(HomePage)}", animate: true);
-                //}
-                //else
-                //{
-                //    //File.Delete(DbPath);
-
-                //    Database.Table<Drug>().Delete();
-
-                //    Database.Table<TradeDrug>().Delete();
-
-                //     await Shell.Current.GoToAsync($"//{nameof(LoadingPage)}", animate: true);
-                //}
-
-
-            }
-            catch (Exception)
-            {
-                //File.Delete(DbPath);
-
-                await Shell.Current.GoToAsync($"//{nameof(LoadingPage)}", animate: true);
-            }
-        }
     }
 }

@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using ICD.Models;
 using ICD.Views;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,15 +14,43 @@ namespace ICD.ViewModels
 {
     public partial class LoadingVM(DataContext dataContext): BaseVM
     {
+        private const string DbName = "ICD506";
+
+        public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory, DbName);
+
+        private SQLiteConnection Database = new SQLiteConnection(DbPath, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.SharedCache);
+
         private readonly DataContext _dataContext = dataContext;
 
+        public async Task Init()
+        {
+            try
+            {
+                Drug drug = Database.Table<Drug>().Where(x => x.DrugId == 6000).FirstOrDefault();
+                TradeDrug tradeDrug = Database.Table<TradeDrug>().Where(x => x.TradeDrugId == 5000).FirstOrDefault();
+
+                if (drug != null && tradeDrug != null)
+                {
+                    await GoToAsyncWithStack(nameof(HomePage), animate: true);
+                }
+                else
+                {
+                    Database.Table<Drug>().Delete();
+                    Database.Table<TradeDrug>().Delete();
+                }
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
         [RelayCommand]
         private async Task LoadData()
         {
-            await _dataContext.LoadAllDrugDetailsAsync();
             await _dataContext.LoadAllDrugsAsync();
             await _dataContext.LoadAllTradeDrugsAsync();
-            await Shell.Current.GoToAsync($"//{nameof(HomePage)}", animate: true);
+            await GoToAsyncWithStack(nameof(HomePage), animate: true);
         }
     }
 }

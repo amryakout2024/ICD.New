@@ -17,7 +17,10 @@ public partial class LoadingPage : ContentPage
         SetBannerId();
 
     }
-
+    protected async override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        await _loadingVM.Init();
+    }
     private void SetBannerId()
     {
 //#if ANDROID

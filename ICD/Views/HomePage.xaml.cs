@@ -31,7 +31,7 @@ public partial class HomePage : UraniumContentPage
 	{
 		base.OnAppearing();
 
-		await _homeVM.InitializeDrugsAsync();
+		await _homeVM.Init();
 
 		if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar")
 		{

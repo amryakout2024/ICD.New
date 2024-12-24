@@ -2,8 +2,32 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ICD.Archives.Dictionary1">
-    
-    <!--//protected override void OnCreate(Bundle? savedInstanceState)
+
+    <!--public async Task
+    <List<Drug>> LoadAllDrugsAsync()
+		{
+            //await init();
+
+            try
+            {
+                Drug drug = Database.Table
+        <Drug>().Where(x => x.DrugId == 1850).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                //File.Delete(DbPath);
+
+                Database = new SQLiteConnection(DbPath, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.SharedCache);
+
+                await init();
+            }
+            return Database.Table
+            <Drug>().ToList();
+        }-->
+
+
+
+                <!--//protected override void OnCreate(Bundle? savedInstanceState)
         //{
         //    base.OnCreate(savedInstanceState);
         //    //MobileAds.Initialize(this);
@@ -24,7 +48,7 @@
 
 
     <!--<Border.GestureRecognizers>
-        <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:HomeVM}},Path=ShowDrugDetailsFormCommand}" CommandParameter="{Binding .}"/>
+        <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:HomeVM}},Path=ShowDrugsFormCommand}" CommandParameter="{Binding .}"/>
     </Border.GestureRecognizers>-->
 
 
@@ -277,7 +301,7 @@
                                 <RoundRectangle CornerRadius="5,0,0,5"/>
                             </Border.StrokeShape>
                             <Border.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:HomeVM}},Path=ShowDrugDetailsFormCommand}" CommandParameter="{Binding .}"/>
+                                <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:HomeVM}},Path=ShowDrugsFormCommand}" CommandParameter="{Binding .}"/>
                             </Border.GestureRecognizers>
                         </Border>
                     </DataTemplate>

@@ -10,22 +10,20 @@
     Shell.NavBarIsVisible="True"
     Title="IdealDiagnosis">
     
-
-
     <Shell.Behaviors>
         <toolkit:StatusBarBehavior StatusBarColor="Green"/>
     </Shell.Behaviors>
+    
+    <ShellContent
+            Title="loading"
+            ContentTemplate="{DataTemplate v:LoadingPage}"
+            Route="LoadingPage" />
 
-    <ShellContent
-                Title="loading"
-                ContentTemplate="{DataTemplate v:LoadingPage}"
-                Route="LoadingPage" />
-    <ShellContent
+    <!--<ShellContent
                 Title="Home"
                 ContentTemplate="{DataTemplate v:HomePage}"
-                Route="HomePage" />
-
-    <Shell.BackButtonBehavior>
+                Route="HomePage" />-->
+    <!--<Shell.BackButtonBehavior>
         <BackButtonBehavior Command="{Binding CloseAppCommand}"/>
-    </Shell.BackButtonBehavior>
+    </Shell.BackButtonBehavior>-->
 </Shell>

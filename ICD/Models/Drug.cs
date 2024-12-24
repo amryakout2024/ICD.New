@@ -12,19 +12,15 @@ namespace ICD.Models
 	{
 		[PrimaryKey]
 
-		public int DrugId { get; set; }
+        public int DrugId { get; set; }
 
-		public string? DrugName { get; set; }
+        public string? DrugName { get; set; }
 
-		public string? DiagnosisCode { get; set; }
+        public string? Indication { get; set; }
 
-		public string? DiagnosisName1 { get; set; }
+        public string? DiagnosisCode { get; set; }
 
-		public string? DiagnosisName2 { get; set; }
-
-		public string? DiagnosisName3 { get; set; }
-
-		public bool IsCheckboxChecked { get; set; }=false;
+        public bool IsCheckboxChecked { get; set; }=false;
 
 		public bool IsButtonVisible { get; set; }=true;
 	}

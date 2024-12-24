@@ -7,7 +7,6 @@
              xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="ICD.Views.HomePage"
-             x:Name="this"
              Shell.FlyoutBehavior="Disabled"
              Shell.FlyoutItemIsVisible="False"
              Shell.TabBarIsVisible="False"
@@ -146,7 +145,7 @@
             <CollectionView Grid.Row="1"
                 SelectionMode="Single"
                             x:Name="cv"
-                ItemsSource="{Binding DrugDetails}"
+                ItemsSource="{Binding Drugs}"
                 EmptyView="No Items To Display Or The Word Is Not Correct">
                 <CollectionView.Style>
                     <Style TargetType="CollectionView">
@@ -167,7 +166,7 @@
                             Margin="5,5,5,0">
                             <Grid  ColumnDefinitions="*,auto">
                                 <VerticalStackLayout
-                                    x:DataType="m:DrugDetail"
+                                    x:DataType="m:Drug"
                                     Grid.Column="0">
                                     <Label TextColor="DarkGreen" 
                                        Text="{Binding DrugName}"
