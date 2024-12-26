@@ -255,7 +255,7 @@
                 </CollectionView.Style>
                 
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="vm:HomeVM">
+                    <DataTemplate>
                         <Border 
                             StrokeThickness="1"
                             Padding="5"
