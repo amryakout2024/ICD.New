@@ -21,6 +21,9 @@ namespace ICD.ViewModels
 		private List<Drug> _drugs;
 
         [ObservableProperty]
+        private List<string> _drugNames;
+
+        [ObservableProperty]
         private List<Drug> _drugsFalse;
 
         [ObservableProperty]
@@ -70,12 +73,16 @@ namespace ICD.ViewModels
 
         public async Task Init()
         {
-            DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
-            Drugs = DrugsWithoutFilter;
-            DrugsFalse = Drugs;
-            CountDrugs = 0;
 
             Drugs = await _dataContext.LoadAllDrugsAsync();
+            TradeDrugs = await _dataContext.LoadAllTradeDrugsAsync();
+            DrugNames = Drugs.Select(x=>x.DrugName).Distinct().ToList();
+            //DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
+            //Drugs = DrugsWithoutFilter;
+            //DrugsFalse = Drugs;
+            CountDrugs = 0;
+
+            //Drugs = await _dataContext.LoadAllDrugsAsync();
 
             IsDrugSelected = false;
             IsTradeRadioButtonChecked = false;
