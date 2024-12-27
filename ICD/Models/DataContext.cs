@@ -6879,6 +6879,7 @@ new Drug{DrugId=6808,DrugName="α -TOCOPHEROL, EGG LECITHIN, GLYCEROL, MEDIUM CH
       
             foreach (Drug drug in Drugs)
             {
+                
                 Database.Insert(drug);
             }
 

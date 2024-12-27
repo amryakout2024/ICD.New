@@ -26,6 +26,8 @@ namespace ICD.ViewModels
         {
             try
             {
+                //File.Delete(DbPath);
+
                 Drug drug = Database.Table<Drug>().Where(x => x.DrugId == 6000).FirstOrDefault();
                 TradeDrug tradeDrug = Database.Table<TradeDrug>().Where(x => x.TradeDrugId == 5000).FirstOrDefault();
 

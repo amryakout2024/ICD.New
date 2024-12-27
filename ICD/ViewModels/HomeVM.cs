@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ICD.Helpers;
 using ICD.Models;
 using ICD.Views;
 using System;
@@ -77,6 +78,11 @@ namespace ICD.ViewModels
             Drugs = await _dataContext.LoadAllDrugsAsync();
             TradeDrugs = await _dataContext.LoadAllTradeDrugsAsync();
             DrugNames = Drugs.Select(x=>x.DrugName).Distinct().ToList();
+            
+            //foreach (string drugName in DrugNames)
+            //{
+            //    drugName;
+            //}
             //DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
             //Drugs = DrugsWithoutFilter;
             //DrugsFalse = Drugs;
@@ -155,7 +161,7 @@ namespace ICD.ViewModels
         }
 
         [RelayCommand]
-        private async Task ShareDrug(Drug Drug)
+        private async Task ShowDrugDetails(string drugName)
         {
 		//	await Share.Default.RequestAsync(
 		//		new ShareTextRequest(
@@ -164,7 +170,18 @@ namespace ICD.ViewModels
                     //));
         }
 
-		[RelayCommand]
+        [RelayCommand]
+        private async Task ShowTradeDrugDetails(TradeDrug tradeDrug)
+        {
+            //	await Share.Default.RequestAsync(
+            //		new ShareTextRequest(
+            //			@$"{drug.DrugName.TrimStart()} : {drug.DiagnosisCode} 
+            //sent from ICD-10 Application".TrimStart()
+            //));
+        }
+
+
+        [RelayCommand]
 		private async Task ShareCheckedDrugs()
 		{
 			//if (CheckedDrugs.Count>10)
