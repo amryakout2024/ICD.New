@@ -10,7 +10,7 @@ namespace ICD.Models
 {
 	public class Drug
 	{
-		[PrimaryKey]
+		[PrimaryKey, AutoIncrement]
 
         public int DrugId { get; set; }
 

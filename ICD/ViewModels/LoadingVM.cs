@@ -51,6 +51,7 @@ namespace ICD.ViewModels
         private async Task LoadData()
         {
             await _dataContext.LoadAllDrugsAsync();
+            await _dataContext.LoadAllActiveDrugsAsync();
             await _dataContext.LoadAllTradeDrugsAsync();
             await GoToAsyncWithStack(nameof(HomePage), animate: true);
         }

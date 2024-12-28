@@ -18,8 +18,15 @@ namespace ICD.ViewModels
 	{
 		private readonly DataContext _dataContext = dataContext;
 
-		[ObservableProperty]
-		private List<Drug> _drugs;
+        [ObservableProperty]
+        private List<Drug> _drugs;
+
+        private List<ActiveDrug> ActiveDrugsWithoutFilter;
+      
+        [ObservableProperty]
+        private List<ActiveDrug> _activeDrugs;
+
+        private List<Drug> DrugsWithoutFilter;
 
         [ObservableProperty]
         private List<string> _drugNames;
@@ -30,7 +37,8 @@ namespace ICD.ViewModels
         [ObservableProperty]
 		private List<TradeDrug> _tradeDrugs;
 
-		private List<Drug> DrugsWithoutFilter;
+		private List<TradeDrug> TradeDrugsWithoutFilter=new List<TradeDrug>();
+        
 		 
         [ObservableProperty]
         private string _searchName;
@@ -63,8 +71,8 @@ namespace ICD.ViewModels
 
         [ObservableProperty]
 		[NotifyCanExecuteChangedFor(nameof(SearchCommand))]
-		
         private bool _isTradeRadioButtonChecked;
+
         [ObservableProperty]
         private Drug _selectedDrug;
 
@@ -75,10 +83,20 @@ namespace ICD.ViewModels
         public async Task Init()
         {
 
-            Drugs = await _dataContext.LoadAllDrugsAsync();
-            TradeDrugs = await _dataContext.LoadAllTradeDrugsAsync();
-            DrugNames = Drugs.Select(x=>x.DrugName).Distinct().ToList();
+            DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
+
+            ActiveDrugsWithoutFilter = await _dataContext.LoadAllActiveDrugsAsync();
             
+            TradeDrugsWithoutFilter = await _dataContext.LoadAllTradeDrugsAsync();
+
+            ActiveDrugs = ActiveDrugsWithoutFilter;
+
+            DrugNames = DrugsWithoutFilter.Select(x => x.DrugName).Distinct().ToList();
+
+            PlaceHolderText = "Enter Active Ingredient";
+            CountDrugs = 0;
+
+
             //foreach (string drugName in DrugNames)
             //{
             //    drugName;
@@ -86,11 +104,9 @@ namespace ICD.ViewModels
             //DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
             //Drugs = DrugsWithoutFilter;
             //DrugsFalse = Drugs;
-            CountDrugs = 0;
 
             //Drugs = await _dataContext.LoadAllDrugsAsync();
 
-            IsDrugSelected = false;
             IsTradeRadioButtonChecked = false;
 
             CheckedDrugs = new ObservableCollection<Drug>();
@@ -108,60 +124,62 @@ namespace ICD.ViewModels
 
         partial void OnIsTradeRadioButtonCheckedChanged(bool value)
         {
+            SearchName = "";
 			//Configuration 
 			Search();
         }
 
         [RelayCommand]
 		private async Task Search()
-		{
-    //        if (!IsTradeRadioButtonChecked)
-    //        {
-				//PlaceHolderText = "Enter Active Ingredient";
+        {
+            if (!IsTradeRadioButtonChecked)
+            {
+                PlaceHolderText = "Enter Active Ingredient";
 
-    //            if (!string.IsNullOrEmpty(SearchName))
-				//{
-				//	//IsBusy = true;
-				//	Drugs = DrugsWithoutFilter.Where(x => x.DrugName.ToLower().Contains(SearchName.ToLower())).ToList();
+                if (!string.IsNullOrEmpty(SearchName))
+                {
+                    //IsBusy = true;
+                    DrugNames = DrugsWithoutFilter.Where(x => DrugName.Contains(SearchName.ToLower())).Select(x => x.DrugName).ToList();
 
-				//	CountDrugs = Drugs.Count();
+                    CountDrugs = Drugs.Count();
 
-				//	//IsBusy = false;
-				//}
-				//else
-				//{
-				//	Drugs = DrugsWithoutFilter;
+                    //IsBusy = false;
+                }
+                else
+                {
+                    //Drugs = DrugsWithoutFilter.Select(x => x.DrugName).Distinct().ToList();
+                    DrugNames = DrugsWithoutFilter.Select(x => x.DrugName).Distinct().ToList();
 
-				//	CountDrugs = 0;
+                    CountDrugs = 0;
 
-				//}
- 
-    //        }
-    //        else
-    //        {
-    //            PlaceHolderText = "Enter Trade Name";
+                }
 
-    //            if (!string.IsNullOrEmpty(SearchName))
-    //            {
-    //                IsBusy = true;
-    //                //TradeDrugs = TradeDrugsWithoutFilter.Where(x => x.TradeDrugName.ToLower().Contains(SearchName.ToLower())).ToList();
+            }
+            else
+            {
+                PlaceHolderText = "Enter Trade Name";
 
-    //                //CountDrugs = TradeDrugs.Count();
-    //                IsBusy = false;
-    //            }
-    //            else
-    //            {
-    //                //TradeDrugs = TradeDrugsWithoutFilter;
+                if (!string.IsNullOrEmpty(SearchName))
+                {
+                    //IsBusy = true;
+                    TradeDrugs = TradeDrugsWithoutFilter.Where(x => x.TradeDrugName.ToLower().Contains(SearchName.ToLower())).ToList();
 
-    //                //CountDrugs = TradeDrugs.Count();
+                    CountDrugs = TradeDrugs.Count();
+                    //IsBusy = false;
+                }
+                else
+                {
+                    TradeDrugs = TradeDrugsWithoutFilter;
 
-    //            }
+                    CountDrugs = 0;
 
-    //        }
+                }
+
+            }
         }
 
         [RelayCommand]
-        private async Task ShowDrugDetails(string drugName)
+        private async Task ShowDrugDetails(ActiveDrug activeDrug)
         {
 		//	await Share.Default.RequestAsync(
 		//		new ShareTextRequest(
@@ -226,7 +244,7 @@ namespace ICD.ViewModels
         [RelayCommand]
         private async Task ClearSelections()
         {
-			Drugs = DrugsWithoutFilter;
+
 			//var d= Drugs.Where(x=>x.DrugId==1).SingleOrDefault();
    //         Drugs.Remove(Drugs.Where(x => x.DrugId == 1).SingleOrDefault());
    //         d.IsCheckboxChecked = false;
@@ -285,7 +303,7 @@ namespace ICD.ViewModels
 		}
 
 		[RelayCommand]
-		private async Task ShowDrugsForm(Drug drug)
+		private async Task ShowDrugsForm(ActiveDrug activeDrug)
 		{
 			//DrugName = drug.DrugName;
 			//DiagnosisId = drug.DiagnosisId;

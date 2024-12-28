@@ -27,6 +27,8 @@ namespace ICD.Models
 
             Database.CreateTable <Drug>();
 
+            Database.CreateTable<ActiveDrug>();
+
             List<Drug> Drugs = new List<Drug>()
             {
                 new Drug{DrugId=1,DrugName="ABACAVIR,LAMIVUDINE",Indication="HUMAN IMMUNODEFICIENCY VIRUS",DiagnosisCode="B20"},
@@ -6881,6 +6883,12 @@ new Drug{DrugId=6808,DrugName="α -TOCOPHEROL, EGG LECITHIN, GLYCEROL, MEDIUM CH
             {
                 
                 Database.Insert(drug);
+
+                Database.Insert(new ActiveDrug
+                {
+                    DrugName = drug.DrugName
+                });
+
             }
 
             Database.CreateTable<TradeDrug>();
@@ -12407,7 +12415,23 @@ new TradeDrug{TradeDrugId=5449,TradeDrugName="ZYVOX 2 MG/ML SOLUTION FOR INFUSIO
             }
             return Database.Table<Drug>().ToList();
         }
+        
+        public async Task<List<ActiveDrug>> LoadAllActiveDrugsAsync()
+        {
+            try
+            {
+                ActiveDrug activeDrug = Database.Table<ActiveDrug> ().Where(x => x.DrugId == 100).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                //File.Delete(DbPath);
 
+                Database = new SQLiteConnection(DbPath, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.SharedCache);
+
+                await init();
+            }
+            return Database.Table<ActiveDrug>().ToList();
+        }
 
         public async Task<List<TradeDrug>> LoadAllTradeDrugsAsync()
 		{

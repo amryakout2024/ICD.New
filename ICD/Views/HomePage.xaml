@@ -7,6 +7,7 @@
              xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="ICD.Views.HomePage"
+             x:Name="this"
              Shell.FlyoutBehavior="Disabled"
              Shell.FlyoutItemIsVisible="False"
              Shell.TabBarIsVisible="False"
@@ -74,7 +75,7 @@
     <ur:UraniumContentPage.Resources>
         <ControlTemplate x:Key="RadioButtonTemplate">
             <Border Stroke="Green"
-                        StrokeThickness="2"
+                        StrokeThickness="0"
                         x:Name="b"
                         StrokeShape="RoundRectangle 10"
                         BackgroundColor="Green"
@@ -139,7 +140,6 @@
         </Style>
     </ur:UraniumContentPage.Resources>
 
-
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -193,14 +193,14 @@
                 </Grid>
                 
                 <mat:TextField
-                            Text="{Binding SearchName}"
-                            TextColor="Green"
-                            FontSize="18"
-                            AccentColor="Green"
-                            Margin="5"
-                            AllowClear="True"
-                            Title="Enter Active Ingredients"
-                            TitleColor="LightGray">
+                    Text="{Binding SearchName}"
+                    TextColor="Green"
+                    FontSize="18"
+                    AccentColor="Green"
+                    Margin="5"
+                    AllowClear="True"
+                    Title="{Binding PlaceHolderText}"
+                    TitleColor="LightGray">
                     <mat:TextField.Behaviors>
                         <toolkit:EventToCommandBehavior                            
                                      EventName="TextChanged"
@@ -241,7 +241,7 @@
             <CollectionView Grid.Row="1"
                 SelectionMode="Single"
                             x:Name="cv"
-                ItemsSource="{Binding DrugNames}"
+                ItemsSource="{Binding ActiveDrugs}"
                 EmptyView="No Items To Display Or The Word Is Not Correct">
                 <CollectionView.Style>
                     <Style TargetType="CollectionView">
@@ -255,14 +255,14 @@
                 </CollectionView.Style>
                 
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Border 
+                    <DataTemplate x:DataType="vm:HomeVM">
+                        <Border x:DataType="m:ActiveDrug"
                             StrokeThickness="1"
                             Padding="5"
                             Margin="5,5,5,0">
                             <Grid  ColumnDefinitions="*,auto">
                                 <Label TextColor="DarkGreen" 
-                                       Text="{Binding .}"
+                                       Text="{Binding DrugName}"
                                        Grid.Column="0"
                                        FontAttributes="Italic"
                                        FontSize="20"/>

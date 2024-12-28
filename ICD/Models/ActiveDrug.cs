@@ -1,21 +1,19 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ICD.Models
 {
-    public class TradeDrug
+    public class ActiveDrug
     {
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey,AutoIncrement]
 
-        public int TradeDrugId { get; set; }
-
-        public string? TradeDrugName { get; set; }
+        public int DrugId { get; set; }
 
         public string? DrugName { get; set; }
+
     }
 }
