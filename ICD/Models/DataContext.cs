@@ -6884,10 +6884,10 @@ new Drug{DrugId=6808,DrugName="α -TOCOPHEROL, EGG LECITHIN, GLYCEROL, MEDIUM CH
                 
                 Database.Insert(drug);
 
-                Database.Insert(new ActiveDrug
-                {
-                    DrugName = drug.DrugName
-                });
+                //Database.Insert(new ActiveDrug
+                //{
+                //    DrugName = drug.DrugName
+                //});
 
             }
 
@@ -12347,9 +12347,14 @@ new TradeDrug{TradeDrugId=5449,TradeDrugName="ZYVOX 2 MG/ML SOLUTION FOR INFUSIO
 
             };
 
-            foreach (TradeDrug TradeDrug in TradeDrugs)
+            foreach (TradeDrug tradeDrug in TradeDrugs)
             {
-                Database.Insert(TradeDrug);
+                Database.Insert(tradeDrug);
+                //Database.Insert(new ActiveDrug
+                //{
+                //    DrugName = tradeDrug.DrugName
+                //});
+
             }
         }
 
@@ -12430,7 +12435,7 @@ new TradeDrug{TradeDrugId=5449,TradeDrugName="ZYVOX 2 MG/ML SOLUTION FOR INFUSIO
 
                 await init();
             }
-            return Database.Table<ActiveDrug>().ToList();
+            return Database.Table<ActiveDrug>().Distinct().ToList();
         }
 
         public async Task<List<TradeDrug>> LoadAllTradeDrugsAsync()

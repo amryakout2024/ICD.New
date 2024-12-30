@@ -241,7 +241,7 @@
             <CollectionView Grid.Row="1"
                 SelectionMode="Single"
                             x:Name="cv"
-                ItemsSource="{Binding ActiveDrugs}"
+                ItemsSource="{Binding Drugs}"
                 EmptyView="No Items To Display Or The Word Is Not Correct">
                 <CollectionView.Style>
                     <Style TargetType="CollectionView">
@@ -256,7 +256,7 @@
                 
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="vm:HomeVM">
-                        <Border x:DataType="m:ActiveDrug"
+                        <Border x:DataType="m:Drug"
                             StrokeThickness="1"
                             Padding="5"
                             Margin="5,5,5,0">
@@ -305,17 +305,10 @@
                             Margin="5,5,5,0">
                             <Grid x:DataType="m:TradeDrug" 
                                   ColumnDefinitions="*,auto">
-                                <VerticalStackLayout
-                                    Grid.Column="0">
-                                    <Label TextColor="DarkGreen" 
+                                <Label TextColor="DarkGreen" 
                                        Text="{Binding TradeDrugName}"
                                        FontAttributes="Italic"
                                        FontSize="20"/>
-                                    <Label TextColor="DarkSlateBlue"
-                                       Text="{Binding DrugName}" 
-                                       FontSize="18"
-                                       FontAttributes="Bold"/>
-                                </VerticalStackLayout>
                                 <Button
                                     Grid.Column="1"
                                     Text="Show"
