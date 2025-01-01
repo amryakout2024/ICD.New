@@ -11,7 +11,7 @@ namespace ICD.Models
 {
 	public class DataContext
 	{
-		private const string DbName = "ICD506";
+		private const string DbName = "ICD507";
 
 		public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory,DbName);
 
@@ -26,8 +26,6 @@ namespace ICD.Models
             //"+"REACTIVE
 
             Database.CreateTable <Drug>();
-
-            Database.CreateTable<ActiveDrug>();
 
             List<Drug> Drugs = new List<Drug>()
             {
@@ -6881,14 +6879,7 @@ new Drug{DrugId=6808,DrugName="α -TOCOPHEROL, EGG LECITHIN, GLYCEROL, MEDIUM CH
       
             foreach (Drug drug in Drugs)
             {
-                
                 Database.Insert(drug);
-
-                //Database.Insert(new ActiveDrug
-                //{
-                //    DrugName = drug.DrugName
-                //});
-
             }
 
             Database.CreateTable<TradeDrug>();
@@ -12350,11 +12341,6 @@ new TradeDrug{TradeDrugId=5449,TradeDrugName="ZYVOX 2 MG/ML SOLUTION FOR INFUSIO
             foreach (TradeDrug tradeDrug in TradeDrugs)
             {
                 Database.Insert(tradeDrug);
-                //Database.Insert(new ActiveDrug
-                //{
-                //    DrugName = tradeDrug.DrugName
-                //});
-
             }
         }
 
@@ -12421,23 +12407,6 @@ new TradeDrug{TradeDrugId=5449,TradeDrugName="ZYVOX 2 MG/ML SOLUTION FOR INFUSIO
             return Database.Table<Drug>().ToList();
         }
         
-        public async Task<List<ActiveDrug>> LoadAllActiveDrugsAsync()
-        {
-            try
-            {
-                ActiveDrug activeDrug = Database.Table<ActiveDrug> ().Where(x => x.DrugId == 100).FirstOrDefault();
-            }
-            catch (Exception)
-            {
-                //File.Delete(DbPath);
-
-                Database = new SQLiteConnection(DbPath, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.SharedCache);
-
-                await init();
-            }
-            return Database.Table<ActiveDrug>().Distinct().ToList();
-        }
-
         public async Task<List<TradeDrug>> LoadAllTradeDrugsAsync()
 		{
             try

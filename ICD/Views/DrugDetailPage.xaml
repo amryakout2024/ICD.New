@@ -142,7 +142,7 @@
     </ur:UraniumContentPage.Resources>
 
 
-    <Grid>
+    <!--<Grid>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -182,7 +182,7 @@
                         Text="{Binding CountCheckedDrugs,StringFormat='Share {0} records'}" 
                         FontSize="15"/>
 
-                    <!--<Button
+                    --><!--<Button
                         Grid.Column="2"
                         IsVisible="{Binding IsButtonVisible}"
                         VerticalOptions="CenterAndExpand"
@@ -191,7 +191,7 @@
                         BackgroundColor="Transparent"
                         ImageSource="sharesquare"
                         Command="{Binding Source={RelativeSource AncestorType={x:Type vm:}},Path=ShareCheckedDrugsCommand}">
-                    </Button>-->
+                    </Button>--><!--
                 </Grid>
 
                 <mat:TextField
@@ -268,12 +268,12 @@
                                        Grid.Column="0"
                                        FontAttributes="Italic"
                                        FontSize="20"/>
-                                <!--<Button
+                                --><!--<Button
                                         Grid.Column="1"
                                         Text="Show"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeVM}},Path=ShowDrugNameDetailsCommand}"
                                         CommandParameter="{Binding .}">
-                                </Button>-->
+                                </Button>--><!--
                             </Grid>
                             <Border.StrokeShape>
                                 <RoundRectangle CornerRadius="5,0,0,5"/>
@@ -330,7 +330,7 @@
                                         CommandParameter="{Binding .}"
                                         CornerRadius="25">
                                     </mat:CheckBox>
-                                    <!--<Button
+                                    --><!--<Button
                                         Grid.Row="1"
                                         HeightRequest="45"
                                         IsVisible="{Binding IsButtonVisible}"
@@ -339,7 +339,7 @@
                                         ImageSource="share"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeVM}},Path=ShareDrugCommand}"
                                         CommandParameter="{Binding .}">
-                                    </Button>-->
+                                    </Button>--><!--
                                 </Grid>
                             </Grid>
                             <Border.StrokeShape>
@@ -351,7 +351,7 @@
             </CollectionView>
 
             <VerticalStackLayout Grid.Row="2">
-                <!--<Border StrokeShape="RoundRectangle 10"
+                --><!--<Border StrokeShape="RoundRectangle 10"
                         StrokeThickness="0"
                     Margin="5,0,5,0">
                     <controls:MTAdView x:Name="myAds">
@@ -363,7 +363,7 @@
                         </controls:MTAdView.HeightRequest>
 
                     </controls:MTAdView>
-                </Border>-->
+                </Border>--><!--
 
                 <Border
                    Margin="5"
@@ -379,6 +379,6 @@
                 </Border>
             </VerticalStackLayout>
         </Grid>
-    </Grid>
+    </Grid>-->
 </ur:UraniumContentPage>
 

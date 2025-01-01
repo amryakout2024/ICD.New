@@ -19,10 +19,10 @@
             ContentTemplate="{DataTemplate v:LoadingPage}"
             Route="LoadingPage" />
 
-    <!--<ShellContent
+    <ShellContent
                 Title="Home"
                 ContentTemplate="{DataTemplate v:HomePage}"
-                Route="HomePage" />-->
+                Route="HomePage" />
     <!--<Shell.BackButtonBehavior>
         <BackButtonBehavior Command="{Binding CloseAppCommand}"/>
     </Shell.BackButtonBehavior>-->

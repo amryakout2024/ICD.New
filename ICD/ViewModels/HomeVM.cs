@@ -19,17 +19,9 @@ namespace ICD.ViewModels
 		private readonly DataContext _dataContext = dataContext;
 
         [ObservableProperty]
-        private List<Drug> _drugs;
-
-        private List<ActiveDrug> ActiveDrugsWithoutFilter;
-      
-        [ObservableProperty]
-        private List<ActiveDrug> _activeDrugs;
+        private List<Drug> _drugs;      
 
         private List<Drug> DrugsWithoutFilter;
-
-        [ObservableProperty]
-        private List<string> _drugNames;
 
         [ObservableProperty]
         private List<Drug> _drugsFalse;
@@ -86,28 +78,12 @@ namespace ICD.ViewModels
             DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
 
             Drugs = DrugsWithoutFilter.DistinctBy(x => x.DrugName).ToList();
-            //Drugs =DrugsWithoutFilter;
-            ActiveDrugsWithoutFilter = await _dataContext.LoadAllActiveDrugsAsync();
             
             TradeDrugsWithoutFilter = await _dataContext.LoadAllTradeDrugsAsync();
 
-            ActiveDrugs = ActiveDrugsWithoutFilter;
-
-            DrugNames = DrugsWithoutFilter.Select(x => x.DrugName).Distinct().ToList();
-
             PlaceHolderText = "Enter Active Ingredient";
+            
             CountDrugs = 0;
-
-
-            //foreach (string drugName in DrugNames)
-            //{
-            //    drugName;
-            //}
-            //DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
-            //Drugs = DrugsWithoutFilter;
-            //DrugsFalse = Drugs;
-
-            //Drugs = await _dataContext.LoadAllDrugsAsync();
 
             IsTradeRadioButtonChecked = false;
 
@@ -141,20 +117,14 @@ namespace ICD.ViewModels
                 if (!string.IsNullOrEmpty(SearchName))
                 {
                     //IsBusy = true;
-                    //ActiveDrugs = ActiveDrugsWithoutFilter.Where(x => x.DrugName.Contains(SearchName.ToLower())).ToList();
                     Drugs = DrugsWithoutFilter.DistinctBy(x => x.DrugName).Where(x => x.DrugName.Contains(SearchName.ToUpper())).ToList();
-                    //Drugs = DrugsWithoutFilter.Where(x => x.DrugName.Contains(SearchName.ToUpper())).ToList();
 
-                    //CountDrugs = ActiveDrugs.Count();
                     CountDrugs = Drugs.Count();
 
                     //IsBusy = false;
                 }
                 else
                 {
-                    //Drugs = DrugsWithoutFilter.Select(x => x.DrugName).Distinct().ToList();
-                    //ActiveDrugs = ActiveDrugsWithoutFilter;
-                    //Drugs = DrugsWithoutFilter;
                     Drugs = DrugsWithoutFilter.DistinctBy(x => x.DrugName).ToList();
 
                     CountDrugs = 0;
@@ -188,6 +158,8 @@ namespace ICD.ViewModels
         [RelayCommand]
         private async Task ShowDrugDetails(Drug drug)
         {
+            //var parameter=Dictionary<string<drug>> 
+            //await GoToAsyncWithStack(nameof(DrugDetailPage),true);
 		//	await Share.Default.RequestAsync(
 		//		new ShareTextRequest(
 		//			@$"{drug.DrugName.TrimStart()} : {drug.DiagnosisCode} 
@@ -310,7 +282,7 @@ namespace ICD.ViewModels
 		}
 
 		[RelayCommand]
-		private async Task ShowDrugsForm(ActiveDrug activeDrug)
+		private async Task ShowDrugsForm(Drug drug)
 		{
 			//DrugName = drug.DrugName;
 			//DiagnosisId = drug.DiagnosisId;

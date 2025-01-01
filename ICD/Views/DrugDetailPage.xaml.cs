@@ -1,11 +1,19 @@
+using ICD.ViewModels;
 using UraniumUI.Pages;
 
 namespace ICD.Views;
 
 public partial class DrugDetailPage : UraniumContentPage
 {
-	public DrugDetailPage()
+    private readonly DrugDetailVM _drugDetailVM;
+
+    public DrugDetailPage(DrugDetailVM drugDetailVM)
 	{
 		InitializeComponent();
-	}
+        
+        _drugDetailVM = drugDetailVM;
+
+        BindingContext = _drugDetailVM;
+
+    }
 }

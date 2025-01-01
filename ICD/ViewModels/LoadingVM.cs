@@ -14,7 +14,7 @@ namespace ICD.ViewModels
 {
     public partial class LoadingVM(DataContext dataContext): BaseVM
     {
-        private const string DbName = "ICD506";
+        private const string DbName = "ICD507";
 
         public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory, DbName);
 
@@ -33,7 +33,7 @@ namespace ICD.ViewModels
 
                 if (drug != null && tradeDrug != null)
                 {
-                    await GoToAsyncWithStack(nameof(HomePage), animate: true);
+                    await GoToAsyncWithShell(nameof(HomePage), animate: true);
                 }
                 else
                 {
@@ -51,9 +51,8 @@ namespace ICD.ViewModels
         private async Task LoadData()
         {
             await _dataContext.LoadAllDrugsAsync();
-            await _dataContext.LoadAllActiveDrugsAsync();
             await _dataContext.LoadAllTradeDrugsAsync();
-            await GoToAsyncWithStack(nameof(HomePage), animate: true);
+            await GoToAsyncWithShell(nameof(HomePage), animate: true);
         }
     }
 }
