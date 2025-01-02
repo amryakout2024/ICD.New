@@ -10,49 +10,29 @@
              Shell.FlyoutBehavior="Disabled"
              Shell.FlyoutItemIsVisible="False"
              Shell.TabBarIsVisible="False"
-             Title="Welcome To ICD-10 App"          
              FlowDirection="LeftToRight">
-    <Shell.TitleView>
+    <!--<Shell.TitleView>
         <Border BackgroundColor="White" 
                 Margin="0"
                 StrokeThickness="0">
-            <Label 
-                    HorizontalOptions="CenterAndExpand"
-                    TextColor="Green"
-                    TextDecorations="Underline"
-                    Text="Welcome To ICD-10 App" 
-                    FontSize="26"/>
         </Border>
-    </Shell.TitleView>
-
-    <ur:UraniumContentPage.ToolbarItems>
-        <ToolbarItem 
-            Order="Secondary"
-            Text="Share the application"
-            Command="{Binding ShareTheApplicationCommand}">
-        </ToolbarItem>
-        <ToolbarItem 
-            Order="Secondary"  
-            Text="Log out"
-            Command="{Binding CloseAppCommand}">
-        </ToolbarItem>
-    </ur:UraniumContentPage.ToolbarItems>
+    </Shell.TitleView>-->
 
     <ur:UraniumContentPage.Attachments>
-        <!--<mat:BottomSheetView  
+        <mat:BottomSheetView  
             DisablePageWhenOpened="True"
             CloseOnTapOutside="True"
             Grid.Row="3">
-            -->
-        <!--<mat:BottomSheetView.Header>
+            
+        <mat:BottomSheetView.Header>
                 <Grid BackgroundColor="Chocolate" 
                         HorizontalOptions="FillAndExpand">
                     <Label TextColor="Chocolate" 
                            HorizontalOptions="FillAndExpand"
                            Text="header"/>
                 </Grid>
-            </mat:BottomSheetView.Header>-->
-        <!--
+            </mat:BottomSheetView.Header>
+        
             <mat:BottomSheetView.Body>
                 <VerticalStackLayout BackgroundColor="Chocolate" 
                         HorizontalOptions="FillAndExpand">
@@ -70,7 +50,7 @@
                            Text="header"/>
                 </VerticalStackLayout>
             </mat:BottomSheetView.Body>
-        </mat:BottomSheetView>-->
+        </mat:BottomSheetView>
     </ur:UraniumContentPage.Attachments>
 
     <ur:UraniumContentPage.Resources>
@@ -142,195 +122,65 @@
     </ur:UraniumContentPage.Resources>
 
 
-    <!--<Grid>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <Grid.Style>
-                <Style TargetType="Grid">
-                    <Setter Property="Opacity" Value="1"/>
-                    <Setter Property="IsEnabled" Value="True"/>
-                    <Style.Triggers>
-                        <DataTrigger TargetType="Grid" Binding="{Binding IsDrugSelected}" Value="true">
-                            <Setter Property="Opacity" Value="0.4"/>
-                            <Setter Property="IsEnabled" Value="False"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Grid.Style>
+    <Grid RowDefinitions="auto,auto,auto,*,auto,2*">
+        <Label Background="WhiteSmoke"
+            Grid.Row="0"
+            Margin="5,0,0,0"
+                TextDecorations="Underline"
+            VerticalOptions="CenterAndExpand"
+            TextColor="Green"
+            Text="Scientific Name" 
+            FontSize="30"/>
+        <Label 
+            Grid.Row="1"
+            Margin="5,0,0,0"
+            VerticalOptions="CenterAndExpand"
+            TextColor="Green"
+            Text="{Binding DrugName}" 
+            FontSize="20"/>
+        <Label 
+            Grid.Row="2" Background="WhiteSmoke"
+            Margin="5,20,0,0" 
+            VerticalOptions="CenterAndExpand"
+            TextColor="Green"
+            TextDecorations="Underline"
+            Text="Trade Names" 
+            FontSize="30"/>
 
-            <VerticalStackLayout Grid.Row="0">
-
-                <Grid ColumnDefinitions="*,auto,auto">
-                    <Label 
-                        Grid.Column="0"
-                        Margin="5,0,0,0"
-                        VerticalOptions="CenterAndExpand"
-                        TextColor="Green"
-                        Text="{Binding CountDrugs,StringFormat='Results count : {0}'}" 
-                        FontSize="15"/>
-                    <Label
-                        Grid.Column="1"
-                            Padding="0"
-                        Margin="0,0,0,0"
-                        TextColor="DarkRed"
-                        IsVisible="{Binding IsLabelVisible}"
-                        VerticalOptions="CenterAndExpand"
-                        Text="{Binding CountCheckedDrugs,StringFormat='Share {0} records'}" 
-                        FontSize="15"/>
-
-                    --><!--<Button
-                        Grid.Column="2"
-                        IsVisible="{Binding IsButtonVisible}"
-                        VerticalOptions="CenterAndExpand"
-                        HeightRequest="50"
-                        WidthRequest="60"
-                        BackgroundColor="Transparent"
-                        ImageSource="sharesquare"
-                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:}},Path=ShareCheckedDrugsCommand}">
-                    </Button>--><!--
-                </Grid>
-
-                <mat:TextField
-                            Text="{Binding SearchName}"
-                            TextColor="Green"
-                            FontSize="18"
-                            AccentColor="Green"
-                            Margin="5"
-                            AllowClear="True"
-                            Title="Enter Active Ingredients"
-                            TitleColor="LightGray">
-                    <mat:TextField.Behaviors>
-                        <toolkit:EventToCommandBehavior                            
-                                     EventName="TextChanged"
-                                     Command="{Binding Source={x:Reference this}, Path=BindingContext.SearchCommand}">
-                        </toolkit:EventToCommandBehavior>
-                    </mat:TextField.Behaviors>
-                </mat:TextField>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <RadioButton Grid.Column="0" 
-                                 Content="Active Ingredient" 
-                                 GroupName="rd"
-                                 IsChecked="True">
-                        <RadioButton.Style>
-                            <Style TargetType="RadioButton">
-                                <Setter Property="ControlTemplate" Value="{StaticResource RadioButtonTemplate}"/>
-                            </Style>
-                        </RadioButton.Style>
-                    </RadioButton>
-                    <RadioButton Grid.Column="1"
-                                 Content="Trade Name"
-                                 GroupName="rd"
-                                 IsChecked="{Binding IsTradeRadioButtonChecked}">
-                        <RadioButton.Style>
-                            <Style TargetType="RadioButton">
-                                <Setter Property="ControlTemplate" Value="{StaticResource RadioButtonTemplate}"/>
-                            </Style>
-                        </RadioButton.Style>
-                    </RadioButton>
-                </Grid>
-
-            </VerticalStackLayout>
-
-            <CollectionView Grid.Row="1"
+        <CollectionView Grid.Row="3" 
                 SelectionMode="Single"
-                            x:Name="cv"
-                ItemsSource="{Binding DrugNames}"
-                EmptyView="No Items To Display Or The Word Is Not Correct">
-                <CollectionView.Style>
-                    <Style TargetType="CollectionView">
-                        <Setter Property="IsVisible" Value="Visible"/>
-                        <Style.Triggers>
-                            <DataTrigger TargetType="CollectionView" Binding="{Binding IsTradeRadioButtonChecked}" Value="true">
-                                <Setter Property="IsVisible" Value="Collapse"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </CollectionView.Style>
-
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Border 
-                            StrokeThickness="1"
-                            Padding="5"
-                            Margin="5,5,5,0">
-                            <Grid  ColumnDefinitions="*,auto">
-                                <Label TextColor="DarkGreen" 
-                                       Text="{Binding .}"
-                                       Grid.Column="0"
-                                       FontAttributes="Italic"
-                                       FontSize="20"/>
-                                --><!--<Button
-                                        Grid.Column="1"
-                                        Text="Show"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeVM}},Path=ShowDrugNameDetailsCommand}"
-                                        CommandParameter="{Binding .}">
-                                </Button>--><!--
-                            </Grid>
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="5,0,0,5"/>
-                            </Border.StrokeShape>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-            <CollectionView Grid.Row="1"
-                SelectionMode="Single"
-                            x:Name="cv2"
+                        x:Name="cv2"
                 ItemsSource="{Binding TradeDrugs}"
-                EmptyView="No Items To Display Or The Word Is Not Correct">
-                <CollectionView.Style>
-                    <Style TargetType="CollectionView">
-                        <Setter Property="IsVisible" Value="Collapse"/>
-                        <Style.Triggers>
-                            <DataTrigger TargetType="CollectionView" Binding="{Binding IsTradeRadioButtonChecked}" Value="true">
-                                <Setter Property="IsVisible" Value="Visible"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </CollectionView.Style>
-
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="vm:HomeVM">
-                        <Border 
-                            StrokeThickness="1"
+                EmptyView="Not Found">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:HomeVM">
+                    <Border 
+                            StrokeThickness="0.5"
                             Padding="5"
                             Margin="5,5,5,0">
-                            <Grid  ColumnDefinitions="*,auto">
-                                <VerticalStackLayout
+                        <Grid  ColumnDefinitions="*,auto">
+                            <VerticalStackLayout
                                     x:DataType="m:TradeDrug"
                                     Grid.Column="0">
-                                    <Label TextColor="DarkGreen" 
+                                <Label TextColor="DarkGreen" 
                                        Text="{Binding TradeDrugName}"
                                        FontAttributes="Italic"
                                        FontSize="20"/>
-                                    <Label TextColor="DarkSlateBlue"
-                                       Text="{Binding DrugName}" 
-                                       FontSize="18"
-                                       FontAttributes="Bold"/>
-                                </VerticalStackLayout>
-                                <Grid RowDefinitions="auto,*"
+                            </VerticalStackLayout>
+                            <!--<Grid RowDefinitions="auto,*"
                                       Grid.Column="1">
-                                    <mat:CheckBox
+                                <mat:CheckBox
                                         IconColor="DarkSlateBlue"
                                         BorderColor="DarkSlateBlue"
                                         HorizontalOptions="CenterAndExpand"
                                         VerticalOptions="CenterAndExpand"
                                         Margin="5"
                                         BoxSizeRequest="23"
-                                        CheckChangedCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeVM}} ,Path=UpdateCheckedDrugCommand}"
+                                        CheckChangedCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:DrugDetailVM}} ,Path=UpdateCheckedDrugCommand}"
                                         CommandParameter="{Binding .}"
                                         CornerRadius="25">
-                                    </mat:CheckBox>
-                                    --><!--<Button
+                                </mat:CheckBox>
+                                <Button
                                         Grid.Row="1"
                                         HeightRequest="45"
                                         IsVisible="{Binding IsButtonVisible}"
@@ -339,19 +189,66 @@
                                         ImageSource="share"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeVM}},Path=ShareDrugCommand}"
                                         CommandParameter="{Binding .}">
-                                    </Button>--><!--
-                                </Grid>
-                            </Grid>
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="5,0,0,5"/>
-                            </Border.StrokeShape>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                                </Button>
+                            </Grid>-->
+                        </Grid>
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="5,0,0,5"/>
+                        </Border.StrokeShape>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+        <Label 
+            Grid.Row="4" Background="WhiteSmoke"
+            Margin="5,0,0,0"
+            VerticalOptions="CenterAndExpand"
+            TextColor="Green"
+            TextDecorations="Underline"
+            Text="ICD-10" 
+            FontSize="30"/>
 
-            <VerticalStackLayout Grid.Row="2">
-                --><!--<Border StrokeShape="RoundRectangle 10"
+        <CollectionView Grid.Row="5" 
+                SelectionMode="Single"
+                            x:Name="cv"
+                ItemsSource="{Binding Drugs}"
+                EmptyView="Not Found">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border 
+                            StrokeThickness="0.5"
+                            Padding="5"
+                            Margin="5,5,5,0">
+                        <Grid  RowDefinitions="*,auto" x:DataType="m:Drug">
+                            <Label TextColor="DarkGreen" 
+                                       Text="{Binding Indication}"
+                                       Grid.Row="0"
+                                       FontAttributes="Italic"
+                                       FontSize="20"/>
+                            <Label TextColor="DarkGreen" 
+                                       Text="{Binding DiagnosisCode}"
+                                       Grid.Row="1"
+                                       FontAttributes="Italic"
+                                       FontSize="20"/>
+                            <!--<Button
+                                        Grid.Column="1"
+                                        Text="Show"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeVM}},Path=ShowDrugNameDetailsCommand}"
+                                        CommandParameter="{Binding .}">
+                            </Button>-->
+                        </Grid>
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="5,0,0,5"/>
+                        </Border.StrokeShape>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        
+        <!--<VerticalStackLayout Grid.Row="3">
+            --><!--<Border StrokeShape="RoundRectangle 10"
                         StrokeThickness="0"
                     Margin="5,0,5,0">
                     <controls:MTAdView x:Name="myAds">
@@ -365,20 +262,19 @@
                     </controls:MTAdView>
                 </Border>--><!--
 
-                <Border
+            <Border
                    Margin="5"
                    StrokeShape="RoundRectangle 10"
                    BackgroundColor="ForestGreen"
                    Padding="0">
-                    <Label
+                <Label
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
                         FontSize="25"
                         TextColor="White"
                         Text="Powered By : Amr Yakout"/>
-                </Border>
-            </VerticalStackLayout>
-        </Grid>
-    </Grid>-->
+            </Border>
+        </VerticalStackLayout>-->
+    </Grid>
 </ur:UraniumContentPage>
 

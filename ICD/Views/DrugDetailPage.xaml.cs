@@ -15,5 +15,17 @@ public partial class DrugDetailPage : UraniumContentPage
 
         BindingContext = _drugDetailVM;
 
+        SetBannerId();
+
+    }
+    protected async override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        await _drugDetailVM.Init();
+    }
+    private void SetBannerId()
+    {
+        //#if ANDROID
+        //		myAds.AdsId="ca-app-pub-3829937021524038/7874998548";
+        //#endif
     }
 }

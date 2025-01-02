@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ICD.Helpers;
 using ICD.Models;
@@ -42,9 +44,6 @@ namespace ICD.ViewModels
         private string _placeHolderText;
 
         public ObservableCollection<Drug> CheckedDrugs;
-
-        [ObservableProperty]
-		private string _drugName;
 
 		[ObservableProperty]
 		private string _diagnosisCode;
@@ -158,23 +157,32 @@ namespace ICD.ViewModels
         [RelayCommand]
         private async Task ShowDrugDetails(Drug drug)
         {
-            //var parameter=Dictionary<string<drug>> 
-            //await GoToAsyncWithStack(nameof(DrugDetailPage),true);
-		//	await Share.Default.RequestAsync(
-		//		new ShareTextRequest(
-		//			@$"{drug.DrugName.TrimStart()} : {drug.DiagnosisCode} 
-		//sent from ICD-10 Application".TrimStart()
-                    //));
+            var parameter = new Dictionary<string, object>
+            {
+                [nameof(DrugDetailVM.Drug)] = drug
+            };
+             await GoToAsyncWithStackAndParameter(nameof(DrugDetailPage),true,parameter);
         }
 
         [RelayCommand]
         private async Task ShowTradeDrugDetails(TradeDrug tradeDrug)
         {
-            //	await Share.Default.RequestAsync(
-            //		new ShareTextRequest(
-            //			@$"{drug.DrugName.TrimStart()} : {drug.DiagnosisCode} 
-            //sent from ICD-10 Application".TrimStart()
-            //));
+            var drug = DrugsWithoutFilter.Where(x => x.DrugName == tradeDrug.DrugName).FirstOrDefault();
+
+            if (drug != null) 
+            {
+                var parameter = new Dictionary<string, object>
+                {
+                    [nameof(DrugDetailVM.Drug)] = drug
+                };
+                await GoToAsyncWithStackAndParameter(nameof(DrugDetailPage), true, parameter);
+
+            }
+            else
+            {
+                await Toast.Make("Scientific Name Not Found",ToastDuration.Short).Show();
+            }
+
         }
 
 

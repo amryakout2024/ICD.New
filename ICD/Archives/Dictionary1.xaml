@@ -2,6 +2,18 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ICD.Archives.Dictionary1">
+    <!--<Grid.Style>
+        <Style TargetType="Grid">
+            <Setter Property="Opacity" Value="1"/>
+            <Setter Property="IsEnabled" Value="True"/>
+            <Style.Triggers>
+                <DataTrigger TargetType="Grid" Binding="{Binding IsDrugSelected}" Value="true">
+                    <Setter Property="Opacity" Value="0.4"/>
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Grid.Style>-->
 
     <!--public async Task
     <List<Drug>> LoadAllDrugsAsync()
