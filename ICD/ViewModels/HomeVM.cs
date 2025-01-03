@@ -60,9 +60,13 @@ namespace ICD.ViewModels
         [ObservableProperty]
         private bool _isButtonVisible;
 
+        //[NotifyCanExecuteChangedFor(nameof(SearchCommand))]
         [ObservableProperty]
-		[NotifyCanExecuteChangedFor(nameof(SearchCommand))]
         private bool _isTradeRadioButtonChecked;
+
+        //[NotifyCanExecuteChangedFor(nameof(SearchCommand))]
+        [ObservableProperty]
+        private bool _isScientificRadioButtonChecked;
 
         [ObservableProperty]
         private Drug _selectedDrug;
@@ -79,12 +83,15 @@ namespace ICD.ViewModels
             Drugs = DrugsWithoutFilter.DistinctBy(x => x.DrugName).ToList();
             
             TradeDrugsWithoutFilter = await _dataContext.LoadAllTradeDrugsAsync();
+            
+            TradeDrugs = TradeDrugsWithoutFilter;
 
-            PlaceHolderText = "Enter Active Ingredient";
+            PlaceHolderText = "Enter Scientific Name";
             
             CountDrugs = 0;
 
             IsTradeRadioButtonChecked = false;
+            IsScientificRadioButtonChecked = true;
 
             CheckedDrugs = new ObservableCollection<Drug>();
             IsDrugSelected = false;
@@ -103,7 +110,13 @@ namespace ICD.ViewModels
         {
             SearchName = "";
 			//Configuration 
-			Search();
+			//Search();
+        }
+        partial void OnIsScientificRadioButtonCheckedChanged(bool value)
+        {
+            SearchName = "";
+			//Configuration 
+			//Search();
         }
 
         [RelayCommand]
@@ -111,12 +124,12 @@ namespace ICD.ViewModels
         {
             if (!IsTradeRadioButtonChecked)
             {
-                PlaceHolderText = "Enter Active Ingredient";
+                PlaceHolderText = "Enter Scientific Name";
 
                 if (!string.IsNullOrEmpty(SearchName))
                 {
                     //IsBusy = true;
-                    Drugs = DrugsWithoutFilter.DistinctBy(x => x.DrugName).Where(x => x.DrugName.Contains(SearchName.ToUpper())).ToList();
+                    Drugs = DrugsWithoutFilter.DistinctBy(x => x.DrugName).Where(x => x.DrugName.Contains(SearchName.ToLower())).ToList();
 
                     CountDrugs = Drugs.Count();
 
@@ -138,7 +151,7 @@ namespace ICD.ViewModels
                 if (!string.IsNullOrEmpty(SearchName))
                 {
                     //IsBusy = true;
-                    TradeDrugs = TradeDrugsWithoutFilter.Where(x => x.TradeDrugName.ToLower().Contains(SearchName.ToUpper())).ToList();
+                    TradeDrugs = TradeDrugsWithoutFilter.Where(x => x.TradeDrugName.ToLower().Contains(SearchName.ToLower())).ToList();
 
                     CountDrugs = TradeDrugs.Count();
                     //IsBusy = false;
@@ -180,7 +193,7 @@ namespace ICD.ViewModels
             }
             else
             {
-                await Toast.Make("Scientific Name Not Found",ToastDuration.Short).Show();
+                await Toast.Make("Not Found , Try Search by Scientific Name",ToastDuration.Short).Show();
             }
 
         }

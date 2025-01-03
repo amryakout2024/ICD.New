@@ -19,7 +19,7 @@
                 StrokeThickness="0">
             <Label 
                     HorizontalOptions="CenterAndExpand"
-                    TextColor="Green"
+                    TextColor="{StaticResource MainColor}"
                     TextDecorations="Underline"
                     Text="Welcome To ICD-10 App" 
                     FontSize="26"/>
@@ -34,7 +34,7 @@
         </ToolbarItem>
         <ToolbarItem 
             Order="Secondary"  
-            Text="Log out"
+            Text="Exit"
             Command="{Binding CloseAppCommand}">
         </ToolbarItem>
     </ur:UraniumContentPage.ToolbarItems>
@@ -215,9 +215,9 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <RadioButton Grid.Column="0" 
-                                 Content="Active Ingredient" 
+                                 Content="Scientific Name" 
                                  GroupName="rd"
-                                 IsChecked="True">
+                                 IsChecked="{Binding IsScientificRadioButtonChecked}">
                         <RadioButton.Style>
                             <Style TargetType="RadioButton">
                                 <Setter Property="ControlTemplate" Value="{StaticResource RadioButtonTemplate}"/>
@@ -242,7 +242,7 @@
                 SelectionMode="Single"
                             x:Name="cv"
                 ItemsSource="{Binding Drugs}"
-                EmptyView="No Items To Display Or The Word Is Not Correct">
+                EmptyView="Not Found Or The Word Is Not Correct">
                 <CollectionView.Style>
                     <Style TargetType="CollectionView">
                         <Setter Property="IsVisible" Value="Visible"/>
@@ -257,11 +257,11 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="vm:HomeVM">
                         <Border x:DataType="m:Drug"
-                            StrokeThickness="1"
+                            StrokeThickness="0.5"
                             Padding="5"
                             Margin="5,5,5,0">
                             <Grid  ColumnDefinitions="*,auto">
-                                <Label TextColor="DarkGreen" 
+                                <Label TextColor="{StaticResource SubMainColor}" 
                                        Text="{Binding DrugName}"
                                        Grid.Column="0"
                                        FontAttributes="Italic"
@@ -285,7 +285,7 @@
                 SelectionMode="Single"
                             x:Name="cv2"
                 ItemsSource="{Binding TradeDrugs}"
-                EmptyView="No Items To Display Or The Word Is Not Correct">
+                EmptyView="Not Found Or The Word Is Not Correct">
                 <CollectionView.Style>
                     <Style TargetType="CollectionView">
                         <Setter Property="IsVisible" Value="Collapse"/>
@@ -300,12 +300,12 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="vm:HomeVM">
                         <Border 
-                            StrokeThickness="1"
+                            StrokeThickness="0.5"
                             Padding="5"
                             Margin="5,5,5,0">
                             <Grid x:DataType="m:TradeDrug" 
                                   ColumnDefinitions="*,auto">
-                                <Label TextColor="DarkGreen" 
+                                <Label TextColor="{StaticResource SubMainColor}"
                                        Text="{Binding TradeDrugName}"
                                        FontAttributes="Italic"
                                        FontSize="20"/>

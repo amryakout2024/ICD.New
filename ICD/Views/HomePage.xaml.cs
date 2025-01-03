@@ -27,18 +27,40 @@ public partial class HomePage : UraniumContentPage
 //#endif
 	}
 
-	protected async override void OnAppearing()
-	{
-		base.OnAppearing();
+    protected async override void OnBindingContextChanged()
+    {
+        base.OnBindingContextChanged();
 
-		await _homeVM.Init();
+        await _homeVM.Init();
 
-		if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar")
-		{
-			this.FlowDirection = FlowDirection.LeftToRight;
-		}
+        if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar")
+        {
+            this.FlowDirection = FlowDirection.LeftToRight;
+        }
 
-	}
+    }
+    protected async override void OnAppearing()
+    {
+        //base.OnAppearing();
+
+        //await _homeVM.Init();
+
+        //if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar")
+        //{
+        //    this.FlowDirection = FlowDirection.LeftToRight;
+        //}
+
+    }
+
+    protected async override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        //await _homeVM.Init();
+
+        //if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar")
+        //{
+        //    this.FlowDirection = FlowDirection.LeftToRight;
+        //}
+    }
 
 	protected override bool OnBackButtonPressed()
 	{

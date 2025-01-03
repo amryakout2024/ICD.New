@@ -18,7 +18,7 @@
         </Border>
     </Shell.TitleView>-->
 
-    <ur:UraniumContentPage.Attachments>
+    <!--<ur:UraniumContentPage.Attachments>
         <mat:BottomSheetView  
             DisablePageWhenOpened="True"
             CloseOnTapOutside="True"
@@ -51,7 +51,7 @@
                 </VerticalStackLayout>
             </mat:BottomSheetView.Body>
         </mat:BottomSheetView>
-    </ur:UraniumContentPage.Attachments>
+    </ur:UraniumContentPage.Attachments>-->
 
     <ur:UraniumContentPage.Resources>
         <ControlTemplate x:Key="RadioButtonTemplate">
@@ -128,21 +128,21 @@
             Margin="5,0,0,0"
                 TextDecorations="Underline"
             VerticalOptions="CenterAndExpand"
-            TextColor="Green"
+            TextColor="{StaticResource MainColor}"
             Text="Scientific Name" 
             FontSize="30"/>
         <Label 
             Grid.Row="1"
             Margin="5,0,0,0"
             VerticalOptions="CenterAndExpand"
-            TextColor="Green"
+            TextColor="{StaticResource SubMainColor}"
             Text="{Binding DrugName}" 
             FontSize="20"/>
         <Label 
             Grid.Row="2" Background="WhiteSmoke"
             Margin="5,20,0,0" 
             VerticalOptions="CenterAndExpand"
-            TextColor="Green"
+            TextColor="{StaticResource MainColor}"
             TextDecorations="Underline"
             Text="Trade Names" 
             FontSize="30"/>
@@ -162,7 +162,8 @@
                             <VerticalStackLayout
                                     x:DataType="m:TradeDrug"
                                     Grid.Column="0">
-                                <Label TextColor="DarkGreen" 
+                                <Label 
+                                     TextColor="{StaticResource SubMainColor}"
                                        Text="{Binding TradeDrugName}"
                                        FontAttributes="Italic"
                                        FontSize="20"/>
@@ -204,7 +205,7 @@
             Grid.Row="4" Background="WhiteSmoke"
             Margin="5,0,0,0"
             VerticalOptions="CenterAndExpand"
-            TextColor="Green"
+            TextColor="{StaticResource MainColor}"
             TextDecorations="Underline"
             Text="ICD-10" 
             FontSize="30"/>
@@ -221,12 +222,14 @@
                             Padding="5"
                             Margin="5,5,5,0">
                         <Grid  RowDefinitions="*,auto" x:DataType="m:Drug">
-                            <Label TextColor="DarkGreen" 
+                            <Label 
+                                TextColor="{StaticResource SubMainColor}" 
                                        Text="{Binding Indication}"
                                        Grid.Row="0"
                                        FontAttributes="Italic"
                                        FontSize="20"/>
-                            <Label TextColor="DarkGreen" 
+                            <Label 
+                                TextColor="{StaticResource SubMainColor}"
                                        Text="{Binding DiagnosisCode}"
                                        Grid.Row="1"
                                        FontAttributes="Italic"

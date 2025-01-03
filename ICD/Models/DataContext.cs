@@ -11,7 +11,7 @@ namespace ICD.Models
 {
 	public class DataContext
 	{
-		private const string DbName = "ICD507";
+		private const string DbName = "ICD508";
 
 		public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory,DbName);
 
@@ -6879,7 +6879,15 @@ new Drug{DrugId=6808,DrugName="α -TOCOPHEROL, EGG LECITHIN, GLYCEROL, MEDIUM CH
       
             foreach (Drug drug in Drugs)
             {
-                Database.Insert(drug);
+                Drug drug2 = new Drug()
+                {
+                    DrugId=drug.DrugId,
+                    DrugName = drug.DrugName.ToLower(),
+                    Indication = drug.Indication.ToLower(),
+                    DiagnosisCode = drug.DiagnosisCode
+                };
+                
+                Database.Insert(drug2);
             }
 
             Database.CreateTable<TradeDrug>();
@@ -12340,7 +12348,13 @@ new TradeDrug{TradeDrugId=5449,TradeDrugName="ZYVOX 2 MG/ML SOLUTION FOR INFUSIO
 
             foreach (TradeDrug tradeDrug in TradeDrugs)
             {
-                Database.Insert(tradeDrug);
+                TradeDrug tradeDrug2 = new TradeDrug()
+                {
+                    TradeDrugId = tradeDrug.TradeDrugId,
+                    TradeDrugName = tradeDrug.TradeDrugName.ToLower(),
+                    DrugName = tradeDrug.DrugName.ToLower()
+                };
+                Database.Insert(tradeDrug2);
             }
         }
 
