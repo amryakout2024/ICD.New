@@ -33,32 +33,17 @@ namespace ICD.ViewModels
 
 		private List<TradeDrug> TradeDrugsWithoutFilter=new List<TradeDrug>();
         
-		 
         [ObservableProperty]
         private string _searchName;
 
         [ObservableProperty]
-        private string _countCheckedDrugs;
-
-        [ObservableProperty]
         private string _placeHolderText;
-
-        public ObservableCollection<Drug> CheckedDrugs;
 
 		[ObservableProperty]
 		private string _diagnosisCode;
 
         [ObservableProperty]
-        private bool _isDrugSelected;
-
-        [ObservableProperty]
-        private bool _isLabelVisible;
-
-        [ObservableProperty]
         private bool _isRefreshing = false;
-
-        [ObservableProperty]
-        private bool _isButtonVisible;
 
         //[NotifyCanExecuteChangedFor(nameof(SearchCommand))]
         [ObservableProperty]
@@ -91,18 +76,8 @@ namespace ICD.ViewModels
             CountDrugs = 0;
 
             IsTradeRadioButtonChecked = false;
+
             IsScientificRadioButtonChecked = true;
-
-            CheckedDrugs = new ObservableCollection<Drug>();
-            IsDrugSelected = false;
-            IsLabelVisible = false;
-            IsButtonVisible = false;
-            CountCheckedDrugs = "0";
-
-            //Shell.SetBackButtonBehavior(this, new BackButtonBehavior()
-            //{
-            //	Command = searchComman()
-            //});
 
         }
 
@@ -112,6 +87,7 @@ namespace ICD.ViewModels
 			//Configuration 
 			//Search();
         }
+        
         partial void OnIsScientificRadioButtonCheckedChanged(bool value)
         {
             SearchName = "";
@@ -181,7 +157,6 @@ namespace ICD.ViewModels
         private async Task ShowTradeDrugDetails(TradeDrug tradeDrug)
         {
             var drug = DrugsWithoutFilter.Where(x => x.DrugName == tradeDrug.DrugName).FirstOrDefault();
-
             if (drug != null) 
             {
                 var parameter = new Dictionary<string, object>
@@ -195,29 +170,6 @@ namespace ICD.ViewModels
             {
                 await Toast.Make("Not Found , Try Search by Scientific Name",ToastDuration.Short).Show();
             }
-
-        }
-
-
-        [RelayCommand]
-		private async Task ShareCheckedDrugs()
-		{
-			//if (CheckedDrugs.Count>10)
-			//{
-			//	await Shell.Current.DisplayAlert("Error","Can not share more than 10 records","Ok",FlowDirection.LeftToRight);
-			//	return;
-			//}
-			//string txt = "";
-			//foreach (var d in CheckedDrugs)
-			//{
-			//	txt = @$"{txt.TrimStart()}
-   //     {d.DrugName.TrimStart()} : {d.DiagnosisCode}".TrimStart();
-			//}
-
-			//await Share.Default.RequestAsync(
-			//	new ShareTextRequest(@$"{txt.TrimStart()} 
-		 //   sent from ICD-10 Application".TrimStart()
-   //     ));
 
         }
 
@@ -240,86 +192,5 @@ namespace ICD.ViewModels
             App.Current.Quit();
 #endif
         }
-
-        [RelayCommand]
-        private async Task ClearSelections()
-        {
-
-			//var d= Drugs.Where(x=>x.DrugId==1).SingleOrDefault();
-   //         Drugs.Remove(Drugs.Where(x => x.DrugId == 1).SingleOrDefault());
-   //         d.IsCheckboxChecked = false;
-			//Drugs.Add(d);
-   //         IsRefreshing = true;
-        }
-
-        [RelayCommand]
-        private async Task UpdateCheckedDrug(Drug drug)
-        {
-            if (drug.IsCheckboxChecked==true)
-            {
-				drug.IsCheckboxChecked = false;
-            }
-            else
-            {
-				drug.IsCheckboxChecked = true;
-            }
-
-            if (drug.IsCheckboxChecked == true)
-			{
-				CheckedDrugs.Add(drug);
-                if (CheckedDrugs.Count>0)
-                {
-					IsLabelVisible = true;
-                    IsButtonVisible = true;
-                }
-                CountCheckedDrugs=CheckedDrugs.Count.ToString();
-            }
-			else 
-			{
-				CheckedDrugs.Remove(drug);
-                if (CheckedDrugs.Count < 1)
-                {
-                    IsLabelVisible = false;
-                    IsButtonVisible = false;
-                }
-
-                CountCheckedDrugs = CheckedDrugs.Count.ToString();
-            }
-
-   //         var d = Drugs.Where(x => x.DrugId == drug.DrugId).FirstOrDefault();
-   //         d.IsCheckboxChecked = true;
-   //         d.IsButtonVisible = false;
-   //         Drugs.Remove(drug);
-			////Drugs.Add(d);
-			//var c= Drugs.Count();
-            //var d2 = Drugs.Where(x => x.DrugId == d.DrugId).FirstOrDefault();
-			
-        }
-
-        [RelayCommand]
-		private async Task GotoHomePage()
-		{
-			IsDrugSelected = false;
-		}
-
-		[RelayCommand]
-		private async Task ShowDrugsForm(Drug drug)
-		{
-			//DrugName = drug.DrugName;
-			//DiagnosisId = drug.DiagnosisId;
-			//DiagnosisName = drug.DiagnosisName;
-
-			//IsDrugSelected = true;
-		}
-
-		[RelayCommand]
-		private async Task NavigateDrugsPage(Drug drug)
-		{
-			//var parameter = new Dictionary<string, object>
-			//{
-			//	[nameof(DrugsVM.Drug)] = drug,
-			//};
-			//await Shell.Current.GoToAsync($"//{nameof(DrugsPage)}",animate:true,parameter);
-		}
 	}
 }

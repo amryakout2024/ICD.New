@@ -2,6 +2,12 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ICD.Archives.Dictionary1">
+
+    <!--//Shell.SetBackButtonBehavior(this, new BackButtonBehavior()
+            //{
+            //	Command = searchComman()
+            //});-->
+
     <!--<Grid.Style>
         <Style TargetType="Grid">
             <Setter Property="Opacity" Value="1"/>
