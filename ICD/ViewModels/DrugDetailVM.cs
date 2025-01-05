@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ICD.Models;
 using System;
@@ -123,8 +125,11 @@ namespace ICD.ViewModels
         }
 
         [RelayCommand]
-        private async Task ClearSelections()
+        private async Task CopyDrug(Drug drug)
         {
+            await Clipboard.SetTextAsync(drug.DiagnosisCode);
+
+            await Toast.Make("Copied Successfully",ToastDuration.Short).Show();
 
             //var d= Drugs.Where(x=>x.DrugId==1).SingleOrDefault();
             //         Drugs.Remove(Drugs.Where(x => x.DrugId == 1).SingleOrDefault());
