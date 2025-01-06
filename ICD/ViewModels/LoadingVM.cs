@@ -14,13 +14,15 @@ namespace ICD.ViewModels
 {
     public partial class LoadingVM(DataContext dataContext): BaseVM
     {
-        private const string DbName = "ICD508";
+        private const string DbName = "ICD511";
 
         public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory, DbName);
 
         private SQLiteConnection Database = new SQLiteConnection(DbPath, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.SharedCache);
 
         private readonly DataContext _dataContext = dataContext;
+
+        bool IsLoadButtonClicked=false;
 
         public async Task Init()
         {
@@ -47,12 +49,17 @@ namespace ICD.ViewModels
 
             }
         }
+
         [RelayCommand]
         private async Task LoadData()
         {
-            await _dataContext.LoadAllDrugsAsync();
-            await _dataContext.LoadAllTradeDrugsAsync();
-            await GoToAsyncWithShell(nameof(HomePage), animate: true);
+            IsLoadButtonClicked = true;
+            if (IsLoadButtonClicked)
+            {
+                await _dataContext.LoadAllDrugsAsync();
+                await _dataContext.LoadAllTradeDrugsAsync();
+                await GoToAsyncWithShell(nameof(HomePage), animate: true);
+            }
         }
     }
 }

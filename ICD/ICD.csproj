@@ -24,11 +24,11 @@
 		<ApplicationTitle>ICD</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.icd</ApplicationId>
+		<ApplicationId>com.amrysajljkpout.icd</ApplicationId>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-		<ApplicationVersion>1</ApplicationVersion>
+		<ApplicationDisplayVersion>14.0</ApplicationDisplayVersion>
+		<ApplicationVersion>14</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
@@ -101,13 +101,13 @@
 	  <ApplicationVersion>10</ApplicationVersion>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-android|AnyCPU'">
+	  <AndroidPackageFormat>apk</AndroidPackageFormat>
+	</PropertyGroup>
+
 	<ItemGroup>
 	  <None Remove="Resources\AppIcon\stas.svg" />
-	  <None Remove="Resources\Images\copy.png" />
-	  <None Remove="Resources\Images\copy2.png" />
-	  <None Remove="Resources\Images\copy3.png" />
 	  <None Remove="Resources\Images\copy4.png" />
-	  <None Remove="Resources\Images\copy5.png" />
 	  <None Remove="Resources\Images\icd.png" />
 	  <None Remove="Resources\Images\share.png" />
 	  <None Remove="Resources\Images\sharesquare.png" />
@@ -126,11 +126,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiImage Include="Resources\Images\copy.png" />
-	  <MauiImage Include="Resources\Images\copy2.png" />
-	  <MauiImage Include="Resources\Images\copy3.png" />
 	  <MauiImage Include="Resources\Images\copy4.png" />
-	  <MauiImage Include="Resources\Images\copy5.png" />
 	  <MauiImage Include="Resources\Images\icd.png" />
 	  <MauiImage Include="Resources\Images\share.png" />
 	  <MauiImage Include="Resources\Images\sharesquare.png" />
