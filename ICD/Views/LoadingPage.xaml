@@ -66,10 +66,12 @@
                 Command="{Binding LoadDataCommand}">
             </Button>
 
-            <!--<ProgressBar ProgressColor="Green" Progress="0.5"/>-->
+            <!--<ProgressBar x:Name="ProgBar"
+                         IsVisible="Collapse"
+                         ProgressColor="Green" Progress="{Binding ProgressDouble}"/>-->
         </VerticalStackLayout>
         
-        <!--<skia:SKLottieView
+        <skia:SKLottieView
             Grid.Row="1"
             WidthRequest="200"
             HeightRequest="200"
@@ -78,7 +80,7 @@
             IsVisible="True"
             IsAnimationEnabled="False"
             RepeatMode="Restart"
-            x:Name="sk"/>-->
+            x:Name="sk"/>
 
         <VerticalStackLayout Grid.Row="2">
             <!--<Border StrokeShape="RoundRectangle 10"

@@ -42,6 +42,9 @@ namespace ICD
             builder.Services.AddSingleton<DrugDetailVM>()
                             .AddSingleton<DrugDetailPage>();
 
+            builder.Services.AddSingleton<AboutVM>()
+                            .AddSingleton<AboutPage>();
+
             builder.Services.AddSingleton<AppShell>();
             builder.Services.AddSingleton<AppShellVM>();
 

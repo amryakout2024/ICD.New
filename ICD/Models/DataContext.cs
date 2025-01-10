@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using ICD.ViewModels;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +12,7 @@ namespace ICD.Models
 {
 	public class DataContext
 	{
-		private const string DbName = "ICD511";
+        private const string DbName = "ICD219";
 
 		public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory,DbName);
 
@@ -6838,19 +6839,34 @@ new Drug{DrugId=6806,DrugName="ZUCLOPENTHIXOL ACETATE",Indication="SCHIZOPHRENIA
 new Drug{DrugId=6807,DrugName="ZUCLOPENTHIXOL DECANOATE",Indication="SCHIZOPHRENIA",DiagnosisCode="F20-F29"},
 new Drug{DrugId=6808,DrugName="α -TOCOPHEROL, EGG LECITHIN, GLYCEROL, MEDIUM CHAIN TRIGLYCERIDES, SOYA OIL",Indication="ACUTE PANCREATITIS",DiagnosisCode="K85"}
 
-            }; 
-      
+            };
+
             foreach (Drug drug in Drugs)
             {
-                Drug drug2 = new Drug()
+                try
                 {
-                    DrugId=drug.DrugId,
-                    DrugName = drug.DrugName.ToLower(),
-                    Indication = drug.Indication.ToLower(),
-                    DiagnosisCode = drug.DiagnosisCode
-                };
-                
-                Database.Insert(drug2);
+                    if (!String.IsNullOrEmpty(drug.DrugName) && !String.IsNullOrEmpty(drug.Indication))
+                    {
+                        Drug drug2 = new Drug()
+                        {
+                            DrugId = drug.DrugId,
+                            DrugName = drug.DrugName.ToLower(),
+                            Indication = drug.Indication.ToLower(),
+                            DiagnosisCode = drug.DiagnosisCode
+                        };
+
+                        Database.Insert(drug2);
+                    }
+                    else
+                    {
+                        Database.Insert(drug);
+                    }
+
+                }
+                catch (Exception)
+                {
+
+                }
             }
 
             Database.CreateTable<TradeDrug>();
@@ -12311,14 +12327,63 @@ new TradeDrug{TradeDrugId=5449,TradeDrugName="ZYVOX 2 MG/ML SOLUTION FOR INFUSIO
 
             foreach (TradeDrug tradeDrug in TradeDrugs)
             {
-                TradeDrug tradeDrug2 = new TradeDrug()
+                try
                 {
-                    TradeDrugId = tradeDrug.TradeDrugId,
-                    TradeDrugName = tradeDrug.TradeDrugName.ToLower(),
-                    DrugName = tradeDrug.DrugName.ToLower()
-                };
-                Database.Insert(tradeDrug2);
+                    if (!String.IsNullOrEmpty(tradeDrug.TradeDrugName) && !String.IsNullOrEmpty(tradeDrug.DrugName))
+                    {
+                        TradeDrug tradeDrug2 = new TradeDrug()
+                        {
+                            TradeDrugId = tradeDrug.TradeDrugId,
+                            TradeDrugName = tradeDrug.TradeDrugName.ToLower(),
+                            DrugName = tradeDrug.DrugName.ToLower()
+                        };
+                        Database.Insert(tradeDrug2);
+                    }
+                    else
+                    {
+                        Database.Insert(tradeDrug);
+                    }
+
+                }
+                catch (Exception)
+                {
+
+                }
+
             }
+
+        }
+        public async Task<List<Drug>> LoadAllDrugsAsync()
+        {
+            try
+            {
+                Drug drug = Database.Table<Drug>().Where(x => x.DrugId == 6000).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                //File.Delete(DbPath);
+
+                Database = new SQLiteConnection(DbPath, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.SharedCache);
+
+                await init();
+            }
+            return Database.Table<Drug>().ToList();
+        }
+
+        public async Task<List<TradeDrug>> LoadAllTradeDrugsAsync()
+        {
+            try
+            {
+
+                TradeDrug tradeDrug = Database.Table<TradeDrug>().Where(x => x.TradeDrugId == 5000).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                Database = new SQLiteConnection(DbPath, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.SharedCache);
+
+                await init();
+            }
+            return Database.Table<TradeDrug>().ToList();
         }
 
         public async Task<bool> FindDrugAsync(int drugId)
@@ -12367,37 +12432,5 @@ new TradeDrug{TradeDrugId=5449,TradeDrugName="ZYVOX 2 MG/ML SOLUTION FOR INFUSIO
             }
         }
 
-        public async Task<List<Drug>> LoadAllDrugsAsync()
-        {
-            try
-            {
-                Drug drug = Database.Table<Drug> ().Where(x => x.DrugId == 6000).FirstOrDefault();
-            }
-            catch (Exception)
-            {
-                //File.Delete(DbPath);
-
-                Database = new SQLiteConnection(DbPath, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.SharedCache);
-
-                await init();
-            }
-            return Database.Table<Drug>().ToList();
-        }
-        
-        public async Task<List<TradeDrug>> LoadAllTradeDrugsAsync()
-		{
-            try
-            {
-
-                TradeDrug tradeDrug = Database.Table<TradeDrug>().Where(x => x.TradeDrugId == 5000).FirstOrDefault();
-            }
-            catch (Exception)
-            {
-                Database = new SQLiteConnection(DbPath, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.SharedCache);
-
-                await init();
-            }
-            return Database.Table<TradeDrug>().ToList();
-        }
     }
 }

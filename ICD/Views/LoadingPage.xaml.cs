@@ -32,6 +32,7 @@ public partial class LoadingPage : ContentPage
         lblToStartLoad.IsVisible = false;
         lblDonotClose.IsVisible = true;
         lblFewMinutes.IsVisible = true;
+        //ProgBar.IsVisible = true;
         LoadDataBtn.Text = "Loading....";
 
     }
