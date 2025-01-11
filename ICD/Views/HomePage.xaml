@@ -29,6 +29,12 @@
     <ur:UraniumContentPage.ToolbarItems>
         <ToolbarItem 
             Order="Secondary"
+            Text="About"
+            Command="{Binding ShowAboutPageCommand}">
+        </ToolbarItem>
+
+        <ToolbarItem 
+            Order="Secondary"
             Text="Share the application"
             Command="{Binding ShareTheApplicationCommand}">
         </ToolbarItem>

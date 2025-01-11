@@ -28,4 +28,12 @@ public partial class DrugDetailPage : UraniumContentPage
         //		myAds.AdsId="ca-app-pub-3829937021524038/7874998548";
         //#endif
     }
+    protected override bool OnBackButtonPressed()
+    {
+#if ANDROID
+        Shell.Current.GoToAsync($"//{nameof(HomePage)}", animate: true);
+#endif
+        return true;
+    }
+
 }

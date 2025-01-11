@@ -15,7 +15,7 @@ namespace ICD.ViewModels
 {
     public partial class LoadingVM(DataContext dataContext): BaseVM
     {
-        private const string DbName = "ICD219";
+        private const string DbName = "ICD220";
 
         public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory, DbName);
 

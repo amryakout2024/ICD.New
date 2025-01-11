@@ -1,12 +1,45 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ur:UraniumContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ICD.Views.AboutPage"
-             Title="AboutPage">
-    <VerticalStackLayout>
+             xmlns:ur="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
+             xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             x:Class="ICD.Views.AboutPage">
+    <VerticalStackLayout Padding="5">
         <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            Text="ICD-10 Application"
+            TextColor="{StaticResource MainColor}"
+            TextDecorations="Underline"
+            FontAttributes="Bold"
+            FontSize="25"/>
+        <Label 
+            Text="Easy way to get ICD-10 code for any medicine , you can search by scientific name or by trade name"
+            TextColor="{StaticResource SubMainColor}"
+            FontSize="20"/>
+        <Label 
+            Text="Developed by Pharmacist : "
+            Margin="0,10,0,0"
+            FontAttributes="Bold"
+            TextColor="{StaticResource MainColor}"
+            TextDecorations="Underline"
+            FontSize="25"/>
+        <Label 
+            Text="Amr Ibrahem Yakout"
+            TextColor="{StaticResource SubMainColor}"
+            FontSize="20"/>
+        <Image Source="phone" 
+               Scale="0.8"
+               HorizontalOptions="StartAndExpand"/>
+        <Label 
+                Text="966541238108"
+                TextColor="{StaticResource SubMainColor}"
+                FontSize="20"/>
+        <Image Source="location"
+               HorizontalOptions="StartAndExpand"
+               Scale="0.7"/>
+        <Label 
+                Text="KSA,Khobar"
+                TextColor="{StaticResource SubMainColor}"
+                FontSize="20"/>
+
     </VerticalStackLayout>
-</ContentPage>
+</ur:UraniumContentPage>

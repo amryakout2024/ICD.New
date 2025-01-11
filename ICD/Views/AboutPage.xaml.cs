@@ -1,9 +1,26 @@
+using ICD.ViewModels;
+using UraniumUI.Pages;
+
 namespace ICD.Views;
 
-public partial class AboutPage : ContentPage
+public partial class AboutPage : UraniumContentPage
 {
-	public AboutPage()
+    private readonly AboutVM _aboutVM;
+
+    public AboutPage(AboutVM aboutVM)
 	{
 		InitializeComponent();
-	}
+
+        _aboutVM = aboutVM;
+
+        BindingContext= _aboutVM;
+    }
+    protected override bool OnBackButtonPressed()
+    {
+#if ANDROID
+        Shell.Current.GoToAsync($"//{nameof(HomePage)}", animate: true);
+#endif
+        return true;
+    }
+
 }

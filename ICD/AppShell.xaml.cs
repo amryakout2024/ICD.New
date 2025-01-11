@@ -19,6 +19,7 @@ namespace ICD
             typeof(LoadingPage),
             typeof(HomePage),
             typeof(DrugDetailPage),
+            typeof(AboutPage),
         ];
 
         private static void RegisterRoutes()

@@ -115,7 +115,7 @@ namespace ICD.ViewModels
             foreach (var drug in CheckedDrugs)
             {
                 txt = @$"{txt.TrimStart()}
-                 {drug.DrugName.TrimStart()} : {drug.DiagnosisCode}".TrimStart();
+                 {drug.Indication.TrimStart()} : {drug.DiagnosisCode}".TrimStart();
             }
 
             await Share.Default.RequestAsync(
@@ -129,7 +129,7 @@ namespace ICD.ViewModels
         {
             await Clipboard.SetTextAsync(drug.DiagnosisCode);
 
-            await Toast.Make("Copied Successfully",ToastDuration.Short).Show();
+            //await Toast.Make("Copied Successfully",ToastDuration.Short).Show();
 
             //var d= Drugs.Where(x=>x.DrugId==1).SingleOrDefault();
             //         Drugs.Remove(Drugs.Where(x => x.DrugId == 1).SingleOrDefault());

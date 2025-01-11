@@ -83,16 +83,24 @@ namespace ICD.ViewModels
 
         partial void OnIsTradeRadioButtonCheckedChanged(bool value)
         {
-            SearchName = "";
-			//Configuration 
-			//Search();
+            //SearchName = "";
+            if (IsTradeRadioButtonChecked)
+            {
+                PlaceHolderText = "Enter Trade Name";
+            }
+            else
+            {
+                PlaceHolderText = "Enter Scientific Name";
+            }
+            //Configuration 
+            Search();
         }
-        
+
         partial void OnIsScientificRadioButtonCheckedChanged(bool value)
         {
-            SearchName = "";
-			//Configuration 
-			//Search();
+            //SearchName = "";
+            //Configuration 
+            Search();
         }
 
         [RelayCommand]
@@ -182,6 +190,12 @@ namespace ICD.ViewModels
 				Uri = "https://play.google.com/store/apps/details?id=com.amr.icd&pli=1"
 			});
 
+        }
+
+        [RelayCommand]
+        private async Task ShowAboutPage()
+        {
+            await GoToAsyncWithStack(nameof(AboutPage), true);
         }
 
         [RelayCommand]
