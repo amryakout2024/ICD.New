@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:ICD.ViewModels"
              xmlns:m="clr-namespace:ICD.Models"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
              xmlns:ur="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
              xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
@@ -11,7 +12,7 @@
              Shell.FlyoutBehavior="Disabled"
              Shell.FlyoutItemIsVisible="False"
              Shell.TabBarIsVisible="False"
-             Title="Welcome To ICD-10 App"          
+             Title="ICD-10 App"          
              FlowDirection="LeftToRight">
     <Shell.TitleView>
         <Border BackgroundColor="White" 
@@ -46,36 +47,14 @@
     </ur:UraniumContentPage.ToolbarItems>
     
     <ur:UraniumContentPage.Attachments>
-        <!--<mat:BottomSheetView  
-            DisablePageWhenOpened="True"
-            CloseOnTapOutside="True"
-            Grid.Row="3">
-            --><!--<mat:BottomSheetView.Header>
-                <Grid BackgroundColor="Chocolate" 
-                        HorizontalOptions="FillAndExpand">
-                    <Label TextColor="Chocolate" 
-                           HorizontalOptions="FillAndExpand"
-                           Text="header"/>
-                </Grid>
-            </mat:BottomSheetView.Header>--><!--
-            <mat:BottomSheetView.Body>
-                <VerticalStackLayout BackgroundColor="Chocolate" 
-                        HorizontalOptions="FillAndExpand">
-                    <Label TextColor="White" 
-                           HorizontalOptions="CenterAndExpand"
-                           Text="header"/>
-                    <Label TextColor="White" 
-                           HorizontalOptions="CenterAndExpand"
-                           Text="header"/>
-                    <Label TextColor="White" 
-                           HorizontalOptions="CenterAndExpand"
-                           Text="header"/>
-                    <Label TextColor="White" 
-                           HorizontalOptions="CenterAndExpand"
-                           Text="header"/>
-                </VerticalStackLayout>
-            </mat:BottomSheetView.Body>
-        </mat:BottomSheetView>-->
+        <mat:BackdropView 
+            Title="Scan"
+            x:Name="backdrop" 
+            IconImageSource="scan">
+            <zxing:CameraBarcodeReaderView
+                   x:Name="cameraBarcodeReaderView"
+                   BarcodesDetected="BarcodesDetected" />
+        </mat:BackdropView>
     </ur:UraniumContentPage.Attachments>
 
     <ur:UraniumContentPage.Resources>
@@ -199,6 +178,7 @@
                 </Grid>
                 
                 <mat:TextField
+                    x:Name="textfield"
                     Text="{Binding SearchName}"
                     TextColor="Green"
                     FontSize="18"

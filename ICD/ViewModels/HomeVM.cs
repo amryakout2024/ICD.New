@@ -79,6 +79,13 @@ namespace ICD.ViewModels
 
             IsScientificRadioButtonChecked = true;
 
+            //var drugs= await _dataContext.LoadAllTradeDrugsAsync();
+
+            //var tradedrugs= await _dataContext.LoadAllDrugsAsync();
+
+            //await Shell.Current.DisplayAlert("", $"drugs ={tradedrugs.Count()}", "ok")
+            //    ;
+
         }
 
         partial void OnIsTradeRadioButtonCheckedChanged(bool value)

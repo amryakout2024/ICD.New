@@ -15,7 +15,7 @@ namespace ICD.ViewModels
 {
     public partial class LoadingVM(DataContext dataContext): BaseVM
     {
-        private const string DbName = "ICD220";
+        private const string DbName = "ICD222";
 
         public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory, DbName);
 
@@ -55,10 +55,6 @@ namespace ICD.ViewModels
                     Database.Table<Drug>().Delete();
                     Database.Table<TradeDrug>().Delete();
                 }
-
-                await _dataContext.LoadAllDrugsAsync();
-                await _dataContext.LoadAllTradeDrugsAsync();
-
             }
             catch (Exception)
             {
@@ -69,13 +65,21 @@ namespace ICD.ViewModels
         [RelayCommand]
         private async Task LoadData()
         {
-            IsLoadButtonClicked = true;
-
-            if (IsLoadButtonClicked)
+            try
             {
-                await _dataContext.LoadAllTradeDrugsAsync();
-                await _dataContext.LoadAllDrugsAsync();
-                await GoToAsyncWithShell(nameof(HomePage), animate: true);
+                IsLoadButtonClicked = true;
+
+                if (IsLoadButtonClicked)
+                {
+                    //await _dataContext.LoadAllTradeDrugsAsync();
+                    //await _dataContext.LoadAllDrugsAsync();
+                    await GoToAsyncWithShell(nameof(HomePage), animate: true);
+                }
+
+            }
+            catch (Exception ww)
+            {
+                await Shell.Current.DisplayAlert("",ww.Message,"ok");
             }
         }
     }

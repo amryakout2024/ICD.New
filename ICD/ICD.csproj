@@ -24,7 +24,7 @@
 		<ApplicationTitle>ICD</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.amrysajljkpout.icd</ApplicationId>
+		<ApplicationId>com.amr.icd</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>14.0</ApplicationDisplayVersion>
@@ -111,6 +111,7 @@
 	  <None Remove="Resources\Images\icd.png" />
 	  <None Remove="Resources\Images\location.png" />
 	  <None Remove="Resources\Images\phone.png" />
+	  <None Remove="Resources\Images\scan.png" />
 	  <None Remove="Resources\Images\share.png" />
 	  <None Remove="Resources\Images\sharesquare.png" />
 	  <None Remove="Resources\Raw\cap.json" />
@@ -132,6 +133,7 @@
 	  <MauiImage Include="Resources\Images\icd.png" />
 	  <MauiImage Include="Resources\Images\location.png" />
 	  <MauiImage Include="Resources\Images\phone.png" />
+	  <MauiImage Include="Resources\Images\scan.png" />
 	  <MauiImage Include="Resources\Images\share.png" />
 	  <MauiImage Include="Resources\Images\sharesquare.png" />
 	</ItemGroup>
@@ -151,6 +153,7 @@
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
 		<PackageReference Include="UraniumUI" Version="2.11.0" />
 		<PackageReference Include="UraniumUI.Material" Version="2.11.0" />
+		<PackageReference Include="ZXing.Net.Maui.Controls" Version="0.4.0" />
 	</ItemGroup>
 
 	<ItemGroup>

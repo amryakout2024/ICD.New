@@ -1,25 +1,86 @@
 using ICD.ViewModels;
+using ICD.Models;
+using ICD.Views;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using UraniumUI.Material;
+using UraniumUI.Material.Controls;
 using UraniumUI.Pages;
+using ZXing.Net.Maui;
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+
 namespace ICD.Views;
 
 public partial class HomePage : UraniumContentPage
 {
 	private readonly HomeVM _homeVM;
 
-	public HomePage(HomeVM homeVM)
+	private readonly DataContext _dataContext;
+
+    private List<TradeDrug> TradeDrugsWithoutFilter = new List<TradeDrug>();
+    private List<Drug> DrugsWithoutFilter=new List<Drug>();
+
+    public HomePage(HomeVM homeVM,DataContext dataContext)
 	{
 		InitializeComponent();
 
 		_homeVM = homeVM;
-
+        _dataContext = dataContext;
 		BindingContext = _homeVM;
 
-		SetBannerId();
-	}
 
+        SetBannerId();
+
+        cameraBarcodeReaderView.Options = new BarcodeReaderOptions
+        {
+            Formats = BarcodeFormats.TwoDimensional,
+            AutoRotate = true,
+            TryInverted = true,
+            Multiple=false,
+        };
+    }
+    protected  void BarcodesDetected(object sender, BarcodeDetectionEventArgs e)
+    {
+        var result = e.Results?.FirstOrDefault();
+        if (result is null) return;
+
+
+        Dispatcher.DispatchAsync(async () =>
+        {
+            //await Shell.Current.DisplayAlert("", result.Value, "ok");
+
+            //await Shell.Current.DisplayAlert("", result.Value.Substring(3, 14), "ok");
+            
+            var tradeDrug = TradeDrugsWithoutFilter.Where(x => x.Gtin == result.Value.Substring(3, 14)).FirstOrDefault();
+            
+            var drug = DrugsWithoutFilter.Where(x => x.DrugName == tradeDrug.DrugName).FirstOrDefault();
+
+            //await Shell.Current.DisplayAlert("", tradeDrug.TradeDrugName, "ok");
+
+            //await Shell.Current.DisplayAlert("", tradeDrug.Gtin, "ok");
+
+            if (tradeDrug != null && drug != null)
+            {
+
+                backdrop.IsPresented = false;
+
+                var parameter = new Dictionary<string, object>
+                {
+                    [nameof(DrugDetailVM.Drug)] = drug
+                };
+
+                await Shell.Current.GoToAsync(nameof(DrugDetailPage), true, parameter);
+
+            }
+            else
+            {
+                await Toast.Make("Not Found , Try Search by Scientific Name", ToastDuration.Short).Show();
+            }
+        });
+    }
     private void SetBannerId()
     {
 //#if ANDROID
@@ -32,6 +93,10 @@ public partial class HomePage : UraniumContentPage
         base.OnBindingContextChanged();
 
         await _homeVM.Init();
+
+        TradeDrugsWithoutFilter = await _dataContext.LoadAllTradeDrugsAsync();
+        
+        DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
 
         if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar")
         {
@@ -56,13 +121,12 @@ public partial class HomePage : UraniumContentPage
     {
         //await _homeVM.Init();
 
-        //if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar")
-        //{
-        //    this.FlowDirection = FlowDirection.LeftToRight;
-        //}
+        TradeDrugsWithoutFilter = await _dataContext.LoadAllTradeDrugsAsync();
+
+        DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
     }
 
-	protected override bool OnBackButtonPressed()
+    protected override bool OnBackButtonPressed()
 	{
 		//var leave = await DisplayAlert("Leave lobby?", "Are you sure you want to leave the lobby?", "Yes", "No");
 

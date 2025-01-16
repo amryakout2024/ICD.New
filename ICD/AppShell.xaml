@@ -14,10 +14,10 @@
         <toolkit:StatusBarBehavior StatusBarColor="Green"/>
     </Shell.Behaviors>
     
-    <ShellContent
+    <!--<ShellContent
             Title="loading"
             ContentTemplate="{DataTemplate v:LoadingPage}"
-            Route="LoadingPage" />
+            Route="LoadingPage" />-->
 
     <ShellContent
                 Title="Home"
