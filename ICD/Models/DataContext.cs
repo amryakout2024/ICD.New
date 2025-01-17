@@ -12,12 +12,6 @@ namespace ICD.Models
 {
 	public class DataContext
 	{
-        private const string DbName = "ICD222";
-
-		public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory,DbName);
-
-        private SQLiteConnection Database = new SQLiteConnection(DbPath, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.SharedCache);
-
         public List<Drug> Drugs { get; set; }
 
         public List<TradeDrug> TradeDrugs { get; set; }
@@ -31,7 +25,6 @@ namespace ICD.Models
 
                 //REACTIVE
                 //"+"REACTIVE
-                Database.CreateTable<TradeDrug>();
 
                 TradeDrugs = new List<TradeDrug>()
                 {
@@ -7698,15 +7691,6 @@ new TradeDrug{TradeDrugId=7660,TradeDrugName="نيبكستو",DrugName="Etanerce
 
                 };
 
-                //foreach (TradeDrug tradeDrug in tradeDrugs)
-                //{
-                //    Database.Insert(tradeDrug);
-                //}
-
-                //await Shell.Current.DisplayAlert("", "trade drugs ok", "ok");
-
-                Database.CreateTable<Drug>();
-
                 Drugs = new List<Drug>()
 {
                 new Drug { DrugId = 1 ,DrugName="Abacavir,Lamivudine", Indication="Human Immunodeficiency Virus", DiagnosisCode="B20"},
@@ -14520,100 +14504,24 @@ new Drug { DrugId = 6808 ,DrugName="Α -Tocopherol, Egg Lecithin, Glycerol, Medi
 
             };
 
-                //foreach (Drug drug in Drugs)
-                //{
-                //    Database.Insert(drug);
-                //}
-
-                //await Shell.Current.DisplayAlert("", "drugs ok", "ok");
-
-
             }
-            catch (Exception ww)
+            catch (Exception)
             {
-                await Shell.Current.DisplayAlert("", ww.Message, "ok");
+
             }
         }
         public async Task<List<Drug>> LoadAllDrugsAsync()
         {
-            //try
-            //{
-            //    Drug drug = Database.Table<Drug>().Where(x => x.DrugId == 6000).FirstOrDefault();
-            //}
-            //catch (Exception)
-            //{
-            //    //File.Delete(DbPath);
-
-            //    Database = new SQLiteConnection(DbPath, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.SharedCache);
-
             await init();
-            //}
-            //return Database.Table<Drug>().ToList();
+
             return Drugs;
         }
 
         public async Task<List<TradeDrug>> LoadAllTradeDrugsAsync()
         {
-            //try
-            //{
-
-            //    TradeDrug tradeDrug = Database.Table<TradeDrug>().Where(x => x.TradeDrugId == 5000).FirstOrDefault();
-            //}
-            //catch (Exception)
-            //{
-            //    Database = new SQLiteConnection(DbPath, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.SharedCache);
-
             await init();
-            //}
-            //return Database.Table<TradeDrug>().ToList();
+
             return TradeDrugs;
         }
-
-        public async Task<bool> FindDrugAsync(int drugId)
-        {
-
-            try
-            {
-                Drug drug = Database.Table<Drug>().Where(x => x.DrugId == drugId).FirstOrDefault();
-
-                if (drug != null)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        public async Task<bool> FindTradeDrugAsync(int tradeId)
-        {
-
-            try
-            {
-                TradeDrug tradeDrug = Database.Table<TradeDrug>().Where(x => x.TradeDrugId == tradeId).FirstOrDefault();
-
-                if (tradeDrug != null)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
     }
 }

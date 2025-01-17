@@ -38,18 +38,11 @@ namespace ICD
             builder.Services.AddSingleton<HomeVM>()
                             .AddSingleton<HomePage>();
 
-            builder.Services.AddSingleton<LoadingVM>()
-                            .AddSingleton<LoadingPage>();
-
             builder.Services.AddSingleton<DrugDetailVM>()
                             .AddSingleton<DrugDetailPage>();
 
             builder.Services.AddSingleton<AboutVM>()
                             .AddSingleton<AboutPage>();
-
-            builder.Services.AddSingleton<AppShell>();
-            builder.Services.AddSingleton<AppShellVM>();
-
             return builder.Build();
         }
     }

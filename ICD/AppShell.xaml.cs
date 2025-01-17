@@ -16,7 +16,6 @@ namespace ICD
         }
         private readonly static Type[] _routablePageTypes =
         [
-            typeof(LoadingPage),
             typeof(HomePage),
             typeof(DrugDetailPage),
             typeof(AboutPage),
