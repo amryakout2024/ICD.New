@@ -17,7 +17,7 @@ namespace ICD.Models
 
         public string? DrugName { get; set; }
 
-        public string? DrugForm { get; set; }
+        public string? AdministrationRoute { get; set; }
 
         public string? Gtin { get; set; }
     }
