@@ -1,5 +1,4 @@
-﻿using SQLite;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,7 +9,7 @@ namespace ICD.Models
 {
     public class TradeDrug
     {
-        [PrimaryKey, AutoIncrement]
+        [Key]
 
         public int TradeDrugId { get; set; }
 

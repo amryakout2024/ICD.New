@@ -10,7 +10,7 @@ namespace ICD.Models
 {
 	public class Drug
 	{
-		[PrimaryKey, AutoIncrement]
+		[Key]
 
         public int DrugId { get; set; }
 
@@ -19,6 +19,8 @@ namespace ICD.Models
         public string? Indication { get; set; }
 
         public string? DiagnosisCode { get; set; }
+
+        public string? AdministrationRoute { get; set; }
 
         public bool IsCheckboxChecked { get; set; }=false;
 
