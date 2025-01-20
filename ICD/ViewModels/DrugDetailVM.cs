@@ -26,6 +26,9 @@ namespace ICD.ViewModels
         [ObservableProperty]
         private string _drugName;
 
+        [ObservableProperty]
+        private string _administrationRoute;
+
         private List<Drug> DrugsWithoutFilter = new List<Drug>();
 
         [ObservableProperty]
@@ -54,13 +57,15 @@ namespace ICD.ViewModels
         {
             DrugName = Drug.DrugName;
 
+            AdministrationRoute = Drug.AdministrationRoute;
+
             DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
 
-            Drugs = DrugsWithoutFilter.Where(x=>x.DrugName==Drug.DrugName).ToList();
+            Drugs = DrugsWithoutFilter.Where(x=>x.DrugName==Drug.DrugName&&x.AdministrationRoute==Drug.AdministrationRoute).ToList();
 
             TradeDrugsWithoutFilter = await _dataContext.LoadAllTradeDrugsAsync();
 
-            TradeDrugs = TradeDrugsWithoutFilter.Where(x=>x.DrugName==Drug.DrugName).ToList();
+            TradeDrugs = TradeDrugsWithoutFilter.Where(x=>x.DrugName==Drug.DrugName&&x.AdministrationRoute==Drug.AdministrationRoute).ToList();
             
             CheckedDrugs = new ObservableCollection<Drug>();
             IsDrugSelected = false;

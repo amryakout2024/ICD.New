@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ICD.Helpers;
 using ICD.Models;
+//using static MoreLinq.Extensions;
 using ICD.Views;
 using System;
 using System.Collections.Generic;
@@ -65,11 +66,11 @@ namespace ICD.ViewModels
 
             DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
 
-            Drugs = DrugsWithoutFilter.DistinctBy(x => x.DrugName).ToList();
-            
+            Drugs = DrugsWithoutFilter.DistinctBy(x=>new { x.DrugName ,x.AdministrationRoute}).ToList();
+
             TradeDrugsWithoutFilter = await _dataContext.LoadAllTradeDrugsAsync();
-            
-            TradeDrugs = TradeDrugsWithoutFilter;
+
+            TradeDrugs = TradeDrugsWithoutFilter.GroupBy(x => new { x.TradeDrugName, x.AdministrationRoute }).Select(g => g.First()).ToList();
 
             PlaceHolderText = "Enter Scientific Name";
             
@@ -78,13 +79,6 @@ namespace ICD.ViewModels
             IsTradeRadioButtonChecked = false;
 
             IsScientificRadioButtonChecked = true;
-
-            //var drugs= await _dataContext.LoadAllTradeDrugsAsync();
-
-            //var tradedrugs= await _dataContext.LoadAllDrugsAsync();
-
-            //await Shell.Current.DisplayAlert("", $"drugs ={tradedrugs.Count()}", "ok")
-            //    ;
 
         }
 
@@ -120,7 +114,7 @@ namespace ICD.ViewModels
                 if (!string.IsNullOrEmpty(SearchName))
                 {
                     //IsBusy = true;
-                    Drugs = DrugsWithoutFilter.DistinctBy(x => x.DrugName).Where(x => x.DrugName.Contains(SearchName.ToLower())).ToList();
+                    Drugs = DrugsWithoutFilter.DistinctBy(x => new { x.DrugName, x.AdministrationRoute }).Where(x => x.DrugName.Contains(SearchName.ToAllFirstLetterInUpper())).ToList();
 
                     CountDrugs = Drugs.Count();
 
@@ -128,7 +122,7 @@ namespace ICD.ViewModels
                 }
                 else
                 {
-                    Drugs = DrugsWithoutFilter.DistinctBy(x => x.DrugName).ToList();
+                    Drugs = DrugsWithoutFilter.DistinctBy(x => new { x.DrugName, x.AdministrationRoute }).ToList();
 
                     CountDrugs = 0;
 
@@ -142,14 +136,14 @@ namespace ICD.ViewModels
                 if (!string.IsNullOrEmpty(SearchName))
                 {
                     //IsBusy = true;
-                    TradeDrugs = TradeDrugsWithoutFilter.Where(x => x.TradeDrugName.ToLower().Contains(SearchName.ToLower())).ToList();
+                    TradeDrugs = TradeDrugsWithoutFilter.DistinctBy(x => new { x.TradeDrugName, x.AdministrationRoute }).Where(x => x.TradeDrugName.Contains(SearchName.ToAllFirstLetterInUpper())).ToList();
 
                     CountDrugs = TradeDrugs.Count();
                     //IsBusy = false;
                 }
                 else
                 {
-                    TradeDrugs = TradeDrugsWithoutFilter;
+                    TradeDrugs = TradeDrugsWithoutFilter.DistinctBy(x => new { x.TradeDrugName, x.AdministrationRoute }).ToList();
 
                     CountDrugs = 0;
 
@@ -172,6 +166,7 @@ namespace ICD.ViewModels
         private async Task ShowTradeDrugDetails(TradeDrug tradeDrug)
         {
             var drug = DrugsWithoutFilter.Where(x => x.DrugName == tradeDrug.DrugName).FirstOrDefault();
+           
             if (drug != null) 
             {
                 var parameter = new Dictionary<string, object>

@@ -282,11 +282,18 @@
                                 </VisualStateGroupList>
                             </VisualStateManager.VisualStateGroups>
                             <Grid  ColumnDefinitions="*,auto">
-                                <Label TextColor="{StaticResource SubMainColor}" 
+                                <VerticalStackLayout>
+                                    <Label TextColor="{StaticResource SubMainColor}" 
                                        Text="{Binding DrugName}"
                                        Grid.Column="0"
                                        FontAttributes="Italic"
                                        FontSize="20"/>
+                                    <Label TextColor="{StaticResource SubMainColor}" 
+                                       Text="{Binding AdministrationRoute}"
+                                       Grid.Column="0"
+                                       FontAttributes="Italic"
+                                       FontSize="20"/>
+                                </VerticalStackLayout>
                                 <Button
                                         Grid.Column="1"
                                         Text="Show"
@@ -326,10 +333,18 @@
                             Margin="5,5,5,0">
                             <Grid x:DataType="m:TradeDrug" 
                                   ColumnDefinitions="*,auto">
-                                <Label TextColor="{StaticResource SubMainColor}"
+                                <VerticalStackLayout>
+                                    <Label TextColor="{StaticResource SubMainColor}" 
                                        Text="{Binding TradeDrugName}"
+                                       Grid.Column="0"
                                        FontAttributes="Italic"
                                        FontSize="20"/>
+                                    <Label TextColor="{StaticResource SubMainColor}" 
+                                       Text="{Binding AdministrationRoute}"
+                                       Grid.Column="0"
+                                       FontAttributes="Italic"
+                                       FontSize="20"/>
+                                </VerticalStackLayout>
                                 <Button
                                     Grid.Column="1"
                                     Text="Show"

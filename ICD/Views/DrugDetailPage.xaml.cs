@@ -21,6 +21,11 @@ public partial class DrugDetailPage : UraniumContentPage
     protected async override void OnNavigatedTo(NavigatedToEventArgs args)
     {
         await _drugDetailVM.Init();
+
+        if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar")
+        {
+            this.FlowDirection = FlowDirection.LeftToRight;
+        }
     }
     private void SetBannerId()
     {

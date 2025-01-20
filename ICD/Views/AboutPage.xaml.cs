@@ -14,6 +14,11 @@ public partial class AboutPage : UraniumContentPage
         _aboutVM = aboutVM;
 
         BindingContext= _aboutVM;
+
+        if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar")
+        {
+            this.FlowDirection = FlowDirection.LeftToRight;
+        }
     }
     protected override bool OnBackButtonPressed()
     {
