@@ -22,10 +22,10 @@ public partial class DrugDetailPage : UraniumContentPage
     {
         await _drugDetailVM.Init();
 
-        if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar")
-        {
-            this.FlowDirection = FlowDirection.LeftToRight;
-        }
+        //if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar")
+        //{
+        //    this.FlowDirection = FlowDirection.LeftToRight;
+        //}
     }
     private void SetBannerId()
     {

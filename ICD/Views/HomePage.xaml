@@ -22,7 +22,7 @@
                     HorizontalOptions="CenterAndExpand"
                     TextColor="{StaticResource MainColor}"
                     TextDecorations="Underline"
-                    Text="Welcome To ICD-10 App" 
+                    Text="ICD-10 App" 
                     FontSize="26"/>
         </Border>
     </Shell.TitleView>

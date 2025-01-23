@@ -92,7 +92,6 @@ public partial class HomePage : UraniumContentPage
     {
         base.OnBindingContextChanged();
 
-        await _homeVM.Init();
 
         TradeDrugsWithoutFilter = await _dataContext.LoadAllTradeDrugsAsync();
         
@@ -102,6 +101,8 @@ public partial class HomePage : UraniumContentPage
         {
             this.FlowDirection = FlowDirection.LeftToRight;
         }
+
+        await _homeVM.Init();
 
     }
     protected async override void OnAppearing()
@@ -121,9 +122,9 @@ public partial class HomePage : UraniumContentPage
     {
         //await _homeVM.Init();
 
-        TradeDrugsWithoutFilter = await _dataContext.LoadAllTradeDrugsAsync();
+        //TradeDrugsWithoutFilter = await _dataContext.LoadAllTradeDrugsAsync();
 
-        DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
+        //DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
     }
 
     protected override bool OnBackButtonPressed()

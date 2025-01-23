@@ -15,10 +15,10 @@ public partial class AboutPage : UraniumContentPage
 
         BindingContext= _aboutVM;
 
-        if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar")
-        {
-            this.FlowDirection = FlowDirection.LeftToRight;
-        }
+        //if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar")
+        //{
+        //    this.FlowDirection = FlowDirection.LeftToRight;
+        //}
     }
     protected override bool OnBackButtonPressed()
     {

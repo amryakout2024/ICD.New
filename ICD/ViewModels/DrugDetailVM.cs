@@ -61,11 +61,11 @@ namespace ICD.ViewModels
 
             DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
 
-            Drugs = DrugsWithoutFilter.Where(x=>x.DrugName==Drug.DrugName&&x.AdministrationRoute==Drug.AdministrationRoute).ToList();
+            Drugs = DrugsWithoutFilter.Where(x=>x.DrugName==Drug.DrugName&&x.AdministrationRoute==Drug.AdministrationRoute).DistinctBy(x => new { x.DrugName, x.AdministrationRoute }).ToList();
 
             TradeDrugsWithoutFilter = await _dataContext.LoadAllTradeDrugsAsync();
 
-            TradeDrugs = TradeDrugsWithoutFilter.Where(x=>x.DrugName==Drug.DrugName&&x.AdministrationRoute==Drug.AdministrationRoute).ToList();
+            TradeDrugs = TradeDrugsWithoutFilter.Where(x=>x.DrugName==Drug.DrugName&&x.AdministrationRoute==Drug.AdministrationRoute).DistinctBy(x => new { x.TradeDrugName, x.AdministrationRoute }).ToList();
             
             CheckedDrugs = new ObservableCollection<Drug>();
             IsDrugSelected = false;
