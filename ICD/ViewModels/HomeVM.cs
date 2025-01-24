@@ -63,12 +63,15 @@ namespace ICD.ViewModels
 
         public async Task Init()
         {
+            TradeDrugsWithoutFilter = DataContext.TradeDrugs;
 
-            DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
+            DrugsWithoutFilter = DataContext.Drugs;
+
+            //DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
 
             Drugs = MoreLinq.MoreEnumerable.DistinctBy(DrugsWithoutFilter,x => new { x.DrugName ,x.AdministrationRoute}).ToList();
 
-            TradeDrugsWithoutFilter = await _dataContext.LoadAllTradeDrugsAsync();
+            //TradeDrugsWithoutFilter = await _dataContext.LoadAllTradeDrugsAsync();
 
             TradeDrugs =MoreLinq.MoreEnumerable.DistinctBy(TradeDrugsWithoutFilter,x => new { x.TradeDrugName, x.AdministrationRoute }).ToList();
 

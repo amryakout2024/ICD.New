@@ -12,11 +12,11 @@ namespace ICD.Models
 {
 	public class DataContext
 	{
-        public List<Drug> Drugs { get; set; }
+        public static List<Drug> Drugs { get; set; }
 
-        public List<TradeDrug> TradeDrugs { get; set; }
+        public static List<TradeDrug> TradeDrugs { get; set; }
 
-        private async Task init()
+        public async Task Init()
 		{
             //remove REACTIVE white spaces,C30
 
@@ -16250,14 +16250,14 @@ new Drug{DrugId=8547,DrugName="Α -Tocopherol, Egg Lecithin, Glycerol, Medium Ch
 
         public async Task<List<Drug>> LoadAllDrugsAsync()
         {
-            await init();
+            await Init();
 
             return Drugs;
         }
 
         public async Task<List<TradeDrug>> LoadAllTradeDrugsAsync()
         {
-            await init();
+            await Init();
 
             return TradeDrugs;
         }

@@ -29,6 +29,7 @@ public partial class HomePage : UraniumContentPage
 
 		_homeVM = homeVM;
         _dataContext = dataContext;
+        
 		BindingContext = _homeVM;
 
 
@@ -92,10 +93,11 @@ public partial class HomePage : UraniumContentPage
     {
         base.OnBindingContextChanged();
 
+        await _dataContext.Init();
 
-        TradeDrugsWithoutFilter = await _dataContext.LoadAllTradeDrugsAsync();
+        TradeDrugsWithoutFilter =  DataContext.TradeDrugs;
         
-        DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
+        DrugsWithoutFilter =  DataContext.Drugs;
 
         if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar")
         {
