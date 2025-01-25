@@ -170,7 +170,7 @@ namespace ICD.ViewModels
         [RelayCommand]
         private async Task ShowTradeDrugDetails(TradeDrug tradeDrug)
         {
-            var drug = DrugsWithoutFilter.Where(x => x.DrugName == tradeDrug.DrugName).FirstOrDefault();
+            var drug = DrugsWithoutFilter.Where(x => x.DrugName == tradeDrug.DrugName&&x.AdministrationRoute==tradeDrug.AdministrationRoute).FirstOrDefault();
            
             if (drug != null) 
             {

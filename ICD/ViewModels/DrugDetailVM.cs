@@ -56,19 +56,17 @@ namespace ICD.ViewModels
         public async Task Init()
         {
             DrugName = Drug.DrugName;
+
+            AdministrationRoute = Drug.AdministrationRoute;
+
             TradeDrugsWithoutFilter = DataContext.TradeDrugs;
 
             DrugsWithoutFilter = DataContext.Drugs;
 
-            AdministrationRoute = Drug.AdministrationRoute;
+            Drugs = DrugsWithoutFilter.Where(x => x.DrugName == Drug.DrugName && x.AdministrationRoute == Drug.AdministrationRoute).ToList();
 
-            //DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
-
-            Drugs = DrugsWithoutFilter.Where(x=>x.DrugName==Drug.DrugName&&x.AdministrationRoute==Drug.AdministrationRoute).DistinctBy(x => new { x.DrugName, x.AdministrationRoute }).ToList();
-
-            //TradeDrugsWithoutFilter = await _dataContext.LoadAllTradeDrugsAsync();
-
-            TradeDrugs = TradeDrugsWithoutFilter.Where(x=>x.DrugName==Drug.DrugName&&x.AdministrationRoute==Drug.AdministrationRoute).DistinctBy(x => new { x.TradeDrugName, x.AdministrationRoute }).ToList();
+            TradeDrugs = TradeDrugsWithoutFilter.Where(x => x.DrugName == Drug.DrugName && x.AdministrationRoute == Drug.AdministrationRoute).DistinctBy(x => new { x.TradeDrugName, x.AdministrationRoute }).ToList();
+            //TradeDrugs = TradeDrugsWithoutFilter.Where(x=>x.DrugName==Drug.DrugName&&x.AdministrationRoute==Drug.AdministrationRoute).ToList();
             
             CheckedDrugs = new ObservableCollection<Drug>();
             IsDrugSelected = false;
