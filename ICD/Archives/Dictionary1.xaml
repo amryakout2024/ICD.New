@@ -22,7 +22,7 @@
     </Grid.Style>-->
 
     <!--public async Task
-    <List<Drug>> LoadAllDrugsAsync()
+    <ObservableCollection<Drug>> LoadAllDrugsAsync()
 		{
             //await init();
 

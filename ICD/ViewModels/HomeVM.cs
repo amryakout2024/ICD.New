@@ -22,17 +22,17 @@ namespace ICD.ViewModels
 		private readonly DataContext _dataContext = dataContext;
 
         [ObservableProperty]
-        private List<Drug> _drugs;      
+        private ObservableCollection<Drug> _drugs;      
 
-        private List<Drug> DrugsWithoutFilter;
-
-        [ObservableProperty]
-        private List<Drug> _drugsFalse;
+        private ObservableCollection<Drug> DrugsWithoutFilter;
 
         [ObservableProperty]
-		private List<TradeDrug> _tradeDrugs;
+        private ObservableCollection<Drug> _drugsFalse;
 
-		private List<TradeDrug> TradeDrugsWithoutFilter=new List<TradeDrug>();
+        [ObservableProperty]
+		private ObservableCollection<TradeDrug> _tradeDrugs;
+
+		private ObservableCollection<TradeDrug> TradeDrugsWithoutFilter=new ObservableCollection<TradeDrug>();
         
         [ObservableProperty]
         private string _searchName;
@@ -69,11 +69,11 @@ namespace ICD.ViewModels
 
             //DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
 
-            Drugs = MoreLinq.MoreEnumerable.DistinctBy(DrugsWithoutFilter,x => new { x.DrugName ,x.AdministrationRoute}).ToList();
+            Drugs =new ObservableCollection<Drug>( MoreLinq.MoreEnumerable.DistinctBy(DrugsWithoutFilter,x => new { x.DrugName ,x.AdministrationRoute}).ToList());
 
             //TradeDrugsWithoutFilter = await _dataContext.LoadAllTradeDrugsAsync();
 
-            TradeDrugs =MoreLinq.MoreEnumerable.DistinctBy(TradeDrugsWithoutFilter,x => new { x.TradeDrugName, x.AdministrationRoute }).ToList();
+            TradeDrugs =new ObservableCollection<TradeDrug>( MoreLinq.MoreEnumerable.DistinctBy(TradeDrugsWithoutFilter,x => new { x.TradeDrugName, x.AdministrationRoute }).ToList());
 
             PlaceHolderText = "Enter Scientific Name";
             
@@ -118,7 +118,7 @@ namespace ICD.ViewModels
                 {
                     //IsBusy = true;
                     //Drugs = DrugsWithoutFilter.DistinctBy(x => new { x.DrugName, x.AdministrationRoute }).Where(x => x.DrugName.Contains(SearchName.ToAllFirstLetterInUpper())).ToList();
-                    Drugs = MoreLinq.MoreEnumerable.DistinctBy(DrugsWithoutFilter, x => new { x.DrugName, x.AdministrationRoute }).Where(x => x.DrugName.Contains(SearchName.ToAllFirstLetterInUpper())).ToList();
+                    Drugs =new ObservableCollection<Drug>( MoreLinq.MoreEnumerable.DistinctBy(DrugsWithoutFilter, x => new { x.DrugName, x.AdministrationRoute }).Where(x => x.DrugName.Contains(SearchName.ToAllFirstLetterInUpper())).ToList());
 
                     CountDrugs = Drugs.Count();
 
@@ -126,7 +126,7 @@ namespace ICD.ViewModels
                 }
                 else
                 {
-                    Drugs = MoreLinq.MoreEnumerable.DistinctBy(DrugsWithoutFilter, x => new { x.DrugName, x.AdministrationRoute }).ToList();
+                    Drugs =new ObservableCollection<Drug>( MoreLinq.MoreEnumerable.DistinctBy(DrugsWithoutFilter, x => new { x.DrugName, x.AdministrationRoute }).ToList());
 
                     CountDrugs = 0;
 
@@ -141,14 +141,14 @@ namespace ICD.ViewModels
                 {
                     //IsBusy = true;
                     //TradeDrugs = TradeDrugsWithoutFilter.DistinctBy(x => new { x.TradeDrugName, x.AdministrationRoute }).Where(x => x.TradeDrugName.Contains(SearchName.ToAllFirstLetterInUpper())).ToList();
-                    TradeDrugs = MoreLinq.MoreEnumerable.DistinctBy(TradeDrugsWithoutFilter, x => new { x.TradeDrugName, x.AdministrationRoute }).Where(x => x.TradeDrugName.Contains(SearchName.ToAllFirstLetterInUpper())).ToList();
+                    TradeDrugs =new ObservableCollection<TradeDrug>( MoreLinq.MoreEnumerable.DistinctBy(TradeDrugsWithoutFilter, x => new { x.TradeDrugName, x.AdministrationRoute }).Where(x => x.TradeDrugName.Contains(SearchName.ToAllFirstLetterInUpper())).ToList());
 
                     CountDrugs = TradeDrugs.Count();
                     //IsBusy = false;
                 }
                 else
                 {
-                    TradeDrugs = MoreLinq.MoreEnumerable.DistinctBy(TradeDrugsWithoutFilter, x => new { x.TradeDrugName, x.AdministrationRoute }).ToList();
+                    TradeDrugs =new ObservableCollection<TradeDrug>( MoreLinq.MoreEnumerable.DistinctBy(TradeDrugsWithoutFilter, x => new { x.TradeDrugName, x.AdministrationRoute }).ToList());
 
                     CountDrugs = 0;
 

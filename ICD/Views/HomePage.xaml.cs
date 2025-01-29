@@ -20,8 +20,8 @@ public partial class HomePage : UraniumContentPage
 
 	private readonly DataContext _dataContext;
 
-    private List<TradeDrug> TradeDrugsWithoutFilter = new List<TradeDrug>();
-    private List<Drug> DrugsWithoutFilter=new List<Drug>();
+    private ObservableCollection<TradeDrug> TradeDrugsWithoutFilter = new ObservableCollection<TradeDrug>();
+    private ObservableCollection<Drug> DrugsWithoutFilter=new ObservableCollection<Drug>();
 
     public HomePage(HomeVM homeVM,DataContext dataContext)
 	{
@@ -37,7 +37,7 @@ public partial class HomePage : UraniumContentPage
 
         cameraBarcodeReaderView.Options = new BarcodeReaderOptions
         {
-            Formats = BarcodeFormats.TwoDimensional,
+            Formats = BarcodeFormats.All,
             AutoRotate = true,
             TryInverted = true,
             Multiple=false,
@@ -51,32 +51,33 @@ public partial class HomePage : UraniumContentPage
 
         Dispatcher.DispatchAsync(async () =>
         {
-            //await Shell.Current.DisplayAlert("", result.Value, "ok");
+            //await Toast.Make(result.Value.ToString(), ToastDuration.Short).Show();
 
-            //await Shell.Current.DisplayAlert("", result.Value.Substring(3, 14), "ok");
-            
-            var tradeDrug = TradeDrugsWithoutFilter.Where(x => x.Gtin == result.Value.Substring(3, 14)).FirstOrDefault();
-            
-            var drug = DrugsWithoutFilter.Where(x => x.DrugName == tradeDrug.DrugName).FirstOrDefault();
-
-            //await Shell.Current.DisplayAlert("", tradeDrug.TradeDrugName, "ok");
-
-            //await Shell.Current.DisplayAlert("", tradeDrug.Gtin, "ok");
-
-            if (tradeDrug != null && drug != null)
+            try
             {
+                var tradeDrug = TradeDrugsWithoutFilter.Where(x => x.Gtin == result.Value.Substring(3, 14)).FirstOrDefault();
 
-                backdrop.IsPresented = false;
+                var drug = DrugsWithoutFilter.Where(x => x.DrugName == tradeDrug.DrugName && x.AdministrationRoute == tradeDrug.AdministrationRoute).FirstOrDefault();
 
-                var parameter = new Dictionary<string, object>
+                if (tradeDrug != null && drug != null)
                 {
-                    [nameof(DrugDetailVM.Drug)] = drug
-                };
+                    backdrop.IsPresented = false;
 
-                await Shell.Current.GoToAsync(nameof(DrugDetailPage), true, parameter);
+                    var parameter = new Dictionary<string, object>
+                    {
+                        [nameof(DrugDetailVM.Drug)] = drug
+                    };
+
+                    await Shell.Current.GoToAsync(nameof(DrugDetailPage), true, parameter);
+
+                }
+                else
+                {
+                    await Toast.Make("Not Found , Try Search by Scientific Name", ToastDuration.Short).Show();
+                }
 
             }
-            else
+            catch (Exception)
             {
                 await Toast.Make("Not Found , Try Search by Scientific Name", ToastDuration.Short).Show();
             }

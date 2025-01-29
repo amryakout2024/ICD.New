@@ -1,4 +1,5 @@
-﻿using ICD.ViewModels;
+﻿
+using ICD.ViewModels;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -12,16 +13,16 @@ namespace ICD.Models
 {
 	public class DataContext
 	{
-        public static List<Drug> Drugs { get; set; }
+        public static ObservableCollection<Drug> Drugs { get; set; }
 
-        public static List<TradeDrug> TradeDrugs { get; set; }
+        public static ObservableCollection<TradeDrug> TradeDrugs { get; set; }
 
         public async Task Init()
 		{
             //remove REACTIVE white spaces,C30
 
             //from Gtin2.txt
-            TradeDrugs = new List<TradeDrug>()
+            TradeDrugs = new ObservableCollection<TradeDrug>()
             {
                 new TradeDrug{TradeDrugId=1,TradeDrugName="Abelcet 5Mg-Ml Iv Vial",DrugName="Amphotericin B",AdministrationRoute="Intravenous Use",Gtin="96677000005580"},
 new TradeDrug{TradeDrugId=2,TradeDrugName="Abilify Maintena 400 Mg Powder And Solvent For Prolonged-Release",DrugName="Aripiprazole",AdministrationRoute="Intramuscular Use",Gtin="05702150145376"},
@@ -7694,7 +7695,7 @@ new TradeDrug{TradeDrugId=7667,TradeDrugName="نيبكستو",DrugName="Etanerce
             };
 
             //from active2.txt
-            Drugs = new List<Drug>()
+            Drugs = new ObservableCollection<Drug>()
             {
                 new Drug{DrugId=1,DrugName="Abacavir",Indication="Human Immunodeficiency Virus",DiagnosisCode="B20",AdministrationRoute="Oral Use"},
 new Drug{DrugId=2,DrugName="Abacavir,Lamivudine",Indication="Human Immunodeficiency Virus",DiagnosisCode="B20",AdministrationRoute="Oral Use"},
@@ -13997,7 +13998,7 @@ new Drug{DrugId=6298,DrugName="Olopatadine,Mometasone Furoate",Indication="Aller
 new Drug{DrugId=6299,DrugName="Omalizumab",Indication="Asthma ",DiagnosisCode="J45",AdministrationRoute="Subcutaneous Use"},
 new Drug{DrugId=6300,DrugName="Omalizumab",Indication="Sinusitis",DiagnosisCode="J32",AdministrationRoute="Subcutaneous Use"},
 new Drug{DrugId=6301,DrugName="Omalizumab",Indication="Urticaria",DiagnosisCode="L50",AdministrationRoute="Subcutaneous Use"},
-new Drug{DrugId=6302,DrugName="Omega-3 Polyunsaturateted Fatty Acids",Indication="Dyslipidemia ",DiagnosisCode="E78",AdministrationRoute=""},
+new Drug{DrugId=6302,DrugName="Omega-3 Polyunsaturateted Fatty Acids",Indication="Dyslipidemia ",DiagnosisCode="E78",AdministrationRoute="Oral Use"},
 new Drug{DrugId=6303,DrugName="Omega-3-Acid Ethyl Esters",Indication="Acute Bipolar I Depression",DiagnosisCode="F31",AdministrationRoute="Oral Use"},
 new Drug{DrugId=6304,DrugName="Omega-3-Acid Ethyl Esters",Indication="Congestive Heart Failure",DiagnosisCode="I50",AdministrationRoute="Oral Use"},
 new Drug{DrugId=6305,DrugName="Omega-3-Acid Ethyl Esters",Indication="Dyslipidemia ",DiagnosisCode="E78",AdministrationRoute="Oral Use"},
@@ -16248,14 +16249,14 @@ new Drug{DrugId=8547,DrugName="Α -Tocopherol, Egg Lecithin, Glycerol, Medium Ch
         }        
 
 
-        public async Task<List<Drug>> LoadAllDrugsAsync()
+        public async Task<ObservableCollection<Drug>> LoadAllDrugsAsync()
         {
             await Init();
 
             return Drugs;
         }
 
-        public async Task<List<TradeDrug>> LoadAllTradeDrugsAsync()
+        public async Task<ObservableCollection<TradeDrug>> LoadAllTradeDrugsAsync()
         {
             await Init();
 

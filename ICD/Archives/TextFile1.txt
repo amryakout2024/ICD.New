@@ -1,0 +1,73 @@
+﻿Abatacept =>
+Juvenile Polyarthritis : M08.3
+Psoriatic Arthritis : M07, L40.5
+Rheumatoid Arithritis  : M05, M06
+Systemic Juvenile Idiopathic Arthritis : M08.2
+
+https://play.google.com/store/apps/details?id=com.amr.icd&pli=1
+    <!--<ur:UraniumContentPage.Attachments>
+        <mat:BottomSheetView  
+            DisablePageWhenOpened="True"
+            CloseOnTapOutside="True"
+            Grid.Row="3">
+            
+        <mat:BottomSheetView.Header>
+                <Grid BackgroundColor="Chocolate" 
+                        HorizontalOptions="FillAndExpand">
+                    <Label TextColor="Chocolate" 
+                           HorizontalOptions="FillAndExpand"
+                           Text="header"/>
+                </Grid>
+            </mat:BottomSheetView.Header>
+        
+            <mat:BottomSheetView.Body>
+                <VerticalStackLayout BackgroundColor="Chocolate" 
+                        HorizontalOptions="FillAndExpand">
+                    <Label TextColor="White" 
+                           HorizontalOptions="CenterAndExpand"
+                           Text="header"/>
+                    <Label TextColor="White" 
+                           HorizontalOptions="CenterAndExpand"
+                           Text="header"/>
+                    <Label TextColor="White" 
+                           HorizontalOptions="CenterAndExpand"
+                           Text="header"/>
+                    <Label TextColor="White" 
+                           HorizontalOptions="CenterAndExpand"
+                           Text="header"/>
+                </VerticalStackLayout>
+            </mat:BottomSheetView.Body>
+        </mat:BottomSheetView>
+    </ur:UraniumContentPage.Attachments>-->
+
+
+            <!--<VerticalStackLayout Grid.Row="3">
+            -->
+            <!--<Border StrokeShape="RoundRectangle 10"
+                        StrokeThickness="0"
+                    Margin="5,0,5,0">
+                    <controls:MTAdView x:Name="myAds">
+                        <controls:MTAdView.HeightRequest>
+                            <OnIdiom 
+                                Phone="50"
+                                Tablet="90"
+                                Desktop="90"/>
+                        </controls:MTAdView.HeightRequest>
+
+                    </controls:MTAdView>
+                </Border>-->
+            <!--
+
+            <Border
+                   Margin="5"
+                   StrokeShape="RoundRectangle 10"
+                   BackgroundColor="ForestGreen"
+                   Padding="0">
+                <Label
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        FontSize="25"
+                        TextColor="White"
+                        Text="Powered By : Amr Yakout"/>
+            </Border>
+        </VerticalStackLayout>-->

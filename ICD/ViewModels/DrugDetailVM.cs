@@ -10,6 +10,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ICD.ViewModels
 {
@@ -21,7 +22,7 @@ namespace ICD.ViewModels
         private Drug _drug;
 
         [ObservableProperty]
-        private List<Drug> _drugs=new List<Drug>();
+        private ObservableCollection<Drug> _drugs=new ObservableCollection<Drug>();
 
         [ObservableProperty]
         private string _drugName;
@@ -29,15 +30,15 @@ namespace ICD.ViewModels
         [ObservableProperty]
         private string _administrationRoute;
 
-        private List<Drug> DrugsWithoutFilter = new List<Drug>();
+        private ObservableCollection<Drug> DrugsWithoutFilter = new ObservableCollection<Drug>();
 
         [ObservableProperty]
-        private List<TradeDrug> _tradeDrugs =new List<TradeDrug>();
+        private ObservableCollection<TradeDrug> _tradeDrugs =new ObservableCollection<TradeDrug>();
 
-        private List<TradeDrug> TradeDrugsWithoutFilter = new List<TradeDrug>();
+        private ObservableCollection<TradeDrug> TradeDrugsWithoutFilter = new ObservableCollection<TradeDrug>();
 
-        [ObservableProperty]
-        private string _countCheckedDrugs;
+        //[ObservableProperty]
+        //private string _countCheckedDrugs;
 
         public ObservableCollection<Drug> CheckedDrugs;
 
@@ -48,8 +49,12 @@ namespace ICD.ViewModels
         private bool _isLabelVisible;
 
         [ObservableProperty]
+        private bool _isAllCheckboxChecked;
+
+        [ObservableProperty]
         private bool _isRefreshing = false;
 
+        [NotifyPropertyChangedFor(nameof( Drugs))]
         [ObservableProperty]
         private bool _isButtonVisible;
 
@@ -63,17 +68,17 @@ namespace ICD.ViewModels
 
             DrugsWithoutFilter = DataContext.Drugs;
 
-            Drugs = DrugsWithoutFilter.Where(x => x.DrugName == Drug.DrugName && x.AdministrationRoute == Drug.AdministrationRoute).ToList();
+            Drugs = new ObservableCollection<Drug>( DrugsWithoutFilter.Where(x => x.DrugName == Drug.DrugName && x.AdministrationRoute == Drug.AdministrationRoute).ToList());
 
-            TradeDrugs = TradeDrugsWithoutFilter.Where(x => x.DrugName == Drug.DrugName && x.AdministrationRoute == Drug.AdministrationRoute).DistinctBy(x => new { x.TradeDrugName, x.AdministrationRoute }).ToList();
+            TradeDrugs =new ObservableCollection<TradeDrug>( TradeDrugsWithoutFilter.Where(x => x.DrugName == Drug.DrugName && x.AdministrationRoute == Drug.AdministrationRoute).DistinctBy(x => new { x.TradeDrugName, x.AdministrationRoute }).ToList());
             //TradeDrugs = TradeDrugsWithoutFilter.Where(x=>x.DrugName==Drug.DrugName&&x.AdministrationRoute==Drug.AdministrationRoute).ToList();
             
             CheckedDrugs = new ObservableCollection<Drug>();
             IsDrugSelected = false;
             IsLabelVisible = false;
             IsButtonVisible = false;
-            CountCheckedDrugs = "0";
 
+            IsAllCheckboxChecked = false;
 
         }
 
@@ -89,7 +94,7 @@ namespace ICD.ViewModels
                 drug.IsCheckboxChecked = true;
             }
 
-            if (drug.IsCheckboxChecked == true)
+            if (drug.IsCheckboxChecked == false)
             {
                 CheckedDrugs.Add(drug);
 
@@ -98,7 +103,8 @@ namespace ICD.ViewModels
                     IsLabelVisible = true;
                     IsButtonVisible = true;
                 }
-                CountCheckedDrugs = CheckedDrugs.Count.ToString();
+                IsAllCheckboxChecked=(CheckedDrugs.Count != Drugs.Count) ? false:true;
+
             }
             else
             {
@@ -107,41 +113,73 @@ namespace ICD.ViewModels
                 {
                     IsLabelVisible = false;
                     IsButtonVisible = false;
+                    IsAllCheckboxChecked = false;
                 }
-
-                CountCheckedDrugs = CheckedDrugs.Count.ToString();
             }
         }
-
         [RelayCommand]
         private async Task ShareCheckedDrugs()
         {
-            string txt = "";
+            string txt =$"{DrugName} =>";
 
             foreach (var drug in CheckedDrugs)
             {
-                txt = @$"{txt.TrimStart()}
-                 {drug.Indication.TrimStart()} : {drug.DiagnosisCode}".TrimStart();
+                txt = @$"{txt}" + Environment.NewLine + $"{drug.Indication} : {drug.DiagnosisCode}";
             }
 
-            await Share.Default.RequestAsync(
-                new ShareTextRequest(@$"{txt.TrimStart()} 
-               sent from ICD-10 Application".TrimStart()
-                 ));
+            await Share.Default.RequestAsync(new ShareTextRequest
+            {
+                Text = $"{txt}" + Environment.NewLine,
+                Title="",
+                Uri = "https://play.google.com/store/apps/details?id=com.amr.icd&pli=1"
+            });
         }
 
         [RelayCommand]
         private async Task CopyDrug(Drug drug)
         {
-            await Clipboard.SetTextAsync(drug.DiagnosisCode);
+            await Clipboard.SetTextAsync($"{drug.DrugName} : "+Environment.NewLine+$"{drug.Indication} : {drug.DiagnosisCode}");
+        }
 
-            //await Toast.Make("Copied Successfully",ToastDuration.Short).Show();
+        [RelayCommand]
+        private async Task CheckAllDrugs()
+        {
+            CheckedDrugs.Clear();
 
-            //var d= Drugs.Where(x=>x.DrugId==1).SingleOrDefault();
-            //         Drugs.Remove(Drugs.Where(x => x.DrugId == 1).SingleOrDefault());
-            //         d.IsCheckboxChecked = false;
-            //Drugs.Add(d);
-            //         IsRefreshing = true;
+            ObservableCollection<Drug> Drugs2 = new ObservableCollection<Drug>();
+
+            if (IsAllCheckboxChecked)
+            {
+                foreach (Drug drug in Drugs)
+                {
+                    drug.IsCheckboxChecked = true;
+
+                    Drugs2.Add(drug);
+
+                    CheckedDrugs.Add(drug);
+
+                }
+
+                Drugs = new ObservableCollection<Drug>(Drugs2);
+
+                IsButtonVisible = true;
+
+            }
+            else
+            {
+                foreach (Drug drug in Drugs)
+                {
+                    drug.IsCheckboxChecked = false;
+
+                    Drugs2.Add(drug);
+
+                    CheckedDrugs.Remove(drug);
+                }
+                Drugs = new ObservableCollection<Drug>(Drugs2);
+
+                IsButtonVisible = false;
+
+            }
         }
 
     }
