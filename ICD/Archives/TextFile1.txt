@@ -1,11 +1,12 @@
-﻿Abatacept =>
-Juvenile Polyarthritis : M08.3
-Psoriatic Arthritis : M07, L40.5
-Rheumatoid Arithritis  : M05, M06
-Systemic Juvenile Idiopathic Arthritis : M08.2
+﻿Aripiprazole =>: 
+Aripiprazole =>: 
+                IsFromUpdateCheckBox = true;
+                IsFromUpdateCheckBox = true;
+Abilirazole : Aripiprazole =>
 
-https://play.google.com/store/apps/details?id=com.amr.icd&pli=1
-    <!--<ur:UraniumContentPage.Attachments>
+Acute Mania : F30
+Anxiety Disorders : F40.01, F40.1, F41, F42, F43.1, F93.2
+Acute Mania : F30    <!--<ur:UraniumContentPage.Attachments>
         <mat:BottomSheetView  
             DisablePageWhenOpened="True"
             CloseOnTapOutside="True"

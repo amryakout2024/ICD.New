@@ -37,10 +37,7 @@ namespace ICD.ViewModels
 
         private ObservableCollection<TradeDrug> TradeDrugsWithoutFilter = new ObservableCollection<TradeDrug>();
 
-        //[ObservableProperty]
-        //private string _countCheckedDrugs;
-
-        public ObservableCollection<Drug> CheckedDrugs;
+        private ObservableCollection<Drug> CheckedDrugs { get; set; }
 
         [ObservableProperty]
         private bool _isDrugSelected;
@@ -58,6 +55,8 @@ namespace ICD.ViewModels
         [ObservableProperty]
         private bool _isButtonVisible;
 
+        private bool IsFromUpdateCheckBox;
+
         public async Task Init()
         {
             DrugName = Drug.DrugName;
@@ -71,15 +70,63 @@ namespace ICD.ViewModels
             Drugs = new ObservableCollection<Drug>( DrugsWithoutFilter.Where(x => x.DrugName == Drug.DrugName && x.AdministrationRoute == Drug.AdministrationRoute).ToList());
 
             TradeDrugs =new ObservableCollection<TradeDrug>( TradeDrugsWithoutFilter.Where(x => x.DrugName == Drug.DrugName && x.AdministrationRoute == Drug.AdministrationRoute).DistinctBy(x => new { x.TradeDrugName, x.AdministrationRoute }).ToList());
-            //TradeDrugs = TradeDrugsWithoutFilter.Where(x=>x.DrugName==Drug.DrugName&&x.AdministrationRoute==Drug.AdministrationRoute).ToList();
             
             CheckedDrugs = new ObservableCollection<Drug>();
             IsDrugSelected = false;
             IsLabelVisible = false;
             IsButtonVisible = false;
-
+            IsFromUpdateCheckBox = false;
             IsAllCheckboxChecked = false;
 
+        }
+        [RelayCommand]
+        private async Task CheckAllDrugs()
+        {
+            //CheckedDrugs.Clear();
+
+            ObservableCollection<Drug> Drugs2 = new ObservableCollection<Drug>();
+
+            if (IsAllCheckboxChecked)
+            {
+                CheckedDrugs.Clear();
+                foreach (Drug drug in Drugs)
+                {
+                    drug.IsCheckboxChecked = true;
+
+                    Drugs2.Add(drug);
+
+                    CheckedDrugs.Add(drug);
+
+                }
+
+                Drugs = new ObservableCollection<Drug>(Drugs2);
+
+                IsButtonVisible = true;
+                IsFromUpdateCheckBox = false;
+            }
+            else
+            {
+                if (IsFromUpdateCheckBox == false)
+                {
+                    foreach (Drug drug in Drugs)
+                    {
+                        drug.IsCheckboxChecked = false;
+
+                        Drugs2.Add(drug);
+
+                        CheckedDrugs.Remove(drug);
+                    }
+                    Drugs = new ObservableCollection<Drug>(Drugs2);
+
+                    IsButtonVisible = false;
+
+                }
+                else
+                {
+                    IsFromUpdateCheckBox = false;
+                }
+
+            }
         }
 
         [RelayCommand]
@@ -103,8 +150,6 @@ namespace ICD.ViewModels
                     IsLabelVisible = true;
                     IsButtonVisible = true;
                 }
-                IsAllCheckboxChecked=(CheckedDrugs.Count != Drugs.Count) ? false:true;
-
             }
             else
             {
@@ -113,23 +158,35 @@ namespace ICD.ViewModels
                 {
                     IsLabelVisible = false;
                     IsButtonVisible = false;
-                    IsAllCheckboxChecked = false;
                 }
+            }
+            if (CheckedDrugs.Count < Drugs.Count)
+            {
+                IsFromUpdateCheckBox = true;
+
+                IsAllCheckboxChecked = false;
+            }
+            else
+            {
+                IsAllCheckboxChecked = true;
             }
         }
         [RelayCommand]
         private async Task ShareCheckedDrugs()
         {
-            string txt =$"{DrugName} =>";
+            
+            string txt =(Drug.TradeDrugName!=null)
+                ? $"{Drug.TradeDrugName} : {DrugName} =>" + Environment.NewLine+Environment.NewLine 
+                : $"{DrugName} =>" + Environment.NewLine+Environment.NewLine ;
 
             foreach (var drug in CheckedDrugs)
             {
-                txt = @$"{txt}" + Environment.NewLine + $"{drug.Indication} : {drug.DiagnosisCode}";
+                txt = @$"{txt} {drug.Indication} : {drug.DiagnosisCode}" + Environment.NewLine + Environment.NewLine;
             }
-
+            txt = txt + Environment.NewLine + "Download ICD-10 App from PlayStore";
             await Share.Default.RequestAsync(new ShareTextRequest
             {
-                Text = $"{txt}" + Environment.NewLine,
+                Text = $"{txt}",
                 Title="",
                 Uri = "https://play.google.com/store/apps/details?id=com.amr.icd&pli=1"
             });
@@ -138,63 +195,12 @@ namespace ICD.ViewModels
         [RelayCommand]
         private async Task CopyDrug(Drug drug)
         {
-            await Clipboard.SetTextAsync($"{drug.DrugName} : "+Environment.NewLine+$"{drug.Indication} : {drug.DiagnosisCode}");
-        }
+            string txt = (Drug.TradeDrugName != null) 
+                ? $"{Drug.TradeDrugName} : {drug.DrugName} =>" +Environment.NewLine+Environment.NewLine+$"{drug.Indication} : {drug.DiagnosisCode}" 
+                : $"{drug.DrugName} =>" + $": " + Environment.NewLine+Environment.NewLine + $"{drug.Indication} : {drug.DiagnosisCode}";
 
-        [RelayCommand]
-        private async Task CheckAllDrugs()
-        {
-            CheckedDrugs.Clear();
-
-            ObservableCollection<Drug> Drugs2 = new ObservableCollection<Drug>();
-
-            if (IsAllCheckboxChecked)
-            {
-                foreach (Drug drug in Drugs)
-                {
-                    drug.IsCheckboxChecked = true;
-
-                    Drugs2.Add(drug);
-
-                    CheckedDrugs.Add(drug);
-
-                }
-
-                Drugs = new ObservableCollection<Drug>(Drugs2);
-
-                IsButtonVisible = true;
-
-            }
-            else
-            {
-                foreach (Drug drug in Drugs)
-                {
-                    drug.IsCheckboxChecked = false;
-
-                    Drugs2.Add(drug);
-
-                    CheckedDrugs.Remove(drug);
-                }
-                Drugs = new ObservableCollection<Drug>(Drugs2);
-
-                IsButtonVisible = false;
-
-            }
+            await Clipboard.SetTextAsync(txt);
         }
 
     }
 }
-//var parameter=Dictionary<string<drug>> 
-//await GoToAsyncWithStack(nameof(DrugDetailPage),true);
-//	await Share.Default.RequestAsync(
-//		new ShareTextRequest(
-//	
-//	
-//			@$"{drug.DrugName.TrimStart()} : {drug.DiagnosisCode} 
-//sent from ICD-10 Application".TrimStart()
-//));
-//	await Share.Default.RequestAsync(
-//		new ShareTextRequest(
-//			@$"{drug.DrugName.TrimStart()} : {drug.DiagnosisCode} 
-//sent from ICD-10 Application".TrimStart()
-//));

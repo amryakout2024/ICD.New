@@ -2,6 +2,17 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ICD.Archives.Dictionary1">
+    //var leave = await DisplayAlert("Leave lobby?", "Are you sure you want to leave the lobby?", "Yes", "No");
+
+		//if (leave)
+		//{
+		//	await handleLeaveAsync();
+		//	return base.OnBackButtonPressed();
+		//}
+		//else
+		//{
+		//	return false;
+		//}
 
     <!--//Shell.SetBackButtonBehavior(this, new BackButtonBehavior()
             //{

@@ -15,7 +15,7 @@
              Title="ICD-10 App"          
              FlowDirection="LeftToRight">
     <Shell.TitleView>
-        <Border BackgroundColor="White" 
+        <Border BackgroundColor="White" FlowDirection="MatchParent"
                 Margin="0"
                 StrokeThickness="0">
             <Label 
@@ -28,7 +28,7 @@
     </Shell.TitleView>
     
     <ur:UraniumContentPage.ToolbarItems>
-        <ToolbarItem 
+        <ToolbarItem
             Order="Secondary"
             Text="About"
             Command="{Binding ShowAboutPageCommand}">
@@ -51,6 +51,9 @@
             Title="Scan"
             x:Name="backdrop" 
             IconImageSource="scan">
+            <mat:BackdropView.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" Command="{Binding CheckCameraPermissionCommand}"/>
+            </mat:BackdropView.GestureRecognizers>
             <zxing:CameraBarcodeReaderView
                    x:Name="cameraBarcodeReaderView"
                    BarcodesDetected="BarcodesDetected" />

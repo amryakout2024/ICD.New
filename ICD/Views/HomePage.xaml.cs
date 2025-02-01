@@ -46,13 +46,10 @@ public partial class HomePage : UraniumContentPage
     protected  void BarcodesDetected(object sender, BarcodeDetectionEventArgs e)
     {
         var result = e.Results?.FirstOrDefault();
-        if (result is null) return;
-
+        //if (result is null) return;
 
         Dispatcher.DispatchAsync(async () =>
         {
-            //await Toast.Make(result.Value.ToString(), ToastDuration.Short).Show();
-
             try
             {
                 var tradeDrug = TradeDrugsWithoutFilter.Where(x => x.Gtin == result.Value.Substring(3, 14)).FirstOrDefault();
@@ -62,6 +59,8 @@ public partial class HomePage : UraniumContentPage
                 if (tradeDrug != null && drug != null)
                 {
                     backdrop.IsPresented = false;
+
+                    drug.TradeDrugName = tradeDrug.TradeDrugName;
 
                     var parameter = new Dictionary<string, object>
                     {
@@ -73,13 +72,13 @@ public partial class HomePage : UraniumContentPage
                 }
                 else
                 {
-                    await Toast.Make("Not Found , Try Search by Scientific Name", ToastDuration.Short).Show();
+                    await Toast.Make("Not Available , Try Search by Scientific Name Or Trade Name", ToastDuration.Short).Show();
                 }
 
             }
             catch (Exception)
             {
-                await Toast.Make("Not Found , Try Search by Scientific Name", ToastDuration.Short).Show();
+                await Toast.Make("Not Available , Try Search by Scientific Name Or Trade Name", ToastDuration.Short).Show();
             }
         });
     }
@@ -108,41 +107,9 @@ public partial class HomePage : UraniumContentPage
         await _homeVM.Init();
 
     }
-    protected async override void OnAppearing()
-    {
-        //base.OnAppearing();
-
-        //await _homeVM.Init();
-
-        //if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar")
-        //{
-        //    this.FlowDirection = FlowDirection.LeftToRight;
-        //}
-
-    }
-
-    protected async override void OnNavigatedTo(NavigatedToEventArgs args)
-    {
-        //await _homeVM.Init();
-
-        //TradeDrugsWithoutFilter = await _dataContext.LoadAllTradeDrugsAsync();
-
-        //DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
-    }
 
     protected override bool OnBackButtonPressed()
 	{
-		//var leave = await DisplayAlert("Leave lobby?", "Are you sure you want to leave the lobby?", "Yes", "No");
-
-		//if (leave)
-		//{
-		//	await handleLeaveAsync();
-		//	return base.OnBackButtonPressed();
-		//}
-		//else
-		//{
-		//	return false;
-		//}
 
 #if ANDROID
 			App.Current.CloseWindow(App.Current.MainPage.Window);
@@ -152,4 +119,8 @@ public partial class HomePage : UraniumContentPage
 		return true;
 	}
 
+    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+
+    }
 }

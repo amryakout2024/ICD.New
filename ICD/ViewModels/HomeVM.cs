@@ -60,18 +60,13 @@ namespace ICD.ViewModels
         [ObservableProperty]
         private int _countDrugs;
 
-
         public async Task Init()
         {
             TradeDrugsWithoutFilter = DataContext.TradeDrugs;
 
             DrugsWithoutFilter = DataContext.Drugs;
 
-            //DrugsWithoutFilter = await _dataContext.LoadAllDrugsAsync();
-
             Drugs =new ObservableCollection<Drug>( MoreLinq.MoreEnumerable.DistinctBy(DrugsWithoutFilter,x => new { x.DrugName ,x.AdministrationRoute}).ToList());
-
-            //TradeDrugsWithoutFilter = await _dataContext.LoadAllTradeDrugsAsync();
 
             TradeDrugs =new ObservableCollection<TradeDrug>( MoreLinq.MoreEnumerable.DistinctBy(TradeDrugsWithoutFilter,x => new { x.TradeDrugName, x.AdministrationRoute }).ToList());
 
@@ -170,20 +165,29 @@ namespace ICD.ViewModels
         [RelayCommand]
         private async Task ShowTradeDrugDetails(TradeDrug tradeDrug)
         {
-            var drug = DrugsWithoutFilter.Where(x => x.DrugName == tradeDrug.DrugName&&x.AdministrationRoute==tradeDrug.AdministrationRoute).FirstOrDefault();
-           
-            if (drug != null) 
+            try
             {
-                var parameter = new Dictionary<string, object>
+                var drug = DrugsWithoutFilter.Where(x => x.DrugName == tradeDrug.DrugName && x.AdministrationRoute == tradeDrug.AdministrationRoute).FirstOrDefault();
+
+                if (drug != null)
                 {
-                    [nameof(DrugDetailVM.Drug)] = drug
-                };
-                await GoToAsyncWithStackAndParameter(nameof(DrugDetailPage), true, parameter);
+                    drug.TradeDrugName = tradeDrug.TradeDrugName;
+                    var parameter = new Dictionary<string, object>
+                    {
+                        [nameof(DrugDetailVM.Drug)] = drug
+                    };
+                    await GoToAsyncWithStackAndParameter(nameof(DrugDetailPage), true, parameter);
+
+                }
+                else
+                {
+                    await Toast.Make("Not Available , Try Search by Scientific Name", ToastDuration.Short).Show();
+                }
 
             }
-            else
+            catch (Exception)
             {
-                await Toast.Make("Not Found , Try Search by Scientific Name",ToastDuration.Short).Show();
+                await Toast.Make("Not Available , Try Search by Scientific Name", ToastDuration.Short).Show();
             }
 
         }
@@ -203,6 +207,17 @@ namespace ICD.ViewModels
         private async Task ShowAboutPage()
         {
             await GoToAsyncWithStack(nameof(AboutPage), true);
+        }
+
+        [RelayCommand]
+        private async Task CheckCameraPermission()
+        {
+            PermissionStatus status = await Permissions.CheckStatusAsync<Permissions.Camera>();
+
+            if (status != PermissionStatus.Granted)
+            {
+                status = await Permissions.RequestAsync<Permissions.Camera>();
+            }
         }
 
         [RelayCommand]

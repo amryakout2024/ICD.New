@@ -25,5 +25,7 @@ namespace ICD.Models
         public bool IsCheckboxChecked { get; set; }=false;
 
 		public bool IsButtonVisible { get; set; }=true;
+
+		public string? TradeDrugName { get; set; }
 	}
 }

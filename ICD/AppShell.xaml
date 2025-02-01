@@ -18,4 +18,8 @@
                 Title="Home"
                 ContentTemplate="{DataTemplate v:HomePage}"
                 Route="HomePage" />
+    <ShellContent
+                Title="About"
+                ContentTemplate="{DataTemplate v:AboutPage}"
+                Route="AboutPage" />
 </Shell>
