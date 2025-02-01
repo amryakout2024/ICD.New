@@ -12,6 +12,9 @@
              Shell.TabBarIsVisible="False"
              FlowDirection="LeftToRight">
 
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding GoBackToHomePageCommand}"/>
+    </Shell.BackButtonBehavior>
     <ur:UraniumContentPage.Resources>
         <ControlTemplate x:Key="RadioButtonTemplate">
             <Border Stroke="Green"

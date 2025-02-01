@@ -3,6 +3,7 @@ using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ICD.Models;
+using ICD.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -202,5 +203,15 @@ namespace ICD.ViewModels
             await Clipboard.SetTextAsync(txt);
         }
 
+        [RelayCommand]
+        private async Task GoBackToHomePage()
+        {
+#if ANDROID
+        await Shell.Current.GoToAsync($"//{nameof(HomePage)}", animate: true);
+#endif
+        }
+
     }
+
+}
 }
