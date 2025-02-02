@@ -46,7 +46,7 @@ public partial class HomePage : UraniumContentPage
     protected  void BarcodesDetected(object sender, BarcodeDetectionEventArgs e)
     {
         var result = e.Results?.FirstOrDefault();
-        //if (result is null) return;
+        if (result is null) return;
 
         Dispatcher.DispatchAsync(async () =>
         {
