@@ -55,6 +55,9 @@ namespace ICD.ViewModels
         private bool _isScientificRadioButtonChecked;
 
         [ObservableProperty]
+        private bool _isBackdropViewPresented;
+
+        [ObservableProperty]
         private Drug _selectedDrug;
 
         [ObservableProperty]
@@ -62,6 +65,8 @@ namespace ICD.ViewModels
 
         public async Task Init()
         {
+            IsBackdropViewPresented=false;
+
             TradeDrugsWithoutFilter = DataContext.TradeDrugs;
 
             DrugsWithoutFilter = DataContext.Drugs;
@@ -171,7 +176,6 @@ namespace ICD.ViewModels
 
                 if (drug != null)
                 {
-                    drug.TradeDrugName = tradeDrug.TradeDrugName;
                     var parameter = new Dictionary<string, object>
                     {
                         [nameof(DrugDetailVM.Drug)] = drug
@@ -187,7 +191,7 @@ namespace ICD.ViewModels
             }
             catch (Exception)
             {
-                await Toast.Make("Not Available , Try Search by Scientific Name", ToastDuration.Short).Show();
+                //await Toast.Make("Not Available , Try Search by Scientific Name", ToastDuration.Short).Show();
             }
 
         }
@@ -212,12 +216,26 @@ namespace ICD.ViewModels
         [RelayCommand]
         private async Task CheckCameraPermission()
         {
-            PermissionStatus status = await Permissions.CheckStatusAsync<Permissions.Camera>();
-
-            if (status != PermissionStatus.Granted)
+            if (IsBackdropViewPresented==false)
             {
-                status = await Permissions.RequestAsync<Permissions.Camera>();
+                PermissionStatus status = await Permissions.CheckStatusAsync<Permissions.Camera>();
+
+                if (status != PermissionStatus.Granted)
+                {
+                    status = await Permissions.RequestAsync<Permissions.Camera>();
+                }
+                if (status == PermissionStatus.Granted)
+                {
+                    IsBackdropViewPresented = true;
+                }
             }
+            else
+            {
+                IsBackdropViewPresented = false;
+
+            }
+
+
         }
 
         [RelayCommand]

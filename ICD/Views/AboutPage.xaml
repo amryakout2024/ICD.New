@@ -3,12 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ur="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
              xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
-             x:Class="ICD.Views.AboutPage"
-                       FlowDirection="LeftToRight">
+             x:Class="ICD.Views.AboutPage">
     <VerticalStackLayout Padding="5" FlowDirection="LeftToRight">
         <Label 
             Text="ICD-10 Application"
-            FlowDirection="LeftToRight"
             TextColor="{StaticResource MainColor}"
             TextDecorations="Underline"
             FontAttributes="Bold"
@@ -21,17 +19,13 @@
         <Label 
             Text="Generic alternatives of any brand companies are special for the KSA market"
             TextColor="{StaticResource SubMainColor}"
-            FlowDirection="LeftToRight"
             FontSize="20"/>
         <Label 
-            Text="Scanning for the matrix code on the medicine box are special also for the KSA market and not all the medicine boxes are readable on scanning"
+            Text="Scanning for the matrix code on the medicine box are special for the KSA market and note that not all the medicines are readable on scanning .If you didnot found any result after scanning,try seaching by the scientific name or the trade name "
             TextColor="{StaticResource SubMainColor}"
-            FlowDirection="LeftToRight"
             FontSize="20"/>
-        
         <Label 
             Text="Developed by Pharmacist : "
-            FlowDirection="LeftToRight"
             Margin="0,10,0,0"
             FontAttributes="Bold"
             TextColor="{StaticResource MainColor}"
@@ -39,26 +33,21 @@
             FontSize="25"/>
         <Label 
             Text="Amr Ibrahem Yakout"
-            FlowDirection="LeftToRight"
             TextColor="{StaticResource SubMainColor}"
             FontSize="20"/>
         <Image Source="phone" 
                Scale="0.8"
-               FlowDirection="LeftToRight"
                HorizontalOptions="StartAndExpand">
         </Image>
         <Label 
                 Text="966541238108"
-            FlowDirection="LeftToRight"
                 TextColor="{StaticResource SubMainColor}"
                 FontSize="20"/>
         <Image Source="location"
-               FlowDirection="LeftToRight"
                HorizontalOptions="StartAndExpand"
                Scale="0.7"/>
         <Label 
                 Text="KSA,Khobar"
-            FlowDirection="LeftToRight"
                 TextColor="{StaticResource SubMainColor}"
                 FontSize="20"/>
 
