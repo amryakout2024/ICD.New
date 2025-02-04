@@ -224,6 +224,7 @@ namespace ICD.ViewModels
                 {
                     status = await Permissions.RequestAsync<Permissions.Camera>();
                 }
+
                 if (status == PermissionStatus.Granted)
                 {
                     IsBackdropViewPresented = true;
