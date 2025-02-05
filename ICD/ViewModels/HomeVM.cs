@@ -185,7 +185,7 @@ namespace ICD.ViewModels
                 }
                 else
                 {
-                    await Toast.Make("Not Available , Try Search by Scientific Name", ToastDuration.Short).Show();
+                    //await Toast.Make("Not Available , Try Search by Scientific Name", ToastDuration.Short).Show();
                 }
 
             }

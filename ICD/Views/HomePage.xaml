@@ -16,22 +16,13 @@
              FlowDirection="LeftToRight">
     <Shell.TitleView>
         <Grid BackgroundColor="White"
-                Margin="0" ColumnDefinitions="*,auto">
+                Margin="0">
             <Label 
-                Grid.Column="0"
-                    HorizontalOptions="CenterAndExpand"
-                    TextColor="{StaticResource MainColor}"
-                    TextDecorations="Underline"
-                    Text="ICD-10 App" 
-                    FontSize="26"/>
-            <Image 
-                Scale="0.7"
-                Grid.Column="1"
-                Source="scan">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding CheckCameraPermissionCommand}"/>
-                </Image.GestureRecognizers>
-            </Image>
+                HorizontalOptions="CenterAndExpand"
+                TextColor="{StaticResource MainColor}"
+                TextDecorations="Underline"
+                Text="ICD-10 App" 
+                FontSize="26"/>
         </Grid>
     </Shell.TitleView>
     
@@ -57,6 +48,7 @@
     <ur:UraniumContentPage.Attachments>
         <mat:BackdropView 
             x:Name="backdrop" 
+            IconImageSource="scan"
             IsPresented="{Binding IsBackdropViewPresented}">
             <zxing:CameraBarcodeReaderView
                    x:Name="cameraBarcodeReaderView"
@@ -387,11 +379,6 @@
                                        Grid.Column="0"
                                        FontAttributes="Italic"
                                        FontSize="20"/>
-                                    <!--<Label TextColor="{StaticResource SubMainColor}" 
-                                       Text="{Binding Gtin}"
-                                       Grid.Column="0"
-                                       FontAttributes="Italic"
-                                       FontSize="20"/>-->
                                 </VerticalStackLayout>
                                 <Button
                                     Grid.Column="1"

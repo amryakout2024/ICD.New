@@ -105,12 +105,46 @@
 	  <AndroidPackageFormat>aab</AndroidPackageFormat>
 	  <AndroidUseAapt2>True</AndroidUseAapt2>
 	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+	  <ApplicationDisplayVersion>16.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>16</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-android|AnyCPU'">
 	  <AndroidUseAapt2>True</AndroidUseAapt2>
 	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
 	  <AndroidPackageFormat>aab</AndroidPackageFormat>
+	  <ApplicationDisplayVersion>16.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>16</ApplicationVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-ios|AnyCPU'">
+	  <ApplicationDisplayVersion>16.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>16</ApplicationVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-maccatalyst|AnyCPU'">
+	  <ApplicationDisplayVersion>16.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>16</ApplicationVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-windows10.0.19041.0|AnyCPU'">
+	  <ApplicationDisplayVersion>16.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>16</ApplicationVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-ios|AnyCPU'">
+	  <ApplicationDisplayVersion>16.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>16</ApplicationVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-maccatalyst|AnyCPU'">
+	  <ApplicationDisplayVersion>16.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>16</ApplicationVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-windows10.0.19041.0|AnyCPU'">
+	  <ApplicationDisplayVersion>16.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>16</ApplicationVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
