@@ -164,16 +164,6 @@
                         Text="{Binding CountCheckedDrugs,StringFormat='Share {0} records'}" 
                         FontSize="15"/>
 
-                    <!--<Button
-                        Grid.Column="2"
-                        IsVisible="{Binding IsButtonVisible}"
-                        VerticalOptions="CenterAndExpand"
-                        HeightRequest="50"
-                        WidthRequest="60"
-                        BackgroundColor="Transparent"
-                        ImageSource="sharesquare"
-                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeVM}},Path=ShareCheckedDrugsCommand}">
-                    </Button>-->
                 </Grid>
                 
                 <mat:TextField
@@ -396,19 +386,7 @@
             </CollectionView>
 
             <VerticalStackLayout Grid.Row="2">
-                <!--<Border StrokeShape="RoundRectangle 10"
-                        StrokeThickness="0"
-                    Margin="5,0,5,0">
-                    <controls:MTAdView x:Name="myAds">
-                        <controls:MTAdView.HeightRequest>
-                            <OnIdiom 
-                                Phone="50"
-                                Tablet="90"
-                                Desktop="90"/>
-                        </controls:MTAdView.HeightRequest>
-
-                    </controls:MTAdView>
-                </Border>-->
+                
 
                 <Border
                    Margin="5"

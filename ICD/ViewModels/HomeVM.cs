@@ -176,6 +176,7 @@ namespace ICD.ViewModels
 
                 if (drug != null)
                 {
+                    drug.TradeDrugName = tradeDrug.TradeDrugName;
                     var parameter = new Dictionary<string, object>
                     {
                         [nameof(DrugDetailVM.Drug)] = drug
@@ -185,13 +186,13 @@ namespace ICD.ViewModels
                 }
                 else
                 {
-                    //await Toast.Make("Not Available , Try Search by Scientific Name", ToastDuration.Short).Show();
+                    await Toast.Make("Not found , Try Search by Scientific Name", ToastDuration.Short).Show();
                 }
 
             }
             catch (Exception)
             {
-                //await Toast.Make("Not Available , Try Search by Scientific Name", ToastDuration.Short).Show();
+                await Toast.Make("Not found , Try Search by Scientific Name", ToastDuration.Short).Show();
             }
 
         }
