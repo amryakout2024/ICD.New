@@ -1,5 +1,4 @@
-﻿
-using ICD.ViewModels;
+﻿using ICD.ViewModels;
 using SQLite;
 using System;
 using System.Collections.Generic;
