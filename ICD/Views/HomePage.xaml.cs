@@ -78,7 +78,7 @@ public partial class HomePage : UraniumContentPage
             }
             catch (Exception)
             {
-                await Toast.Make("Not Available , Try Search by Scientific Name Or Trade Name", ToastDuration.Short).Show();
+                //await Toast.Make("Not Available , Try Search by Scientific Name Or Trade Name", ToastDuration.Short).Show();
             }
         });
     }
