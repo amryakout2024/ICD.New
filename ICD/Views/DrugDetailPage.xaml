@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:ICD.ViewModels"
              xmlns:m="clr-namespace:ICD.Models"
+                                    xmlns:admob="clr-namespace:Plugin.AdMob;assembly=Plugin.AdMob"
              xmlns:ur="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
              xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
@@ -354,8 +355,16 @@
             </VerticalStackLayout>
         </ScrollView>
                     <VerticalStackLayout Grid.Row="2">
+            <admob:BannerAd AdSize="SmartBanner" x:Name="myAds">
+                <admob:BannerAd.HeightRequest>
+                    <OnIdiom 
+                                Phone="50"
+                                Tablet="90"
+                                Desktop="90"/>
+                </admob:BannerAd.HeightRequest>
+            </admob:BannerAd>
 
-                <Border
+            <Border
                    Margin="5"
                    StrokeShape="RoundRectangle 10"
                    BackgroundColor="ForestGreen"

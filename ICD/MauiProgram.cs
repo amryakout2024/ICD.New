@@ -7,6 +7,8 @@ using UraniumUI.Material;
 using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using ZXing.Net.Maui.Controls;
+using Plugin.AdMob;
+using Plugin.AdMob.Configuration;
 //using Plugin.MauiMTAdmob;
 
 namespace ICD
@@ -21,6 +23,7 @@ namespace ICD
                 .UseSkiaSharp()
                 .UseMauiCommunityToolkit()
                 .UseUraniumUI()
+                .UseAdMob()
                 .UseUraniumUIMaterial()
                 .UseBarcodeReader()
                 .ConfigureFonts(fonts =>
@@ -31,6 +34,8 @@ namespace ICD
 
 #if DEBUG
             builder.Logging.AddDebug();
+            AdConfig.UseTestAdUnitIds = true;
+
 #endif
 
             builder.Services.AddSingleton<DataContext>();

@@ -84,10 +84,10 @@ public partial class HomePage : UraniumContentPage
     }
     private void SetBannerId()
     {
-//#if ANDROID
-//		myAds.AdsId="ca-app-pub-3829937021524038/7874998548";
-//#endif
-	}
+#if ANDROID
+        myAds.AdUnitId = "ca-app-pub-3829937021524038/7874998548";
+#endif
+    }
 
     protected async override void OnBindingContextChanged()
     {
