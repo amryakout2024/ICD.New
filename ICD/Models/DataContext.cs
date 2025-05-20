@@ -21,7 +21,6 @@ namespace ICD.Models
             //remove REACTIVE white spaces,C30
 
             //from Gtin2.txt
-
             TradeDrugs = new ObservableCollection<TradeDrug>()
             {
                 new TradeDrug{TradeDrugId=1,TradeDrugName="Abelcet 5Mg-Ml Iv Vial",DrugName="Amphotericin B",AdministrationRoute="Intravenous Use",Gtin="96677000005580"},
@@ -8457,9 +8456,9 @@ new Drug{DrugId=757,DrugName="Azithromycin",Indication="Vibrio Cholerae ",Diagno
 new Drug{DrugId=758,DrugName="Azithromycin",Indication="Vibrio Cholerae ",DiagnosisCode="A00",AdministrationRoute="Parenteral Use"},
 new Drug{DrugId=759,DrugName="Azteonam",Indication="Hospital And Ventilater Acquired Pneumonia",DiagnosisCode="J18.9",AdministrationRoute="Intramuscular Use"},
 new Drug{DrugId=760,DrugName="Bacillus Calmette Guerin",Indication="Bladder Cancer",DiagnosisCode="C67",AdministrationRoute="Intravesical Use"},
-new Drug{DrugId=761,DrugName="Baclofen",Indication="Low Back Pain",DiagnosisCode="M54.5",AdministrationRoute="Oral Use"},
-new Drug{DrugId=762,DrugName="Baclofen",Indication="Multiple Sclerosis",DiagnosisCode="G35",AdministrationRoute="Intrathecal Use"},
-new Drug{DrugId=763,DrugName="Baclofen",Indication="Multiple Sclerosis",DiagnosisCode="G35",AdministrationRoute="Oral Use"},
+new Drug{DrugId=761,DrugName="Baby milk (Cows or Goats)",Indication="Intestinal Malabsorption",DiagnosisCode="K90",AdministrationRoute="Oral Use"},
+new Drug{DrugId=762,DrugName="Baclofen",Indication="Low Back Pain",DiagnosisCode="M54.5",AdministrationRoute="Oral Use"},
+new Drug{DrugId=763,DrugName="Baclofen",Indication="Multiple Sclerosis",DiagnosisCode="G35",AdministrationRoute="Intrathecal Use"},
 new Drug{DrugId=764,DrugName="Baclofen",Indication="Spasticity ",DiagnosisCode="M62.8",AdministrationRoute="Intrathecal Use"},
 new Drug{DrugId=765,DrugName="Baclofen",Indication="Spasticity ",DiagnosisCode="M62.8",AdministrationRoute="Oral Use"},
 new Drug{DrugId=766,DrugName="Baclofen",Indication="Trigeminal Neuralgia ",DiagnosisCode="G50.0",AdministrationRoute="Oral Use"},
@@ -8676,7 +8675,7 @@ new Drug{DrugId=976,DrugName="Bromazepam",Indication="Vertigo - Benign Paroxysma
 new Drug{DrugId=977,DrugName="Bromazepam",Indication="Vertigo - Motion Sickness",DiagnosisCode="T75.3",AdministrationRoute="Oral Use"},
 new Drug{DrugId=978,DrugName="Bromazepam",Indication="Benign Paroxysmal Positional Vertigo And Acute Vestibular Neuronitis Or Labyrinthitis Or Meniere'S Disease",DiagnosisCode="H81",AdministrationRoute="Oral Use"},
 new Drug{DrugId=979,DrugName="Bromfenac Sodium",Indication="Allergic Conjuctivitis (Ac)",DiagnosisCode="H10.1",AdministrationRoute="Ophthalmic Use"},
-new Drug{DrugId=980,DrugName="Bromfenac Sodium",Indication="Cystoid Macular Edema",DiagnosisCode="H26.4, H26.8",AdministrationRoute="Ophthalmic Use"},
+new Drug{DrugId=980,DrugName="Bromfenac Sodium",Indication="Ocular Pain",DiagnosisCode="H57.1",AdministrationRoute="Ophthalmic Use"},
 new Drug{DrugId=981,DrugName="Bromhexine",Indication="Acute Exacerbation Of Bronchiectasis (Non-Cystic Fibrosis)-Long-Term Oral Antibiotic Treatment-Airway Clearance",DiagnosisCode="J47",AdministrationRoute="Oral Use"},
 new Drug{DrugId=982,DrugName="Bromocriptine",Indication="Cardiomyopathy",DiagnosisCode="I42",AdministrationRoute="Oral Use"},
 new Drug{DrugId=983,DrugName="Bromocriptine",Indication="Hyperprolactinemia",DiagnosisCode="E22.1",AdministrationRoute="Oral Use"},
@@ -10401,7 +10400,7 @@ new Drug{DrugId=2701,DrugName="Dextrose,Sodium Chloride,Sodium Citrate,Potassium
 new Drug{DrugId=2702,DrugName="Dextrose,Sodium Chloride,Sodium Citrate,Potassium Chloride",Indication="Infectious Diarrhea-Supportive Treatment",DiagnosisCode="A04.9",AdministrationRoute="Oral Use"},
 new Drug{DrugId=2703,DrugName="Dextrose,Sodium Chloride,Sodium Citrate,Potassium Chloride",Indication="Traveller'S Diarrhea",DiagnosisCode="A09.0",AdministrationRoute="Oral Use"},
 new Drug{DrugId=2704,DrugName="Dextrose,Sodium Chloride,Sodium Citrate,Potassium Chloride",Indication="Vibrio Cholerae ",DiagnosisCode="A00",AdministrationRoute="Oral Use"},
-new Drug{DrugId=2705,DrugName="Diapers",Indication="Limitations of activities due to disacility",DiagnosisCode="Z73.6",AdministrationRoute="Topical Use"},new Drug{DrugId=2706,DrugName="Diazepam",Indication="Acute Mania",DiagnosisCode="F30",AdministrationRoute="Intramuscular And Intravenous Use"},
+new Drug{DrugId=2705,DrugName="Diapers",Indication="Limitations of activities due to disability",DiagnosisCode="Z73.6",AdministrationRoute="Topical Use"},new Drug{DrugId=2706,DrugName="Diazepam",Indication="Acute Mania",DiagnosisCode="F30",AdministrationRoute="Intramuscular And Intravenous Use"},
 new Drug{DrugId=2707,DrugName="Diazepam",Indication="Acute Mania",DiagnosisCode="F30",AdministrationRoute="Rectal Use"},
 new Drug{DrugId=2708,DrugName="Diazepam",Indication="Acute Mania",DiagnosisCode="F30",AdministrationRoute="Intravenous Use"},
 new Drug{DrugId=2709,DrugName="Diazepam",Indication="Acute Mania",DiagnosisCode="F30",AdministrationRoute="Oral Use"},
@@ -12554,8 +12553,8 @@ new Drug{DrugId=4855,DrugName="Ketoprofen",Indication="Rheumatoid Arithritis ",D
 new Drug{DrugId=4856,DrugName="Ketoprofen",Indication="Sickle Cell Disease - Pain Management ",DiagnosisCode="D57",AdministrationRoute="Oral Use"},
 new Drug{DrugId=4857,DrugName="Ketoprofen",Indication="Sickle Cell Disease - Pain Management ",DiagnosisCode="D57",AdministrationRoute="Intramuscular Use"},
 new Drug{DrugId=4858,DrugName="Ketoprofen",Indication="Spondyloarthritis Enteropathic Arthropathies, Unspecified Site Reactive Arthropathy, Unspecified",DiagnosisCode="M45 M07.60, M02.9",AdministrationRoute="Oral Use"},
-new Drug{DrugId=4859,DrugName="Ketorolac Tromethamine",Indication="Occular edema",DiagnosisCode="H57.1",AdministrationRoute="Ophthalmic Use"},
-new Drug{DrugId=4860,DrugName="Ketorolac Tromethamine",Indication="Cystoid Macular Edema",DiagnosisCode="H26.4, H26.8",AdministrationRoute="Ophthalmic Use"},
+new Drug{DrugId=4859,DrugName="Ketorolac Tromethamine",Indication="Allergic Conjuctivitis (Ac)",DiagnosisCode="H10.1",AdministrationRoute="Ophthalmic Use"},
+new Drug{DrugId=4860,DrugName="Ketorolac Tromethamine",Indication="Ocular Pain",DiagnosisCode="H57.1",AdministrationRoute="Ophthalmic Use"},
 new Drug{DrugId=4861,DrugName="Ketorolac Tromethamine",Indication="Epidermolysis Bullosa ",DiagnosisCode="Q81",AdministrationRoute="Intramuscular And Intravenous Use"},
 new Drug{DrugId=4862,DrugName="Ketorolac Tromethamine",Indication="Epidermolysis Bullosa ",DiagnosisCode="Q81",AdministrationRoute="Intravenous Use"},
 new Drug{DrugId=4863,DrugName="Ketotifen",Indication="Allergic Conjuctivitis (Ac)",DiagnosisCode="H10.1",AdministrationRoute="Ocular Use"},
@@ -13832,7 +13831,7 @@ new Drug{DrugId=6133,DrugName="Neostigmine Methylsulfate",Indication="Anesthesia
 new Drug{DrugId=6134,DrugName="Neostigmine Methylsulfate",Indication="Myasthenia Gravis",DiagnosisCode="G70, P94.0",AdministrationRoute="Intramuscular Use"},
 new Drug{DrugId=6135,DrugName="Neostigmine Methylsulfate",Indication="Myasthenia Gravis",DiagnosisCode="G70, P94.0",AdministrationRoute="Intravenous Use"},
 new Drug{DrugId=6136,DrugName="Nepafenac",Indication="Allergic Conjuctivitis (Ac)",DiagnosisCode="H10.1",AdministrationRoute="Ocular Use"},
-new Drug{DrugId=6137,DrugName="Nepafenac",Indication="Cystoid Macular Edema",DiagnosisCode="H26.4, H26.8",AdministrationRoute="Ocular Use"},
+new Drug{DrugId=6137,DrugName="Nepafenac",Indication="Ocular Pain",DiagnosisCode="H57.1",AdministrationRoute="Ocular Use"},
 new Drug{DrugId=6138,DrugName="Netupitant,Palonosetron Hydrochloride",Indication="Nausea And Vomiting In Cancer",DiagnosisCode="R11",AdministrationRoute="Oral Use"},
 new Drug{DrugId=6139,DrugName="Nevirapine",Indication="Human Immunodeficiency Virus",DiagnosisCode="B20",AdministrationRoute="Oral Use"},
 new Drug{DrugId=6140,DrugName="Niacin",Indication="Dyslipidemia",DiagnosisCode="E78",AdministrationRoute="Oral Use"},
