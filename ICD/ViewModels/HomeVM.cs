@@ -63,6 +63,10 @@ namespace ICD.ViewModels
         [ObservableProperty]
         private int _countDrugs;
 
+        public static Drug DrugFromHomeVM;
+
+        public static TradeDrug TradeDrugFromHomeVM;
+
         public async Task Init()
         {
             IsBackdropViewPresented=false;
@@ -172,22 +176,28 @@ namespace ICD.ViewModels
         {
             try
             {
-                var drug = DrugsWithoutFilter.Where(x => x.DrugName == tradeDrug.DrugName && x.AdministrationRoute == tradeDrug.AdministrationRoute).FirstOrDefault();
+                TradeDrugFromHomeVM = tradeDrug;
 
-                if (drug != null)
-                {
-                    drug.TradeDrugName = tradeDrug.TradeDrugName;
-                    var parameter = new Dictionary<string, object>
-                    {
-                        [nameof(DrugDetailVM.Drug)] = drug
-                    };
-                    await GoToAsyncWithStackAndParameter(nameof(DrugDetailPage), true, parameter);
+                await GoToAsyncWithStack(nameof(DrugDetailPage), true);
 
-                }
-                else
-                {
-                    await Toast.Make("Not found , Try Search by Scientific Name", ToastDuration.Short).Show();
-                }
+                //var drug = DrugsWithoutFilter.Where(x => x.DrugName == TradeDrugFromHomeVM.DrugName && x.AdministrationRoute == tradeDrug.AdministrationRoute).FirstOrDefault();
+
+                //if (drug != null)
+                //{
+                //    //DrugFromHomeVM.TradeDrugName = tradeDrug.TradeDrugName;
+
+                //    //var parameter = new Dictionary<string, object>
+                //    //{
+                //    //    [nameof(DrugDetailVM.Drug)] = DrugFromHomeVM
+                //    //};
+
+                //    await GoToAsyncWithStack(nameof(DrugDetailPage), true);
+
+                //}
+                //else
+                //{
+                //    await Toast.Make("Not found , Try Search by Scientific Name", ToastDuration.Short).Show();
+                //}
 
             }
             catch (Exception)

@@ -15,7 +15,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace ICD.ViewModels
 {
-    [QueryProperty(nameof(Drug),nameof(Drug))]
+    //[QueryProperty(nameof(Drug),nameof(Drug))]
     public partial class DrugDetailVM(DataContext dataContext):BaseVM
     {
         private readonly DataContext _dataContext = dataContext;
@@ -23,7 +23,7 @@ namespace ICD.ViewModels
         private Drug _drug;
 
         [ObservableProperty]
-        private ObservableCollection<Drug> _drugs=new ObservableCollection<Drug>();
+        private ObservableCollection<Drug> _drugs;
 
         [ObservableProperty]
         private string _drugName;
@@ -60,17 +60,39 @@ namespace ICD.ViewModels
 
         public async Task Init()
         {
-            DrugName = Drug.DrugName;
+            try
+            {
+                DrugsWithoutFilter = DataContext.Drugs;
 
-            AdministrationRoute = Drug.AdministrationRoute;
+                TradeDrugsWithoutFilter = DataContext.TradeDrugs;
 
-            TradeDrugsWithoutFilter = DataContext.TradeDrugs;
+                Drug = DrugsWithoutFilter.Where(x => x.DrugName == HomeVM.TradeDrugFromHomeVM.DrugName && x.AdministrationRoute == HomeVM.TradeDrugFromHomeVM.AdministrationRoute).FirstOrDefault();
 
-            DrugsWithoutFilter = DataContext.Drugs;
+                TradeDrugs = new ObservableCollection<TradeDrug>(TradeDrugsWithoutFilter.Where(x => x.DrugName == HomeVM.TradeDrugFromHomeVM.DrugName && x.AdministrationRoute == HomeVM.TradeDrugFromHomeVM.AdministrationRoute).DistinctBy(x => new { x.TradeDrugName, x.AdministrationRoute }).ToList());
 
-            Drugs = new ObservableCollection<Drug>( DrugsWithoutFilter.Where(x => x.DrugName == Drug.DrugName && x.AdministrationRoute == Drug.AdministrationRoute).ToList());
+                DrugName = HomeVM.TradeDrugFromHomeVM.DrugName;
 
-            TradeDrugs =new ObservableCollection<TradeDrug>( TradeDrugsWithoutFilter.Where(x => x.DrugName == Drug.DrugName && x.AdministrationRoute == Drug.AdministrationRoute).DistinctBy(x => new { x.TradeDrugName, x.AdministrationRoute }).ToList());
+                AdministrationRoute = HomeVM.TradeDrugFromHomeVM.AdministrationRoute;
+
+                if (Drug != null)
+                {
+                    Drugs = new ObservableCollection<Drug>(DrugsWithoutFilter.Where(x => x.DrugName == Drug.DrugName && x.AdministrationRoute == Drug.AdministrationRoute).ToList());
+                }
+            }
+            catch (Exception)
+            {
+                await Toast.Make("Not found , Try Search by Scientific Name", ToastDuration.Short).Show();
+            }
+
+            //DrugName = Drug.DrugName;
+
+            //AdministrationRoute = Drug.AdministrationRoute;
+
+            //TradeDrugsWithoutFilter = DataContext.TradeDrugs;
+
+            //DrugsWithoutFilter = DataContext.Drugs;
+
+            //Drugs = new ObservableCollection<Drug>( DrugsWithoutFilter.Where(x => x.DrugName == Drug.DrugName && x.AdministrationRoute == Drug.AdministrationRoute).ToList());
             
             CheckedDrugs = new ObservableCollection<Drug>();
             IsDrugSelected = false;
@@ -83,124 +105,142 @@ namespace ICD.ViewModels
         [RelayCommand]
         private async Task CheckAllDrugs()
         {
-            //CheckedDrugs.Clear();
-
-            ObservableCollection<Drug> Drugs2 = new ObservableCollection<Drug>();
-
-            if (IsAllCheckboxChecked)
+            if (Drugs!=null)
             {
-                CheckedDrugs.Clear();
-                foreach (Drug drug in Drugs)
+                //CheckedDrugs.Clear();
+
+                ObservableCollection<Drug> Drugs2 = new ObservableCollection<Drug>();
+
+                if (IsAllCheckboxChecked)
                 {
-                    drug.IsCheckboxChecked = true;
-
-                    Drugs2.Add(drug);
-
-                    CheckedDrugs.Add(drug);
-
-                }
-
-                Drugs = new ObservableCollection<Drug>(Drugs2);
-
-                IsButtonVisible = true;
-                IsFromUpdateCheckBox = false;
-            }
-            else
-            {
-                if (IsFromUpdateCheckBox == false)
-                {
+                    CheckedDrugs.Clear();
                     foreach (Drug drug in Drugs)
                     {
-                        drug.IsCheckboxChecked = false;
+                        drug.IsCheckboxChecked = true;
 
                         Drugs2.Add(drug);
 
-                        CheckedDrugs.Remove(drug);
+                        CheckedDrugs.Add(drug);
+
                     }
+
                     Drugs = new ObservableCollection<Drug>(Drugs2);
 
-                    IsButtonVisible = false;
-
+                    IsButtonVisible = true;
+                    IsFromUpdateCheckBox = false;
                 }
                 else
                 {
-                    IsFromUpdateCheckBox = false;
-                }
+                    if (IsFromUpdateCheckBox == false)
+                    {
+                        foreach (Drug drug in Drugs)
+                        {
+                            drug.IsCheckboxChecked = false;
 
+                            Drugs2.Add(drug);
+
+                            CheckedDrugs.Remove(drug);
+                        }
+                        Drugs = new ObservableCollection<Drug>(Drugs2);
+
+                        IsButtonVisible = false;
+
+                    }
+                    else
+                    {
+                        IsFromUpdateCheckBox = false;
+                    }
+
+                }
             }
+            
         }
 
         [RelayCommand]
         private async Task UpdateCheckedDrug(Drug drug)
         {
-            if (drug.IsCheckboxChecked == true)
+            if (Drugs != null)
             {
-                drug.IsCheckboxChecked = false;
-            }
-            else
-            {
-                drug.IsCheckboxChecked = true;
-            }
 
-            if (drug.IsCheckboxChecked == false)
-            {
-                CheckedDrugs.Add(drug);
-
-                if (CheckedDrugs.Count > 0)
+                if (drug.IsCheckboxChecked == true)
                 {
-                    IsLabelVisible = true;
-                    IsButtonVisible = true;
+                    drug.IsCheckboxChecked = false;
                 }
-            }
-            else
-            {
-                CheckedDrugs.Remove(drug);
-                if (CheckedDrugs.Count < 1)
+                else
                 {
-                    IsLabelVisible = false;
-                    IsButtonVisible = false;
+                    drug.IsCheckboxChecked = true;
                 }
-            }
-            if (CheckedDrugs.Count < Drugs.Count)
-            {
-                IsFromUpdateCheckBox = true;
 
-                IsAllCheckboxChecked = false;
-            }
-            else
-            {
-                IsAllCheckboxChecked = true;
+                if (drug.IsCheckboxChecked == false)
+                {
+                    CheckedDrugs.Add(drug);
+
+                    if (CheckedDrugs.Count > 0)
+                    {
+                        IsLabelVisible = true;
+                        IsButtonVisible = true;
+                    }
+                }
+                else
+                {
+                    CheckedDrugs.Remove(drug);
+                    if (CheckedDrugs.Count < 1)
+                    {
+                        IsLabelVisible = false;
+                        IsButtonVisible = false;
+                    }
+                }
+                if (CheckedDrugs.Count < Drugs.Count)
+                {
+                    IsFromUpdateCheckBox = true;
+
+                    IsAllCheckboxChecked = false;
+                }
+                else
+                {
+                    IsAllCheckboxChecked = true;
+                }
             }
         }
         [RelayCommand]
         private async Task ShareCheckedDrugs()
         {
-            
-            string txt =(Drug.TradeDrugName!=null)
-                ? $"{Drug.TradeDrugName} : {DrugName} =>" + Environment.NewLine+Environment.NewLine 
-                : $"{DrugName} =>" + Environment.NewLine+Environment.NewLine ;
+            if (Drugs != null)
+            {
 
-            foreach (var drug in CheckedDrugs)
-            {
-                txt = @$"{txt} {drug.Indication} : {drug.DiagnosisCode}" + Environment.NewLine + Environment.NewLine;
+                string txt = (Drug.TradeDrugName != null)
+                    ? $"{Drug.TradeDrugName} : {DrugName} =>" + Environment.NewLine + Environment.NewLine
+                    : $"{DrugName} =>" + Environment.NewLine + Environment.NewLine;
+
+                foreach (var drug in CheckedDrugs)
+                {
+                    txt = @$"{txt} {drug.Indication} : {drug.DiagnosisCode}" + Environment.NewLine + Environment.NewLine;
+                }
+                txt = txt + Environment.NewLine + "Download ICD-10 App from PlayStore";
+                await Share.Default.RequestAsync(new ShareTextRequest
+                {
+                    Text = $"{txt}",
+                    Title = "",
+                    Uri = "https://play.google.com/store/apps/details?id=com.amr.icd&pli=1"
+                });
             }
-            txt = txt + Environment.NewLine + "Download ICD-10 App from PlayStore";
-            await Share.Default.RequestAsync(new ShareTextRequest
-            {
-                Text = $"{txt}",
-                Title="",
-                Uri = "https://play.google.com/store/apps/details?id=com.amr.icd&pli=1"
-            });
+
+
         }
 
         [RelayCommand]
         private async Task CopyDrug(Drug drug)
         {
-            string txt = (Drug.TradeDrugName != null) 
-                ? $"{Drug.TradeDrugName} : {drug.DrugName} =>" +Environment.NewLine+Environment.NewLine+$"{drug.Indication} : {drug.DiagnosisCode}" 
-                : $"{drug.DrugName} =>" + $": " + Environment.NewLine+Environment.NewLine + $"{drug.Indication} : {drug.DiagnosisCode}";
+            if (Drugs != null)
+            {
 
-            await Clipboard.SetTextAsync(txt);
+                string txt = (Drug.TradeDrugName != null)
+                    ? $"{Drug.TradeDrugName} : {drug.DrugName} =>" + Environment.NewLine + Environment.NewLine + $"{drug.Indication} : {drug.DiagnosisCode}"
+                    : $"{drug.DrugName} =>" + $": " + Environment.NewLine + Environment.NewLine + $"{drug.Indication} : {drug.DiagnosisCode}";
+
+                await Clipboard.SetTextAsync(txt);
+            }
+
         }
 
         [RelayCommand]
